@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build with Claude"
+  short_description: "Guided MVP implementation for Solana projects"
+  default_prompt: "Help me build my Solana MVP step by step. Guide me through the implementation and help me ship something working."

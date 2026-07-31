@@ -1,0 +1,164 @@
+---
+name: build-defi-protocol
+description: Guide a developer through building a DeFi protocol on Solana. Use when a user says "build a DEX", "AMM", "lending protocol", "vault", "yield", "liquidity pool", "DeFi protocol", "swap program", "build a DeFi app", "perpetual futures", "perps protocol", "leverage trading", or "derivatives". Reads build-context.md from a prior scaffold phase if available.
+---
+
+## Preamble (run first)
+
+```bash
+_TEL_TIER=$(cat ~/.superstack/config.json 2>/dev/null | grep -o '"telemetryTier": *"[^"]*"' | head -1 | sed 's/.*"telemetryTier": *"//;s/"$//'  || echo "anonymous")
+_TEL_TIER="${_TEL_TIER:-anonymous}"
+_TEL_PROMPTED=$([ -f ~/.superstack/.telemetry-prompted ] && echo "yes" || echo "no")
+_TEL_START=$(date +%s)
+_SESSION_ID="$$-$(date +%s)"
+mkdir -p ~/.superstack
+echo "TELEMETRY: $_TEL_TIER"
+echo "TEL_PROMPTED: $_TEL_PROMPTED"
+if [ "$_TEL_TIER" != "off" ]; then
+_TEL_EVENT='{"skill":"build-defi-protocol","phase":"build","event":"started","ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}' 
+echo "$_TEL_EVENT" >> ~/.superstack/telemetry.jsonl 2>/dev/null || true
+_CONVEX_URL=$(cat ~/.superstack/config.json 2>/dev/null | grep -o '"convexUrl":"[^"]*"' | head -1 | cut -d'"' -f4 || echo "")
+[ -n "$_CONVEX_URL" ] && curl -s -X POST "$_CONVEX_URL/api/mutation" -H "Content-Type: application/json" -d '{"path":"telemetry:track","args":{"skill":"build-defi-protocol","phase":"build","status":"success","version":"0.2.0","platform":"'$(uname -s)-$(uname -m)'","timestamp":'$(date +%s)000'}}' >/dev/null 2>&1 &
+true
+fi
+```
+
+If `TEL_PROMPTED` is `no`: Before starting the skill workflow, ask the user about telemetry.
+Use AskUserQuestion:
+
+> Help superstack get better! We track which skills get used and how long they take —
+> no code, no file paths, no PII. Change anytime in `~/.superstack/config.json`.
+
+Options:
+- A) Sure, help superstack improve (anonymous)
+- B) No thanks
+
+If A: run this bash:
+```bash
+echo '{"telemetryTier":"anonymous"}' > ~/.superstack/config.json
+_TEL_TIER="anonymous"
+touch ~/.superstack/.telemetry-prompted
+```
+
+If B: run this bash:
+```bash
+echo '{"telemetryTier":"off"}' > ~/.superstack/config.json
+_TEL_TIER="off"
+touch ~/.superstack/.telemetry-prompted
+```
+
+This only happens once. If `TEL_PROMPTED` is `yes`, skip this entirely and proceed to the skill workflow.
+
+> **Wrong skill?** See [SKILL_ROUTER.md](../../SKILL_ROUTER.md) for all available skills.
+
+# Build DeFi Protocol
+
+## Overview
+
+Guide the user through designing and implementing a DeFi protocol on Solana — AMMs, lending pools, vaults, or yield strategies. Covers program architecture, math primitives, security patterns, and testing against real liquidity state. Emphasizes security-first development since DeFi programs handle real funds.
+
+## Integrate vs Build Decision (Step 0)
+
+Before writing any program code, check whether the user actually needs a custom smart contract:
+
+- **If the user wants to own the protocol layer, build novel on-chain logic, or explicitly asked for a program/smart contract** → proceed to the workflow below.
+- **If the user said "build a DEX/perps/lending app"** and it's unclear whether they mean the protocol or an app on top → ask: "Do you want to build the on-chain program itself, or build a frontend/app on top of an existing protocol? Integrating an existing protocol is faster, inherits audited security and liquidity, and gets you to production sooner."
+
+If they choose integration, route to `build-with-claude` instead — this skill is for custom program development.
+
+See `data/solana-knowledge/04-protocols-and-sdks.md` → "Integrate First, Build Second" for the full decision framework and protocol health verification steps.
+
+## Workflow
+
+1. Check for `.superstack/build-context.md`. If found, use stack decisions. If not, ask: what type of DeFi (AMM, lending, vault, yield aggregator)? What's the target scale and composability needs? Write `.superstack/build-context.md` with the context gathered so future skills can use it.
+2. Read [references/defi-program-patterns.md](references/defi-program-patterns.md) to select architecture and math primitives.
+3. Read [references/defi-security.md](references/defi-security.md) before writing any program logic — security must be designed in, not bolted on.
+4. Read [references/defi-testing.md](references/defi-testing.md) to set up the testing environment with real liquidity state.
+5. Implement in milestones:
+   a. Core math library (constant product, interest rate, price calculation)
+   b. Account structures and state management
+   c. Core instructions (deposit, withdraw, swap, borrow, repay)
+   d. Access control, admin functions, emergency pause
+   e. Integration tests against forked mainnet state via Surfpool
+6. Security review before any deployment — use `solana-fender-mcp` for static analysis.
+
+## Non-Negotiables
+
+- Never deploy a DeFi program without at least one independent security review pass.
+- All math must use checked arithmetic — no overflows, no precision loss on division.
+- Define and document rounding direction for every value-moving path (deposit, withdraw, swap, borrow, repay, liquidate). Round conservatively so users cannot extract value through dust or rounding loops.
+- Always validate oracle publish time/freshness, confidence interval, trading status when available, and decimal/exponent normalization before using a price. Define explicit fallback behavior when the oracle is stale or too wide.
+- Test with realistic liquidity state using Surfpool's mainnet forking, not just unit tests.
+- Include an emergency pause mechanism — you will need it.
+- Validate slippage on every swap or liquidity operation. No unbounded price impact.
+- All custody vaults must be PDA-controlled. Keep vault authority, admin authority, and emergency/pause authority logically separate.
+- Define upgrade authority, pause authority, and authority revocation/transfer plans before mainnet. Prefer multisig control for privileged actions.
+
+## Phase Handoff
+
+This skill is **Phase 2 (Build)** in the Idea → Build → Launch journey.
+
+**Reads**: `.superstack/build-context.md`
+**Writes/Updates**: `.superstack/build-context.md` (creates if missing) with:
+- `defi.protocol_type`: "amm" | "lending" | "vault" | "yield" | "custom"
+- `defi.program_id`: string (devnet)
+- `defi.security_review`: "none" | "self" | "audit-firm"
+- `defi.oracle_integration`: string (e.g., "pyth", "switchboard")
+- `defi.emergency_pause`: boolean
+
+When updating, **deep-merge** — don't overwrite existing fields.
+
+See `../../data/specs/phase-handoff.md` for the full JSON contract.
+
+## Quick Start
+
+```bash
+# DeFi project scaffold with Anchor
+anchor init my-defi-protocol
+cd my-defi-protocol
+
+# Key dependencies for DeFi:
+cargo add anchor-spl          # SPL token integration
+cargo add pyth-solana-receiver-sdk  # Oracle price feeds (Pyth pull model)
+
+# Test with mainnet state (real liquidity data)
+surfpool start --network mainnet
+anchor test --skip-local-validator
+```
+
+## Decision Points
+
+- **Which DeFi category?** AMM, lending, perps, staking, yield.
+- **Which oracle?** Pyth for crypto price feeds (fastest, widest coverage). Switchboard for custom data feeds or non-crypto data.
+- **Which token standard?** SPL Token for simple fungible tokens. Token-2022 when you need extension-enabled mints or accounts — e.g. transfer fees, transfer hooks, metadata/group pointers, confidential transfers, interest-bearing tokens, non-transferable tokens, default account state, memo-required transfers, CPI guard, pausable behavior, or permanent delegates. Verify every downstream CPI and protocol integration supports the exact extensions you enable.
+- **Single deployer vs multisig?** Use Squads multisig for any program handling >$10k TVL.
+- **Who executes maintenance actions?** Decide early whether liquidations, rebalancing, funding updates, interest accrual, or cranks are permissionless, keeper-driven, or admin-triggered.
+- **Security checklist:** See `../../data/guides/security-checklist.md` — mandatory before mainnet.
+
+## Resources
+
+### references/
+
+- [references/defi-program-patterns.md](references/defi-program-patterns.md)
+- [references/defi-security.md](references/defi-security.md)
+- [references/defi-testing.md](references/defi-testing.md)
+
+## Telemetry (run last)
+
+After the skill workflow completes (success, error, or abort), log the telemetry event.
+Determine the outcome from the workflow result: `success` if completed normally, `error`
+if it failed, `abort` if the user interrupted.
+
+Run this bash:
+
+```bash
+_TEL_END=$(date +%s)
+_TEL_DUR=$(( _TEL_END - ${_TEL_START:-$_TEL_END} ))
+_TEL_TIER=$(cat ~/.superstack/config.json 2>/dev/null | grep -o '"telemetryTier": *"[^"]*"' | head -1 | sed 's/.*"telemetryTier": *"//;s/"$//' || echo "anonymous")
+if [ "$_TEL_TIER" != "off" ]; then
+echo '{"skill":"build-defi-protocol","phase":"build","event":"completed","outcome":"OUTCOME","duration_s":"'"$_TEL_DUR"'","session":"'"$_SESSION_ID"'","ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","platform":"'$(uname -s)-$(uname -m)'"}' >> ~/.superstack/telemetry.jsonl 2>/dev/null || true
+true
+fi
+```
+
+Replace `OUTCOME` with success/error/abort based on the workflow result.

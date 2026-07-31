@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deploy to Mainnet"
+  short_description: "Guide Solana projects from devnet to production mainnet"
+  default_prompt: "Help me deploy my Solana project to mainnet. Walk me through the checklist and make sure everything is production-ready."

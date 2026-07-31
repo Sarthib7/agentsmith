@@ -1,0 +1,241 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Rules \u00b7 Output rules",
+      "description": "How the agent talks. Compression and ordering, applied to every response.",
+      "skills": [
+        "adhd",
+        "cavecrew",
+        "caveman",
+        "caveman-commit",
+        "caveman-compress",
+        "caveman-help",
+        "caveman-review",
+        "caveman-stats",
+        "i-have-adhd"
+      ]
+    },
+    {
+      "title": "Rules \u00b7 Session control",
+      "description": "Finding the right skill, widening the frame, carrying state between sessions.",
+      "skills": [
+        "handoff",
+        "learn",
+        "navigate-skills",
+        "skill-menu",
+        "using-superpowers",
+        "zoom-out"
+      ]
+    },
+    {
+      "title": "Rules \u00b7 Skill authoring",
+      "description": "Writing and maintaining skills themselves.",
+      "skills": [
+        "setup-matt-pocock-skills",
+        "skill-creator",
+        "write-a-skill"
+      ]
+    },
+    {
+      "title": "Coding \u00b7 Spec-driven development",
+      "description": "SPEC.md as source of truth: distill it, build against it, check drift, feed every bug back in.",
+      "skills": [
+        "backprop",
+        "build",
+        "check",
+        "spec",
+        "wayfinder"
+      ]
+    },
+    {
+      "title": "Coding \u00b7 Review and verification",
+      "description": "Catching what you got wrong before someone else does, and proving fixes actually hold.",
+      "skills": [
+        "cso",
+        "diagnose",
+        "followup-review",
+        "fresh-eyes",
+        "improve",
+        "improve-codebase-architecture",
+        "prove-it",
+        "review",
+        "review-and-iterate",
+        "tdd"
+      ]
+    },
+    {
+      "title": "Coding \u00b7 Planning and issue tracking",
+      "description": "Stress-testing a plan before writing code, then turning it into trackable work.",
+      "skills": [
+        "grill-me",
+        "grill-with-docs",
+        "prototype",
+        "to-issues",
+        "to-prd",
+        "triage",
+        "wizard"
+      ]
+    },
+    {
+      "title": "Coding \u00b7 Frontend",
+      "description": "React and Next.js architecture, plus interface craft.",
+      "skills": [
+        "frontend-architect",
+        "frontend-design-guidelines"
+      ]
+    },
+    {
+      "title": "Coding \u00b7 Backend and databases",
+      "description": "APIs, Postgres, and Supabase.",
+      "skills": [
+        "backend-specialist",
+        "supabase",
+        "supabase-postgres-best-practices"
+      ]
+    },
+    {
+      "title": "Coding \u00b7 Deployment",
+      "description": "Render and Railway. Blueprints, services, domains, and what to do when a deploy fails.",
+      "skills": [
+        "render-background-workers",
+        "render-blueprints",
+        "render-cli",
+        "render-cron-jobs",
+        "render-debug",
+        "render-deploy",
+        "render-disks",
+        "render-docker",
+        "render-domains",
+        "render-env-vars",
+        "render-keyvalue",
+        "render-mcp",
+        "render-migrate-from-heroku",
+        "render-monitor",
+        "render-networking",
+        "render-postgres",
+        "render-private-services",
+        "render-scaling",
+        "render-static-sites",
+        "render-web-services",
+        "render-workflows",
+        "use-railway"
+      ]
+    },
+    {
+      "title": "Coding \u00b7 Documentation lookup",
+      "description": "Fetching current API docs instead of guessing from training data.",
+      "skills": [
+        "find-docs",
+        "openai-docs"
+      ]
+    },
+    {
+      "title": "Coding \u00b7 Tooling",
+      "description": "Hooks, pre-commit, migrations, and the tools the agent drives outside a codebase.",
+      "skills": [
+        "agent-browser",
+        "collab-canvas",
+        "git-guardrails-claude-code",
+        "migrate-to-shoehorn",
+        "obsidian-vault",
+        "scaffold-exercises",
+        "setup-pre-commit"
+      ]
+    },
+    {
+      "title": "Crypto \u00b7 Solana engineering",
+      "description": "Program development, debugging, and the road to mainnet.",
+      "skills": [
+        "debug-program",
+        "deploy-to-mainnet",
+        "solana-beginner",
+        "solana-dev",
+        "solana-dev-expert",
+        "virtual-solana-incubator"
+      ]
+    },
+    {
+      "title": "Crypto \u00b7 Solana build guides",
+      "description": "Walkthrough playbooks that decide what to build and in what order.",
+      "skills": [
+        "build-data-pipeline",
+        "build-defi-protocol",
+        "build-mobile",
+        "build-with-claude",
+        "launch-token",
+        "scaffold-project"
+      ]
+    },
+    {
+      "title": "Crypto \u00b7 EVM",
+      "description": "Solidity, Foundry, and EVM protocol work.",
+      "skills": [
+        "ethskills",
+        "evm-fullstack-dev"
+      ]
+    },
+    {
+      "title": "Crypto \u00b7 Agent payment rails",
+      "description": "Agents that pay: Masumi on Cardano, MPP and x402, paid APIs, confidential inference.",
+      "skills": [
+        "masumi",
+        "masumi-ecosystem-developer",
+        "mppx",
+        "pay",
+        "tempo",
+        "temprouter"
+      ]
+    },
+    {
+      "title": "Crypto \u00b7 Ecosystem research",
+      "description": "Reading the market before committing to a build.",
+      "skills": [
+        "colosseum-copilot",
+        "defillama-research",
+        "find-next-crypto-idea",
+        "submit-to-hackathon"
+      ]
+    },
+    {
+      "title": "Writing \u00b7 Drafting",
+      "description": "Turning fragments and notes into something publishable.",
+      "skills": [
+        "edit-article",
+        "writing-beats",
+        "writing-fragments",
+        "writing-shape"
+      ]
+    },
+    {
+      "title": "Writing \u00b7 De-slopping",
+      "description": "The detector and the rewriter. Run on anything that ships.",
+      "skills": [
+        "avoid-ai-writing",
+        "humanizer"
+      ]
+    },
+    {
+      "title": "Product \u00b7 Validation",
+      "description": "Pressure-testing an idea before you commit to it.",
+      "skills": [
+        "competitive-landscape",
+        "product-review",
+        "roast-my-product",
+        "validate-idea"
+      ]
+    },
+    {
+      "title": "Product \u00b7 Go to market",
+      "description": "Pitching, funding, branding, and telling people it exists.",
+      "skills": [
+        "apply-grant",
+        "brand-design",
+        "create-pitch-deck",
+        "devrel-strategist",
+        "marketing-video"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold Project"
+  short_description: "Set up a complete Solana workspace from a validated idea"
+  default_prompt: "Help me scaffold my Solana project. Set up the right starter repo, skills, and MCPs for what I want to build."

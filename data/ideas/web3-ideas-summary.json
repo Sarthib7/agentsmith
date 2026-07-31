@@ -1,0 +1,18 @@
+{
+  "counts": {
+    "alliance_ideas_superteam_like.json": 13,
+    "yc_crypto_web3_companies_superteam_like.json": 71,
+    "yc_rfs_superteam_like.json": 10,
+    "a16z_state_of_crypto_2025_superteam_like.json": 8,
+    "a16z_big_ideas_crypto_2025_superteam_like.json": 12,
+    "external_web3_ideas_superteam_like.json": 114
+  },
+  "raw_sources": [
+    "downloaded_sources/alliance_ideas.html",
+    "downloaded_sources/yc_crypto_web3.html",
+    "downloaded_sources/yc_crypto_web3_page2.html",
+    "downloaded_sources/a16z_state_of_crypto_2025.html",
+    "downloaded_sources/a16z_big_ideas_crypto_2025.html",
+    "downloaded_sources/yc_rfs.html"
+  ]
+}
