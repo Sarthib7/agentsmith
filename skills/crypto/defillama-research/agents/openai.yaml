@@ -1,0 +1,4 @@
+interface:
+  display_name: "DefiLlama Research"
+  short_description: "Research DeFi protocols and market opportunities using real-time TVL data"
+  default_prompt: "Show me the DeFi landscape on Solana — which protocols are growing, where are the gaps, and what should I build?"

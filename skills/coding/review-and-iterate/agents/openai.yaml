@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review and Iterate"
+  short_description: "Code review and security audit for Solana projects"
+  default_prompt: "Review my Solana project code for quality, security, and production readiness. Give me honest scores and specific fixes."

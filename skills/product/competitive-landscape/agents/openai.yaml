@@ -1,0 +1,4 @@
+interface:
+  display_name: "Competitive Landscape"
+  short_description: "Map competitors, substitutes, and opportunities in a crypto space"
+  default_prompt: "Map the competitive landscape for my crypto product idea. Show me who's building what, where the gaps are, and how I can differentiate."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Find Next Crypto Idea"
+  short_description: "Interview users and rank crypto ideas"
+  default_prompt: "Help me figure out what to build in crypto, interview me sharply, and produce the top 3 ideas with a recommended winner."

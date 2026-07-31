@@ -1,0 +1,4 @@
+interface:
+  display_name: "Submit to Hackathon"
+  short_description: "Prepare optimized hackathon submissions for Solana projects"
+  default_prompt: "Help me prepare my hackathon submission. I need a compelling project description, demo video script, and submission optimized for judges."

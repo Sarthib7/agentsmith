@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Pitch Deck"
+  short_description: "Generate structured pitch deck content for crypto projects"
+  default_prompt: "Help me create a pitch deck for my Solana project. I need slide-by-slide content with speaking notes, tailored to my audience."

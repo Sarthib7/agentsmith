@@ -1,0 +1,28 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "model": "opus[1m]",
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "cartographer@cartographer-marketplace": true,
+    "vercel@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "cartographer-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/kingbootoshi/cartographer.git"
+      }
+    }
+  },
+  "fastMode": true,
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark",
+  "editorMode": "normal",
+  "teammateMode": "auto",
+  "agentPushNotifEnabled": false
+}

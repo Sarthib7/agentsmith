@@ -1,0 +1,4 @@
+interface:
+  display_name: "Validate Idea"
+  short_description: "Stress-test a crypto startup idea with a structured validation sprint"
+  default_prompt: "Help me validate whether my crypto idea is worth building. I want honest feedback and a go/no-go recommendation."
