@@ -69,6 +69,8 @@ Task `x` only if:
 - New test(s) added per plan.
 - No §V invariant regressed (run full test suite at end).
 
+§T goal or §V invariant states a number (latency, cost, size, success rate)? Invoke bench-it before calling it done. A number with nothing beside it is not a met target.
+
 ## NON-GOALS
 
 - No sub-agents. No parallel workers. Main thread only.

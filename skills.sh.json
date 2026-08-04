@@ -3,6 +3,15 @@
   "notGrouped": "bottom",
   "groupings": [
     {
+      "title": "Written here",
+      "description": "Mine. Written for this setup, not collected from anywhere.",
+      "skills": [
+        "bench-it",
+        "fresh-eyes",
+        "prove-it"
+      ]
+    },
+    {
       "title": "Rules \u00b7 Output rules",
       "description": "How the agent talks. Compression and ordering, applied to every response.",
       "skills": [
@@ -53,6 +62,7 @@
       "title": "Coding \u00b7 Review and verification",
       "description": "Catching what you got wrong before someone else does, and proving fixes actually hold.",
       "skills": [
+        "bench-it",
         "cso",
         "diagnose",
         "followup-review",

@@ -50,8 +50,9 @@ GROUPS = [
 
     ("coding", "Review and verification",
      "Catching what you got wrong before someone else does, and proving fixes actually hold.",
-     ["review", "followup-review", "review-and-iterate", "prove-it", "fresh-eyes", "cso",
-      "diagnose", "improve", "improve-codebase-architecture", "tdd"]),
+     ["review", "followup-review", "review-and-iterate", "prove-it", "bench-it",
+      "fresh-eyes", "cso", "diagnose", "improve", "improve-codebase-architecture",
+      "tdd"]),
 
     ("coding", "Planning and issue tracking",
      "Stress-testing a plan before writing code, then turning it into trackable work.",
@@ -191,6 +192,72 @@ def current_dirs():
     return found
 
 
+# Skills I wrote, surfaced as the first section on the skills.sh repo page.
+# Manifest-only: each of these still lives in its real GROUPS entry, and the
+# skills.sh schema puts no constraint on a skill appearing in two groupings.
+FEATURED = (
+    "Written here",
+    "Mine. Written for this setup, not collected from anywhere.",
+    ["bench-it", "fresh-eyes", "prove-it"],
+)
+
+BADGE = "https://img.shields.io/badge"
+
+
+def render_box(rules_n, ondemand_n, inner=55):
+    body = [
+        "",
+        "a g e n t s m i t h",
+        "",
+        f"{rules_n:<4} rules    always on, never invoked by name",
+        f"{ondemand_n:<4} skills   load when the task matches",
+        "",
+    ]
+    out = ["╭" + "─" * inner + "╮"]
+    out += ["│" + ("    " + line).ljust(inner) + "│" for line in body]
+    out.append("╰" + "─" * inner + "╯")
+    return "\n".join(out)
+
+
+def readme_counts(counts, total):
+    """Rewrite the generated header box and badge row in README.md.
+
+    Counts written by hand go stale the first time a skill is added. These are
+    the only numbers in the README, and this owns both of them.
+    """
+    path = os.path.join(REPO, "README.md")
+    if not os.path.isfile(path):
+        return
+    with open(path, encoding="utf-8") as f:
+        text = f.read()
+
+    rules_n = counts.get("rules", 0)
+    box = render_box(rules_n, total - rules_n)
+    text, n_box = re.subn(r"```\n╭─[^`]*?╯\n```", "```\n" + box + "\n```", text, count=1)
+
+    badges = [
+        f"![skills]({BADGE}/skills-{total}-1a1a1a"
+        "?style=flat-square&labelColor=1a1a1a&color=FF51FF)"
+    ]
+    badges += [
+        f"![{sec}]({BADGE}/{sec}-{counts.get(sec, 0)}-1a1a1a?style=flat-square)"
+        for sec in SECTIONS
+    ]
+    text, n_badge = re.subn(
+        r"(<!-- counts:start -->\n).*?(\n<!-- counts:end -->)",
+        lambda m: m.group(1) + "\n".join(badges) + m.group(2),
+        text,
+        flags=re.S,
+        count=1,
+    )
+
+    if not (n_box and n_badge):
+        print(f"WARN README markers missing (box={n_box}, badges={n_badge})", file=sys.stderr)
+
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+
+
 def main():
     on_disk = current_dirs()
     listed = [s for _, _, _, skills in GROUPS for s in skills]
@@ -221,17 +288,32 @@ def main():
     meta = {d: frontmatter(os.path.join(p, "SKILL.md")) for d, p in on_disk.items()}
 
     # skills.sh.json keys on the declared frontmatter name
+    feat_title, feat_desc, feat_skills = FEATURED
+    stray = [s for s in feat_skills if s not in meta]
+    if stray:
+        print(f"ERROR FEATURED not on disk: {sorted(stray)}", file=sys.stderr)
+        sys.exit(1)
+
+    groupings = []
+    if feat_skills:
+        groupings.append({
+            "title": feat_title,
+            "description": feat_desc,
+            "skills": sorted((meta[s][0] or s) for s in feat_skills),
+        })
+    groupings += [
+        {
+            "title": f"{section.capitalize()} · {title}",
+            "description": desc,
+            "skills": sorted((meta[s][0] or s) for s in skills),
+        }
+        for section, title, desc, skills in GROUPS
+    ]
+
     manifest = {
         "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
         "notGrouped": "bottom",
-        "groupings": [
-            {
-                "title": f"{section.capitalize()} · {title}",
-                "description": desc,
-                "skills": sorted((meta[s][0] or s) for s in skills),
-            }
-            for section, title, desc, skills in GROUPS
-        ],
+        "groupings": groupings,
     }
     with open(os.path.join(REPO, "skills.sh.json"), "w") as f:
         json.dump(manifest, f, indent=2)
@@ -278,6 +360,7 @@ def main():
         f.write("\n".join(lines))
 
     counts = {sec: sum(len(sk) for s, _, _, sk in GROUPS if s == sec) for sec in SECTIONS}
+    readme_counts(counts, len(on_disk))
     print(f"OK moved {moved} dirs; {len(on_disk)} skills total")
     print("   " + ", ".join(f"{k}={v}" for k, v in counts.items()))
 
