@@ -1,6 +1,6 @@
 # Skill index
 
-115 skills across four sections: **core**, **coding**, **product**, **runtime**.
+116 skills across four sections: **core**, **coding**, **product**, **runtime**.
 Generated from `skills/*/*/SKILL.md`, do not edit by hand.
 
 Install one by its declared name:
@@ -58,7 +58,7 @@ Writing and maintaining skills themselves.
 | [`skill-creator`](skills/rules/skill-creator/SKILL.md) | Create new skills, modify and improve existing skills, and measure skill performance. |
 | [`write-a-skill`](skills/rules/write-a-skill/SKILL.md) | Create new agent skills with proper structure, progressive disclosure, and bundled resources. |
 
-## Coding <sub>(58)</sub>
+## Coding <sub>(59)</sub>
 
 Writing, reviewing, and shipping code. Chain-agnostic.
 
@@ -74,12 +74,13 @@ SPEC.md as source of truth: distill it, build against it, check drift, feed ever
 | [`build` <sub>(dir `spec-build`)</sub>](skills/coding/spec-build/SKILL.md) | Plan-then-execute implementation against SPEC.md. |
 | [`wayfinder`](skills/coding/wayfinder/SKILL.md) | Plan a huge chunk of work — more than one agent session can hold — as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the… |
 
-### Review and verification <sub>(10)</sub>
+### Review and verification <sub>(11)</sub>
 
 Catching what you got wrong before someone else does, and proving fixes actually hold.
 
 | Skill | What it does |
 |---|---|
+| [`bench-it`](skills/coding/bench-it/SKILL.md) | Benchmark a product claim against a named baseline or competitor. |
 | [`cso`](skills/coding/cso/SKILL.md) | Chief Security Officer mode. |
 | [`diagnose`](skills/coding/diagnose/SKILL.md) | Disciplined diagnosis loop for hard bugs and performance regressions. |
 | [`followup-review`](skills/coding/followup-review/SKILL.md) | Re-review a pull request after the author has pushed fixes for your earlier findings. |
