@@ -210,36 +210,17 @@ FEATURED = (
 BADGE = "https://img.shields.io/badge"
 
 
-def render_box(rules_n, ondemand_n, inner=55):
-    body = [
-        "",
-        "a g e n t s m i t h",
-        "",
-        f"{rules_n:<4} rules    always on, never invoked by name",
-        f"{ondemand_n:<4} skills   load when the task matches",
-        "",
-    ]
-    out = ["╭" + "─" * inner + "╮"]
-    out += ["│" + ("    " + line).ljust(inner) + "│" for line in body]
-    out.append("╰" + "─" * inner + "╯")
-    return "\n".join(out)
-
-
 def readme_counts(counts, total):
-    """Rewrite the generated header box and badge row in README.md.
+    """Rewrite the generated badge row in README.md.
 
     Counts written by hand go stale the first time a skill is added. These are
-    the only numbers in the README, and this owns both of them.
+    the only generated numbers in the README.
     """
     path = os.path.join(REPO, "README.md")
     if not os.path.isfile(path):
         return
     with open(path, encoding="utf-8") as f:
         text = f.read()
-
-    rules_n = counts.get("rules", 0)
-    box = render_box(rules_n, total - rules_n)
-    text, n_box = re.subn(r"```\n╭─[^`]*?╯\n```", "```\n" + box + "\n```", text, count=1)
 
     badges = [
         f"![skills]({BADGE}/skills-{total}-1a1a1a"
@@ -257,8 +238,8 @@ def readme_counts(counts, total):
         count=1,
     )
 
-    if not (n_box and n_badge):
-        print(f"WARN README markers missing (box={n_box}, badges={n_badge})", file=sys.stderr)
+    if not n_badge:
+        print("WARN README count markers missing", file=sys.stderr)
 
     with open(path, "w", encoding="utf-8") as f:
         f.write(text)

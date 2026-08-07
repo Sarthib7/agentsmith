@@ -19,6 +19,10 @@ python3 scripts/build-index.py
 
 Keep plugin-only agents, commands, hooks, and manifests under `plugin/`. Skills remain in their ownership roots so source and packaging do not become mixed.
 
+## Workflows
+
+- [Agentic engineering repository protocol](workflows/agentic-engineering.md): read this workflow when two or more agents work on one repository outcome.
+
 ## Verification
 
 Run the index builder after moving, adding, or updating a skill. The command must exit successfully before committing.
