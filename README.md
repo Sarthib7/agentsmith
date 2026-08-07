@@ -1,8 +1,12 @@
 <div align="center">
 
-# agentsmith
+# Agentsmith
 
 Agent rules and reusable skills from my daily setup, with a separate workspace for plugin packaging.
+
+<a href="https://tenor.com/view/iron-man-iron-man-hammer-iron-hammer-robert-downey-robert-downey-jr-gif-15959050">
+  <img src="https://media1.tenor.com/m/cUDKyJkDr6kAAAAd/iron-man-iron-man-hammer.gif" alt="Tony Stark hammering metal" width="360">
+</a>
 
 <!-- counts:start -->
 ![skills](https://img.shields.io/badge/skills-119-1a1a1a?style=flat-square&labelColor=1a1a1a&color=FF51FF)
@@ -37,11 +41,14 @@ npx skills use Sarthib7/agentsmith@caveman
 
 Full generated catalog: [SKILLS.md](SKILLS.md).
 
+Changes and new skills: [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Repository layout
 
 ```text
 agentsmith/
 ├── AGENTS.md          rules for contributing to this repository
+├── CONTRIBUTING.md    contributor workflow and validation steps
 ├── rules/             global AGENTS.md and CLAUDE.md files
 ├── workflows/         reusable operating workflows linked by agent rules
 ├── skills/            collected skills used in my setup
@@ -79,35 +86,16 @@ Authorship stays conservative. A skill remains in `skills/` when its origin is u
 
 `plugin/` is the packaging workspace. Its capability split follows the [Vercel plugin](https://github.com/vercel/vercel-plugin): specialist agents, commands, hooks, and platform manifests remain separate from skill source. The plugin is a scaffold today and has no published manifest.
 
-## Add or update a skill
+## DYOR
 
-1. Put collected work in `skills/<name>/` or verified original work in `my-skills/<name>/`.
-2. Add the skill to one catalog group in `scripts/build-index.py`.
-3. Record its author, source, and license in `ATTRIBUTION.md` when known.
-4. Regenerate and validate:
+Treat every skill as untrusted until you review it. Inclusion in this collection is not a security review or endorsement.
 
-```bash
-python3 scripts/build-index.py
-```
+Before installing a skill:
 
-The generator rejects duplicate directories, ungrouped skills, missing skills, and skills placed in the wrong ownership root. It rewrites `SKILLS.md`, `skills.sh.json`, and the count markers above.
-
-## Global rules
-
-`rules/AGENTS.md` and `rules/CLAUDE.md` contain the setup's always-on layer. They define output style, skill routing, documentation lookup order, evidence requirements, confirmation gates, and multi-agent repository coordination.
-
-`rules/settings.example.json` contains an example Claude Code configuration. Review it before copying it into a local setup.
-
-## Plugin companions
-
-Some capabilities ship as external plugins and are not copied into this repository:
-
-```text
-/plugin install superpowers@claude-plugins-official
-/plugin install vercel@claude-plugins-official
-/plugin install rust-analyzer-lsp@claude-plugins-official
-/plugin install cartographer@cartographer-marketplace
-```
+- Read its `SKILL.md`, scripts, hooks, and requested permissions.
+- Check its source and license in [ATTRIBUTION.md](ATTRIBUTION.md).
+- Record the commit SHA you reviewed when reproducibility matters.
+- Test unfamiliar skills in an isolated repository or worktree.
 
 ## Known limitations
 
@@ -116,4 +104,4 @@ Some capabilities ship as external plugins and are not copied into this reposito
 - `skills/tempo-request/` declares `name: tempo`, matching its upstream source.
 - Provenance is incomplete for skills that arrived without author metadata, a license, or a recorded source.
 
-Generated files should not be edited by hand. Change the source or catalog configuration, then run `python3 scripts/build-index.py`.
+Generated files should not be edited by hand. Follow [CONTRIBUTING.md](CONTRIBUTING.md) when changing the collection.
