@@ -2,18 +2,7 @@
 
 # agentsmith
 
-Rules, skills, and plugin components from my daily agent setup.
-
-```
-╭───────────────────────────────────────────────────────╮
-│                                                       │
-│    a g e n t s m i t h                                │
-│                                                       │
-│    18   rules    always on, never invoked by name     │
-│    101  skills   load when the task matches           │
-│                                                       │
-╰───────────────────────────────────────────────────────╯
-```
+Agent rules and reusable skills from my daily setup, with a separate workspace for plugin packaging.
 
 <!-- counts:start -->
 ![skills](https://img.shields.io/badge/skills-119-1a1a1a?style=flat-square&labelColor=1a1a1a&color=FF51FF)
@@ -54,6 +43,7 @@ Full generated catalog: [SKILLS.md](SKILLS.md).
 agentsmith/
 ├── AGENTS.md          rules for contributing to this repository
 ├── rules/             global AGENTS.md and CLAUDE.md files
+├── workflows/         reusable operating workflows linked by agent rules
 ├── skills/            collected skills used in my setup
 ├── my-skills/         skills with verified sarthib7 authorship
 ├── plugin/            agents, commands, hooks, and manifests
