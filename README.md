@@ -39,7 +39,7 @@ Read one skill without installing it:
 npx skills use Sarthib7/agentsmith@caveman
 ```
 
-Full generated catalog: [SKILLS.md](SKILLS.md).
+Browse the collection on [Skills.sh](https://www.skills.sh/sarthib7/agentsmith) or open the full generated [skill catalog](SKILLS.md).
 
 Changes and new skills: [CONTRIBUTING.md](CONTRIBUTING.md).
 
