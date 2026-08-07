@@ -3,11 +3,15 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Written here",
-      "description": "Mine. Written for this setup, not collected from anywhere.",
+      "title": "My skills",
+      "description": "Skills with verified sarthib7 authorship.",
       "skills": [
+        "adhd",
         "bench-it",
+        "deterministic-code-review",
+        "followup-review",
         "fresh-eyes",
+        "git-worktree-runner",
         "prove-it"
       ]
     },
@@ -64,6 +68,7 @@
       "skills": [
         "bench-it",
         "cso",
+        "deterministic-code-review",
         "diagnose",
         "followup-review",
         "fresh-eyes",
@@ -148,6 +153,7 @@
         "agent-browser",
         "collab-canvas",
         "git-guardrails-claude-code",
+        "git-worktree-runner",
         "janitor",
         "migrate-to-shoehorn",
         "obsidian-vault",

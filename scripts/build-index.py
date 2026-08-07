@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
-"""Move skills into skills/<section>/<name>/ and regenerate skills.sh.json + SKILLS.md.
-
-Sections are a catalog layout the skills CLI walks one extra level deep for.
-Validates that every skill on disk is assigned exactly once before moving anything.
-"""
-import json, os, re, shutil, sys
+"""Validate skill ownership and regenerate repository indexes."""
+import json, os, re, sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKILLS_DIR = os.path.join(REPO, "skills")
+MY_SKILLS_DIR = os.path.join(REPO, "my-skills")
+
+MY_SKILLS = {
+    "adhd",
+    "bench-it",
+    "deterministic-code-review",
+    "followup-review",
+    "fresh-eyes",
+    "git-worktree-runner",
+    "prove-it",
+}
 
 SECTIONS = {
     "rules": "Rules",
@@ -50,9 +57,9 @@ GROUPS = [
 
     ("coding", "Review and verification",
      "Catching what you got wrong before someone else does, and proving fixes actually hold.",
-     ["review", "followup-review", "review-and-iterate", "prove-it", "bench-it",
-      "fresh-eyes", "cso", "diagnose", "improve", "improve-codebase-architecture",
-      "tdd"]),
+     ["review", "deterministic-code-review", "followup-review", "review-and-iterate",
+      "prove-it", "bench-it", "fresh-eyes", "cso", "diagnose", "improve",
+      "improve-codebase-architecture", "tdd"]),
 
     ("coding", "Planning and issue tracking",
      "Stress-testing a plan before writing code, then turning it into trackable work.",
@@ -81,8 +88,9 @@ GROUPS = [
 
     ("coding", "Tooling",
      "Hooks, pre-commit, migrations, and the tools the agent drives outside a codebase.",
-     ["git-guardrails-claude-code", "setup-pre-commit", "migrate-to-shoehorn",
-      "scaffold-exercises", "agent-browser", "obsidian-vault", "collab-canvas", "janitor"]),
+     ["git-guardrails-claude-code", "git-worktree-runner", "setup-pre-commit",
+      "migrate-to-shoehorn", "scaffold-exercises", "agent-browser", "obsidian-vault",
+      "collab-canvas", "janitor"]),
 
     # ---- crypto ----
     ("crypto", "Solana engineering",
@@ -176,29 +184,27 @@ def first_sentence(desc, limit=180):
 
 
 def current_dirs():
-    """Skill dirs, whether still flat or already sectioned."""
+    """Return every skill directory from the two ownership roots."""
     found = {}
-    for entry in os.listdir(SKILLS_DIR):
-        p = os.path.join(SKILLS_DIR, entry)
-        if not os.path.isdir(p):
-            continue
-        if os.path.isfile(os.path.join(p, "SKILL.md")):
-            found[entry] = p
-        else:
-            for sub in os.listdir(p):
-                sp = os.path.join(p, sub)
-                if os.path.isfile(os.path.join(sp, "SKILL.md")):
-                    found[sub] = sp
+    for root in (SKILLS_DIR, MY_SKILLS_DIR):
+        for entry in os.listdir(root):
+            path = os.path.join(root, entry)
+            if not os.path.isdir(path):
+                continue
+            if not os.path.isfile(os.path.join(path, "SKILL.md")):
+                print(f"ERROR skill directory missing SKILL.md: {path}", file=sys.stderr)
+                sys.exit(1)
+            if entry in found:
+                print(f"ERROR duplicate skill directory: {entry}", file=sys.stderr)
+                sys.exit(1)
+            found[entry] = path
     return found
 
 
-# Skills I wrote, surfaced as the first section on the skills.sh repo page.
-# Manifest-only: each of these still lives in its real GROUPS entry, and the
-# skills.sh schema puts no constraint on a skill appearing in two groupings.
 FEATURED = (
-    "Written here",
-    "Mine. Written for this setup, not collected from anywhere.",
-    ["bench-it", "fresh-eyes", "prove-it"],
+    "My skills",
+    "Skills with verified sarthib7 authorship.",
+    sorted(MY_SKILLS),
 )
 
 BADGE = "https://img.shields.io/badge"
@@ -271,20 +277,15 @@ def main():
                 print(f"ERROR {label}: {sorted(bad)}", file=sys.stderr)
         sys.exit(1)
 
-    # move into sections
-    moved = 0
-    for section, _, _, skills in GROUPS:
-        dest_dir = os.path.join(SKILLS_DIR, section)
-        os.makedirs(dest_dir, exist_ok=True)
-        for s in skills:
-            src = on_disk[s]
-            dest = os.path.join(dest_dir, s)
-            if os.path.abspath(src) == os.path.abspath(dest):
-                continue
-            shutil.move(src, dest)
-            moved += 1
+    wrong_root = []
+    for skill, path in on_disk.items():
+        expected = MY_SKILLS_DIR if skill in MY_SKILLS else SKILLS_DIR
+        if os.path.dirname(path) != expected:
+            wrong_root.append(skill)
+    if wrong_root:
+        print(f"ERROR skills in wrong ownership root: {sorted(wrong_root)}", file=sys.stderr)
+        sys.exit(1)
 
-    on_disk = current_dirs()
     meta = {d: frontmatter(os.path.join(p, "SKILL.md")) for d, p in on_disk.items()}
 
     # skills.sh.json keys on the declared frontmatter name
@@ -323,8 +324,8 @@ def main():
     lines = [
         "# Skill index",
         "",
-        f"{len(on_disk)} skills across four sections: **core**, **coding**, **product**, **runtime**.",
-        "Generated from `skills/*/*/SKILL.md`, do not edit by hand.",
+        f"{len(on_disk)} skills across {len(SECTIONS)} catalog sections.",
+        "Generated from `skills/*/SKILL.md` and `my-skills/*/SKILL.md`. Do not edit by hand.",
         "",
         "Install one by its declared name:",
         "",
@@ -353,7 +354,8 @@ def main():
                 name = name or s
                 blurb = first_sentence(d).replace("|", "\\|")
                 label = f"`{name}`" if name == s else f"`{name}` <sub>(dir `{s}`)</sub>"
-                lines.append(f"| [{label}](skills/{section}/{s}/SKILL.md) | {blurb} |")
+                root = "my-skills" if s in MY_SKILLS else "skills"
+                lines.append(f"| [{label}]({root}/{s}/SKILL.md) | {blurb} |")
             lines.append("")
 
     with open(os.path.join(REPO, "SKILLS.md"), "w") as f:
@@ -361,7 +363,7 @@ def main():
 
     counts = {sec: sum(len(sk) for s, _, _, sk in GROUPS if s == sec) for sec in SECTIONS}
     readme_counts(counts, len(on_disk))
-    print(f"OK moved {moved} dirs; {len(on_disk)} skills total")
+    print(f"OK {len(on_disk)} skills total; {len(MY_SKILLS)} verified as mine")
     print("   " + ", ".join(f"{k}={v}" for k, v in counts.items()))
 
 
