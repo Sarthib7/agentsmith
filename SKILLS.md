@@ -1,6 +1,6 @@
 # Skill index
 
-116 skills across four sections: **core**, **coding**, **product**, **runtime**.
+117 skills across four sections: **core**, **coding**, **product**, **runtime**.
 Generated from `skills/*/*/SKILL.md`, do not edit by hand.
 
 Install one by its declared name:
@@ -58,7 +58,7 @@ Writing and maintaining skills themselves.
 | [`skill-creator`](skills/rules/skill-creator/SKILL.md) | Create new skills, modify and improve existing skills, and measure skill performance. |
 | [`write-a-skill`](skills/rules/write-a-skill/SKILL.md) | Create new agent skills with proper structure, progressive disclosure, and bundled resources. |
 
-## Coding <sub>(59)</sub>
+## Coding <sub>(60)</sub>
 
 Writing, reviewing, and shipping code. Chain-agnostic.
 
@@ -163,7 +163,7 @@ Fetching current API docs instead of guessing from training data.
 | [`find-docs`](skills/coding/find-docs/SKILL.md) | Retrieves up-to-date documentation, API references, and code examples for any developer technology. |
 | [`openai-docs`](skills/coding/openai-docs/SKILL.md) | Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations (for example: Codex, Responses API, Chat Completions,… |
 
-### Tooling <sub>(7)</sub>
+### Tooling <sub>(8)</sub>
 
 Hooks, pre-commit, migrations, and the tools the agent drives outside a codebase.
 
@@ -172,6 +172,7 @@ Hooks, pre-commit, migrations, and the tools the agent drives outside a codebase
 | [`agent-browser`](skills/coding/agent-browser/SKILL.md) | Browser automation CLI for AI agents. |
 | [`collab-canvas`](skills/coding/collab-canvas/SKILL.md) | Control Collaborator's spatial canvas from the terminal using the collab-canvas CLI. |
 | [`git-guardrails-claude-code`](skills/coding/git-guardrails-claude-code/SKILL.md) | Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. |
+| [`janitor`](skills/coding/janitor/SKILL.md) | Performs a read-only, platform-aware audit of cache and temporary storage, then reports cleanup candidates with measured sizes and risk notes. |
 | [`migrate-to-shoehorn`](skills/coding/migrate-to-shoehorn/SKILL.md) | Migrate test files from `as` type assertions to @total-typescript/shoehorn. |
 | [`obsidian-vault`](skills/coding/obsidian-vault/SKILL.md) | Search, create, and manage notes in the Obsidian vault with wikilinks and index notes. |
 | [`scaffold-exercises`](skills/coding/scaffold-exercises/SKILL.md) | Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. |
