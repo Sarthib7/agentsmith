@@ -51,7 +51,7 @@ npx skills use Sarthib7/agentsmith@caveman
 Most of what makes an agent useful is not the model. It is the standing instructions: what to check before answering, when to stop and ask, which sources to trust, how much to say. Those live in two layers.
 
 ```
-  ALWAYS ON                        rules/CLAUDE.md
+  ALWAYS ON                        rules/CLAUDE.md + rules/AGENTS.md
   ─────────                        output shape · banned writing patterns
   every turn, never invoked        doc lookup order · four confirmation gates
         │
@@ -62,7 +62,7 @@ Most of what makes an agent useful is not the model. It is the standing instruct
   loads when the task matches      domain skills carry it out
 ```
 
-`rules/CLAUDE.md` is the always-on layer. It sets output shape, bans the writing patterns that make agent output obvious, orders documentation sources so the agent stops answering API questions from memory, and defines four confirmation gates that need an explicit yes before the agent acts.
+`rules/CLAUDE.md` and `rules/AGENTS.md` are matching copies of the always-on layer for Claude Code and AGENTS.md-compatible harnesses. They set output shape, ban the writing patterns that make agent output obvious, order documentation sources so the agent stops answering API questions from memory, define evidence rules, and coordinate multi-agent repositories. Four confirmation gates need an explicit yes before the agent acts.
 
 `skills/` is the on-demand layer. A skill loads when the task matches, and it carries a procedure the agent would otherwise improvise. Some are process (how to debug, how to review, how to plan). Some are domain (Solana, EVM, Masumi payments, Render). Process skills run first and set the approach; domain skills carry it out.
 
@@ -108,7 +108,8 @@ npx skills add Sarthib7/agentsmith@fresh-eyes
 | `skills/writing/` | Drafting prose and stripping the AI tells out of it |
 | `skills/product/` | Validation and go to market |
 | `SKILLS.md` | Generated index of all of them, grouped, with one-line descriptions |
-| `rules/CLAUDE.md` | The global rules file. Communication style, confirmation gates, doc lookup order, git policy |
+| `rules/CLAUDE.md` | Global rules for Claude Code |
+| `rules/AGENTS.md` | Matching global rules for Codex and other AGENTS.md-compatible harnesses |
 | `rules/settings.example.json` | Claude Code settings: model, plugins, marketplaces |
 | `skills.sh.json` | Grouping manifest for the skills.sh directory |
 | `scripts/build-index.py` | Regenerates `SKILLS.md`, `skills.sh.json`, and the counts above |

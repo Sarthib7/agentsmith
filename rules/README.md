@@ -2,12 +2,16 @@
 
 The always-on layer. Skills load when a task matches; these apply to every message.
 
-## `CLAUDE.md`
+## `CLAUDE.md` and `AGENTS.md`
 
-Drop it at `~/.claude/CLAUDE.md` for every project, or at a repo root for one project. Other harnesses read the same content from `AGENTS.md`, so symlink rather than copy:
+Use `CLAUDE.md` with Claude Code. Use the matching `AGENTS.md` with Codex and other AGENTS.md-compatible harnesses. The repository copies must remain identical.
+
+For one shared global source, install `CLAUDE.md`, then symlink each harness entry point:
 
 ```bash
 ln -s ~/.claude/CLAUDE.md ~/AGENTS.md
+ln -s ~/.claude/CLAUDE.md ~/.agents/AGENTS.md
+ln -s ~/.claude/CLAUDE.md ~/.codex/AGENTS.md
 ```
 
 What it covers, in the order the file sets it out:
@@ -20,11 +24,14 @@ What it covers, in the order the file sets it out:
 | Writing rules | Banned constructions. Em dashes, AI vocabulary, rule of three, negative parallelism, vague attribution |
 | Output shaping | Lead with the next action, number multi-step work, restate state every turn, cap lists at five |
 | Cavekit | SPEC.md is source of truth where it exists. Only `spec` may write it |
+| Fable 5 | Evidence-backed progress, bounded scope, delegation, memory, outcome-first summaries |
 | Skills routing | Process skill first, implementation skill second. One skill per job. Announce before following |
 | Documentation lookup | A five-step order that puts training data last. Skills, then MCP, then live official docs |
+| Written records | Provenance tags, quoted evidence, method blind spots, explicit corrections |
 | Default behaviors | Ask rather than assume, show options first, simplest thing that works, stay in scope |
 | Confirmation gates | Four categories that need an explicit yes: altering my content, destructive, irreversible, acting on my behalf |
 | Git commit rules | Commit identity, one commit at a time, no `Co-Authored-By` trailer |
+| Repository protocol | File-backed task ownership, interface contracts, blockers, handoffs, and session status |
 
 Two things in there do more work than the rest.
 
