@@ -82,7 +82,7 @@ GROUPS = [
     ("coding", "Tooling",
      "Hooks, pre-commit, migrations, and the tools the agent drives outside a codebase.",
      ["git-guardrails-claude-code", "setup-pre-commit", "migrate-to-shoehorn",
-      "scaffold-exercises", "agent-browser", "obsidian-vault", "collab-canvas"]),
+      "scaffold-exercises", "agent-browser", "obsidian-vault", "collab-canvas", "janitor"]),
 
     # ---- crypto ----
     ("crypto", "Solana engineering",

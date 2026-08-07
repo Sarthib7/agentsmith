@@ -6,7 +6,7 @@
 │    a g e n t s m i t h                                │
 │                                                       │
 │    18   rules    always on, never invoked by name     │
-│    98   skills   load when the task matches           │
+│    99   skills   load when the task matches           │
 │                                                       │
 ╰───────────────────────────────────────────────────────╯
 ```
@@ -16,9 +16,9 @@
 Harness-agnostic. Install into Claude Code, Cursor, Codex, Windsurf, or anything else the `skills` CLI supports.
 
 <!-- counts:start -->
-![skills](https://img.shields.io/badge/skills-116-1a1a1a?style=flat-square&labelColor=1a1a1a&color=FF51FF)
+![skills](https://img.shields.io/badge/skills-117-1a1a1a?style=flat-square&labelColor=1a1a1a&color=FF51FF)
 ![rules](https://img.shields.io/badge/rules-18-1a1a1a?style=flat-square)
-![coding](https://img.shields.io/badge/coding-59-1a1a1a?style=flat-square)
+![coding](https://img.shields.io/badge/coding-60-1a1a1a?style=flat-square)
 ![crypto](https://img.shields.io/badge/crypto-24-1a1a1a?style=flat-square)
 ![writing](https://img.shields.io/badge/writing-6-1a1a1a?style=flat-square)
 ![product](https://img.shields.io/badge/product-9-1a1a1a?style=flat-square)

@@ -148,6 +148,7 @@
         "agent-browser",
         "collab-canvas",
         "git-guardrails-claude-code",
+        "janitor",
         "migrate-to-shoehorn",
         "obsidian-vault",
         "scaffold-exercises",
