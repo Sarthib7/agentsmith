@@ -56,6 +56,7 @@ Finding the right skill, widening the frame, carrying state between sessions.
 |---|---|
 | [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff document for another agent to pick up. |
 | [`learn`](skills/learn/SKILL.md) | Manage project learnings across sessions. |
+| [`research-url`](skills/research-url/SKILL.md) | Research a URL with one dedicated subagent per URL: fixed-format distilled report plus learnings entries, with a parent-side landing check. |
 | [`navigate-skills`](skills/navigate-skills/SKILL.md) | Meta skill — browse all installed solana-new skills, repos, and MCPs to find the right tool for any task |
 | [`skill-menu`](skills/skill-menu/SKILL.md) | Use when the user asks to list, choose, or explicitly invoke skills with skill:<name>; loads local skill files on demand. |
 | [`using-superpowers`](skills/using-superpowers/SKILL.md) | Use when starting any conversation - establishes how to find and use skills, requiring Skill tool invocation before ANY response including clarifying questions |
