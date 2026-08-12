@@ -2,6 +2,8 @@
 
 The always-on layer. Skills load when a task matches; these apply to every message.
 
+Because this file loads into every session, size has a cost in adherence as well as tokens. Claude Code's docs target under 200 lines per file and warn that longer files "reduce adherence". Anything that is only true during one kind of work belongs in `workflows/` or in a skill, not here. Note that `@path` imports do not help: imported files load at launch too.
+
 ## `CLAUDE.md` and `AGENTS.md`
 
 Use `CLAUDE.md` with Claude Code. Use the matching `AGENTS.md` with Codex and other AGENTS.md-compatible harnesses. The repository copies must remain identical.
@@ -19,19 +21,20 @@ What it covers, in the order the file sets it out:
 | Section | What it decides |
 |---|---|
 | About me | Calibration. Which topics need context and which do not |
-| Communication | No filler openers, length matched to complexity, uncertainty flagged before the claim |
-| Caveman mode | Terse fragments by default, with named exceptions for security warnings and multi-step sequences |
+| Communication | Open with the answer, length matched to complexity, STE sentences, full sentences while coding |
+| Caveman mode | Terse fragments by default, with named exceptions for security warnings and coding explanations |
+| YAGNI | The laziest solution that works. A ladder that stops at the first rung that holds |
 | Writing rules | Banned constructions. Em dashes, AI vocabulary, rule of three, negative parallelism, vague attribution |
 | Output shaping | Lead with the next action, number multi-step work, restate state every turn, cap lists at five |
 | Cavekit | SPEC.md is source of truth where it exists. Only `spec` may write it |
-| Fable 5 | Evidence-backed progress, bounded scope, delegation, memory, outcome-first summaries |
 | Skills routing | Process skill first, implementation skill second. One skill per job. Announce before following |
+| Ultra gates | Review before every push. Maximum depth on planning and brainstorming |
 | Documentation lookup | A five-step order that puts training data last. Skills, then MCP, then live official docs |
 | Written records | Provenance tags, quoted evidence, method blind spots, explicit corrections |
-| Default behaviors | Ask rather than assume, show options first, simplest thing that works, stay in scope |
-| Confirmation gates | Four categories that need an explicit yes: altering my content, destructive, irreversible, acting on my behalf |
+| Default behaviors | Ask rather than assume, show options first, stay in scope, cap retries at three |
+| Confirmation gates | Five categories that need an explicit yes: altering my content, destructive, irreversible, acting on my behalf, formal backtracking |
 | Git commit rules | Commit identity, one commit at a time, no `Co-Authored-By` trailer |
-| Repository protocol | File-backed task ownership, interface contracts, blockers, handoffs, and session status |
+| Workflows | Links out to the agentic engineering protocol, so it loads only when the work needs it |
 
 Two things in there do more work than the rest.
 
