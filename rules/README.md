@@ -42,6 +42,17 @@ Two things in there do more work than the rest.
 
 **The confirmation gates.** Each one names a class of action and demands a yes in the current message. "You mentioned this earlier" explicitly does not count, which closes the gap where an agent treats old approval as standing permission.
 
+## `sync.py`
+
+The two copies above are generated, so edit the live `~/.claude/CLAUDE.md` and never the copies.
+
+```bash
+python3 rules/sync.py           # rebuild both copies from the live file
+python3 rules/sync.py --check   # exit 1 if they have gone stale
+```
+
+It rewrites machine-local paths to repo-relative ones. If it meets a path it has no rewrite for, or a rewrite that no longer matches, it stops and says which. Drift fails loudly rather than shipping a half-converted snapshot. This repo has drifted before: the `Ultra gates` section existed in the live file and was missing from the copies.
+
 ## `settings.example.json`
 
 Claude Code settings with the local hook paths stripped. Copy to `~/.claude/settings.json` and adjust. Plugin entries assume you have added the marketplaces they reference.
