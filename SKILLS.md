@@ -15,7 +15,7 @@ Read one without installing it:
 npx skills use Sarthib7/agentsmith@<name>
 ```
 
-## Rules <sub>(24)</sub>
+## Rules <sub>(25)</sub>
 
 Always on, or about the setup itself. Never invoked by name.
 
@@ -48,7 +48,7 @@ YAGNI enforced on every coding task. What gets built, not how the agent talks.
 | [`ponytail-help`](skills/ponytail-help/SKILL.md) | Quick-reference card for all ponytail modes, skills, and commands. |
 | [`ponytail-review`](skills/ponytail-review/SKILL.md) | Code review focused exclusively on over-engineering. |
 
-### Session control <sub>(6)</sub>
+### Session control <sub>(7)</sub>
 
 Finding the right skill, widening the frame, carrying state between sessions.
 
@@ -56,8 +56,8 @@ Finding the right skill, widening the frame, carrying state between sessions.
 |---|---|
 | [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff document for another agent to pick up. |
 | [`learn`](skills/learn/SKILL.md) | Manage project learnings across sessions. |
-| [`research-url`](skills/research-url/SKILL.md) | Research a URL with one dedicated subagent per URL: fixed-format distilled report plus learnings entries, with a parent-side landing check. |
 | [`navigate-skills`](skills/navigate-skills/SKILL.md) | Meta skill — browse all installed solana-new skills, repos, and MCPs to find the right tool for any task |
+| [`research-url`](my-skills/research-url/SKILL.md) | Research a URL (repo, gist, article, doc) with one dedicated subagent per URL, producing a fixed-format distilled report plus entries in the project learnings file. |
 | [`skill-menu`](skills/skill-menu/SKILL.md) | Use when the user asks to list, choose, or explicitly invoke skills with skill:<name>; loads local skill files on demand. |
 | [`using-superpowers`](skills/using-superpowers/SKILL.md) | Use when starting any conversation - establishes how to find and use skills, requiring Skill tool invocation before ANY response including clarifying questions |
 | [`zoom-out`](skills/zoom-out/SKILL.md) | Tell the agent to zoom out and give broader context or a higher-level perspective. |
@@ -281,7 +281,7 @@ The detector and the rewriter. Run on anything that ships.
 | [`avoid-ai-writing`](skills/avoid-ai-writing/SKILL.md) | Audit and rewrite content to remove AI writing patterns ("AI-isms"). |
 | [`humanizer`](skills/humanizer/SKILL.md) | Remove signs of AI-generated writing from text. |
 
-## Product <sub>(9)</sub>
+## Product <sub>(8)</sub>
 
 Deciding what to build, then getting people to use it.
 
@@ -296,13 +296,12 @@ Pressure-testing an idea before you commit to it.
 | [`roast-my-product`](skills/roast-my-product/SKILL.md) | Harsh, honest product critique — find every weakness before users do. |
 | [`validate-idea`](skills/validate-idea/SKILL.md) | Run a structured validation sprint on a crypto startup idea. |
 
-### Go to market <sub>(5)</sub>
+### Go to market <sub>(4)</sub>
 
 Pitching, funding, branding, and telling people it exists.
 
 | Skill | What it does |
 |---|---|
-| [`apply-grant`](skills/apply-grant/SKILL.md) | Prepare an Agentic Engineering Grant application by gathering project data, git history, and context files, then presenting all fields needed to fill the Solana Earn grant form. |
 | [`brand-design`](skills/brand-design/SKILL.md) | Generate, preview, and apply a brand color palette (plus typography, gradients, and tone/voice) to a frontend project. |
 | [`create-pitch-deck`](skills/create-pitch-deck/SKILL.md) | Create a structured pitch deck for a crypto project. |
 | [`devrel-strategist`](skills/devrel-strategist/SKILL.md) | Modern Developer Relations strategy for 2025-2026. |

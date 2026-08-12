@@ -1,6 +1,7 @@
 ---
 name: research-url
 description: Research a URL (repo, gist, article, doc) with one dedicated subagent per URL, producing a fixed-format distilled report plus entries in the project learnings file. Use when the user drops a link and asks to research it, learn from it, or extract tips, rules, or lessons ("research this URL", "have an agent learn from this", "what does this repo teach"). Not for quick API/doc lookups (use find-docs) or fetching a single fact from one page (fetch it directly).
+author: sarthib7
 ---
 
 # research-url
