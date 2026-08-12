@@ -14,6 +14,7 @@ MY_SKILLS = {
     "fresh-eyes",
     "git-worktree-runner",
     "prove-it",
+    "research-url",
 }
 
 SECTIONS = {
@@ -46,7 +47,8 @@ GROUPS = [
 
     ("rules", "Session control",
      "Finding the right skill, widening the frame, carrying state between sessions.",
-     ["skill-menu", "navigate-skills", "using-superpowers", "zoom-out", "handoff", "learn"]),
+     ["skill-menu", "navigate-skills", "using-superpowers", "zoom-out", "handoff", "learn",
+      "research-url"]),
 
     ("rules", "Skill authoring",
      "Writing and maintaining skills themselves.",
@@ -137,7 +139,7 @@ GROUPS = [
 
     ("product", "Go to market",
      "Pitching, funding, branding, and telling people it exists.",
-     ["create-pitch-deck", "apply-grant", "brand-design", "devrel-strategist",
+     ["create-pitch-deck", "brand-design", "devrel-strategist",
       "marketing-video"]),
 ]
 

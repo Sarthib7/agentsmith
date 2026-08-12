@@ -12,7 +12,7 @@ Taken from the `author:` field in each `SKILL.md`.
 
 | Author | Skills |
 |---|---|
-| sarthib7 | `adhd`, `bench-it`, `deterministic-code-review`, `followup-review`, `fresh-eyes`, `git-worktree-runner`, `prove-it` |
+| sarthib7 | `adhd`, `bench-it`, `deterministic-code-review`, `followup-review`, `fresh-eyes`, `git-worktree-runner`, `prove-it`, `research-url` |
 | Render | `render-background-workers`, `render-blueprints`, `render-cli`, `render-cron-jobs`, `render-debug`, `render-deploy`, `render-disks`, `render-docker`, `render-domains`, `render-env-vars`, `render-keyvalue`, `render-mcp`, `render-migrate-from-heroku`, `render-monitor`, `render-networking`, `render-postgres`, `render-private-services`, `render-scaling`, `render-static-sites`, `render-web-services`, `render-workflows` |
 | Supabase | `supabase`, `supabase-postgres-best-practices` |
 | Solana Foundation | `solana-dev` |

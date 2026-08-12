@@ -12,7 +12,8 @@
         "followup-review",
         "fresh-eyes",
         "git-worktree-runner",
-        "prove-it"
+        "prove-it",
+        "research-url"
       ]
     },
     {
@@ -49,6 +50,7 @@
         "handoff",
         "learn",
         "navigate-skills",
+        "research-url",
         "skill-menu",
         "using-superpowers",
         "zoom-out"
@@ -259,7 +261,6 @@
       "title": "Product \u00b7 Go to market",
       "description": "Pitching, funding, branding, and telling people it exists.",
       "skills": [
-        "apply-grant",
         "brand-design",
         "create-pitch-deck",
         "devrel-strategist",
