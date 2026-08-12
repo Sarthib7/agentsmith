@@ -10,11 +10,11 @@ Agent rules and reusable skills from my daily setup, with a separate workspace f
 
 <!-- counts:start -->
 ![skills](https://img.shields.io/badge/skills-125-1a1a1a?style=flat-square&labelColor=1a1a1a&color=FF51FF)
-![rules](https://img.shields.io/badge/rules-24-1a1a1a?style=flat-square)
+![rules](https://img.shields.io/badge/rules-25-1a1a1a?style=flat-square)
 ![coding](https://img.shields.io/badge/coding-62-1a1a1a?style=flat-square)
 ![crypto](https://img.shields.io/badge/crypto-24-1a1a1a?style=flat-square)
 ![writing](https://img.shields.io/badge/writing-6-1a1a1a?style=flat-square)
-![product](https://img.shields.io/badge/product-9-1a1a1a?style=flat-square)
+![product](https://img.shields.io/badge/product-8-1a1a1a?style=flat-square)
 <!-- counts:end -->
 
 </div>
@@ -43,6 +43,14 @@ Browse the collection on [Skills.sh](https://www.skills.sh/sarthib7/agentsmith) 
 
 Changes and new skills: [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Start here
+
+Read in this order:
+
+1. [`rules/`](rules/) — the standing instructions every session runs under. Everything else assumes them.
+2. [`my-skills/`](my-skills/) — the skills written here, then the full collection via the [skill catalog](SKILLS.md).
+3. [`workflows/`](workflows/) — the operating workflows the rules link to.
+
 ## Repository layout
 
 ```text
@@ -64,7 +72,7 @@ Ownership and purpose stay separate. `skills/` answers what I use. `my-skills/` 
 
 ## My skills
 
-These seven skills declare `author: sarthib7` in their source:
+These eight skills declare `author: sarthib7` in their source:
 
 | Skill | Purpose |
 |---|---|
@@ -75,6 +83,7 @@ These seven skills declare `author: sarthib7` in their source:
 | [`fresh-eyes`](my-skills/fresh-eyes/SKILL.md) | Get an independent second opinion without shared context |
 | [`git-worktree-runner`](my-skills/git-worktree-runner/SKILL.md) | Run isolated agent tasks through `git gtr` worktrees |
 | [`prove-it`](my-skills/prove-it/SKILL.md) | Verify that a check passes and can fail |
+| [`research-url`](my-skills/research-url/SKILL.md) | Research a URL with one subagent per URL into a fixed-format report plus learnings |
 
 Authorship stays conservative. A skill remains in `skills/` when its origin is uncertain.
 
