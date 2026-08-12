@@ -11,13 +11,13 @@ I'm sarthi, an agentic engineer — background in blockchain and ML, strong in b
 
 # Caveman mode — DEFAULT
 
-Respond in caveman mode by default, every session, every response (skill: `~/.claude/skills/caveman`): terse fragments, drop articles/filler/pleasantries/hedging, short synonyms, arrows for causality. Technical substance stays exact — code blocks unchanged, errors quoted exact, identifiers spelled out fully.
+Respond in caveman mode by default, every session, every response (skill: `skills/caveman`): terse fragments, drop articles/filler/pleasantries/hedging, short synonyms, arrows for causality. Technical substance stays exact — code blocks unchanged, errors quoted exact, identifiers spelled out fully.
 
 Auto-clarity exceptions (drop caveman temporarily, then resume): security warnings, irreversible-action confirmations, multi-step sequences where fragment order risks misread, final summaries after long autonomous runs (outcome first, complete sentences, no invented labels). "stop caveman" / "normal mode" disables.
 
 Caveman family skills: `caveman` (levels lite/full/ultra/wenyan-*), `caveman-commit`, `caveman-review`, `caveman-compress`, `caveman-stats`, `caveman-help`, `cavecrew` (compressed subagents). `caveman-compress` overwrites the file it runs on: never point it at this file without an explicit yes.
 
-# YAGNI: GLOBAL DEFAULT (skill: `~/.claude/skills/ponytail`)
+# YAGNI: GLOBAL DEFAULT (skill: `skills/ponytail`)
 
 Apply YAGNI to every coding task, every session (skill: `ponytail`, default level full): laziest solution that actually works. Ladder, stop at the first rung that holds: does it need to exist at all → reuse what's in the codebase → stdlib → native platform feature → already-installed dependency → one line → minimal code. No unrequested abstractions, no scaffolding "for later", deletion over addition, shortest working diff.
 
@@ -50,7 +50,7 @@ Applies to every register: chat replies, docs, READMEs, commit bodies, PR descri
 
 **Uniform rhythm is itself a tell.** Vary sentence length. Not every paragraph needs the same three-sentence shape.
 
-**Run the detector on anything that ships.** `avoid-ai-writing` carries a regex engine (45 issue types) at `~/.agents/skills/avoid-ai-writing/detector/patterns.js`; use it on READMEs, docs, and posts, then rewrite with `humanizer`. Don't run it on code, lockfiles, or generated output. Note: this file predates the rules and still uses em dashes; that is not a licence to write new ones.
+**Run the detector on anything that ships.** `avoid-ai-writing` carries a regex engine (45 issue types) at `skills/avoid-ai-writing/detector/patterns.js`; use it on READMEs, docs, and posts, then rewrite with `humanizer`. Don't run it on code, lockfiles, or generated output. Note: this file predates the rules and still uses em dashes; that is not a licence to write new ones.
 
 # Output shaping — ADHD reader (skill: `i-have-adhd`)
 
@@ -71,7 +71,7 @@ Persistent, every response, every session. Off only when I say "stop adhd mode".
 
 # Cavekit — spec-driven dev (skills: spec, build, check, backprop)
 
-- **SPEC.md exists in repo → it's source of truth.** Read it before any build/feature work there. Format: `~/.claude/skills/spec/FORMAT.md` (§G goal, §C constraints, §I interfaces, §V invariants, §T tasks, §B bugs; caveman encoding).
+- **SPEC.md exists in repo → it's source of truth.** Read it before any build/feature work there. Format: `skills/spec/FORMAT.md` (§G goal, §C constraints, §I interfaces, §V invariants, §T tasks, §B bugs; caveman encoding).
 - **Backprop reflex.** Bug found or test fails → never fix-and-forget: trace root cause, append §B row, add §V invariant if it would catch the class of bug, add a test citing it (`backprop` skill).
 - **Only `spec` skill mutates SPEC.md** (exception: `build` flips §T status cells). `check` is read-only drift report.
 - **Don't create SPEC.md unprompted.** Only when I ask ("write spec", "spec this", "distill spec from code").
@@ -86,9 +86,9 @@ Persistent, every response, every session. Off only when I say "stop adhd mode".
 - **Record lessons in memory** — one lesson per file, why it mattered; update existing notes over duplicating; delete wrong ones.
 - **Final message = first thing I read.** Outcome in first sentence (the TLDR), supporting detail after. Clear beats short when they conflict.
 
-# Skills — routing (catalog: `~/.agents/skills/SKILLS.md`)
+# Skills — routing (catalog: `SKILLS.md` at the repo root)
 
-**Read `~/.agents/skills/SKILLS.md` before picking a skill.** It lists every installed skill with what it is for, when to use it, what not to use it for, and known gaps. Also reachable as `~/.claude/skills/SKILLS.md`. `SKILLS-INDEX.md` beside it is stale; ignore it.
+**Read `SKILLS.md` before picking a skill.** It lists every installed skill with what it is for, when to use it, what not to use it for, and known gaps.
 
 - **Process skill first, implementation skill second.** "Let's build X" goes `superpowers:brainstorming`, then the build skill. "Fix this bug" goes `diagnose` (or `superpowers:systematic-debugging`), then the domain skill.
 - **One skill per job.** Two overlapping skills produce contradictory instructions. Pick the narrower one.
