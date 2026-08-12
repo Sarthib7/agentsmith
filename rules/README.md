@@ -23,7 +23,7 @@ What it covers, in the order the file sets it out:
 | About me | Calibration. Which topics need context and which do not |
 | Communication | Open with the answer, length matched to complexity, STE sentences, full sentences while coding |
 | Caveman mode | Terse fragments by default, with named exceptions for security warnings and coding explanations |
-| YAGNI | The laziest solution that works. A ladder that stops at the first rung that holds |
+| YAGNI | The laziest solution that works, and the short list of things never to simplify away |
 | Writing rules | Banned constructions. Em dashes, AI vocabulary, rule of three, negative parallelism, vague attribution |
 | Output shaping | Lead with the next action, number multi-step work, restate state every turn, cap lists at five |
 | Cavekit | SPEC.md is source of truth where it exists. Only `spec` may write it |

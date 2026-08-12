@@ -17,9 +17,9 @@ Auto-clarity exceptions (drop caveman temporarily, then resume): security warnin
 
 Caveman family skills are listed in SKILLS.md. `caveman-compress` overwrites the file it runs on: never point it at this file without an explicit yes.
 
-# YAGNI: GLOBAL DEFAULT (skill: `skills/ponytail`)
+# YAGNI: GLOBAL DEFAULT (skill: `ponytail`)
 
-Apply YAGNI to every coding task, every session (skill: `ponytail`, default level full): laziest solution that actually works. Ladder, stop at the first rung that holds: does it need to exist at all → reuse what's in the codebase → stdlib → native platform feature → already-installed dependency → one line → minimal code. No unrequested abstractions, no scaffolding "for later", deletion over addition, shortest working diff.
+`ponytail` runs at level full by default, every coding task, every session. Laziest solution that actually works. No unrequested abstractions, no scaffolding "for later", deletion over addition, shortest working diff.
 
 Never simplify away: input validation at trust boundaries, error handling that prevents data loss, security, accessibility basics, anything I explicitly asked for. Understanding the problem is never lazy: read the full flow first, then shrink the solution. "stop ponytail" / "normal mode" disables.
 
@@ -71,9 +71,9 @@ Persistent, every response, every session. Off only when I say "stop adhd mode".
 
 # Cavekit — spec-driven dev (skills: spec, build, check, backprop)
 
-- **SPEC.md exists in repo → it's source of truth.** Read it before any build/feature work there. Format: `skills/spec/FORMAT.md` (§G goal, §C constraints, §I interfaces, §V invariants, §T tasks, §B bugs; caveman encoding).
-- **Backprop reflex.** Bug found or test fails → never fix-and-forget: trace root cause, append §B row, add §V invariant if it would catch the class of bug, add a test citing it (`backprop` skill).
-- **Only `spec` skill mutates SPEC.md** (exception: `build` flips §T status cells). `check` is read-only drift report.
+- **SPEC.md exists in repo → it's source of truth.** Read it before any build or feature work there. Section format lives in the `spec` skill's `FORMAT.md`.
+- **Backprop reflex.** Bug or failing test → run `backprop`, then add a test that cites the new §V invariant.
+- **Only `spec` mutates SPEC.md.** `build` may flip §T status cells. `check` is a read-only drift report.
 - **Don't create SPEC.md unprompted.** Only when I ask ("write spec", "spec this", "distill spec from code").
 
 # Skills — routing (catalog: `SKILLS.md` at the repo root)
@@ -93,21 +93,19 @@ Persistent, every response, every session. Off only when I say "stop adhd mode".
 
 # Ultra gates: review before push, depth on plan and brainstorm
 
-- **Ultrareview before every push of substantive code.** When I am present: stop and ask me to run `/code-review ultra` (alias `/ultrareview`). You cannot launch it yourself; it is user-triggered and billed. When I am away: run the local equivalent instead (fresh-eyes adversarial review, multi-agent when the diff warrants it) and name which gate ran in your summary. Never push unreviewed code. Docs and coordination-record commits are exempt.
-- **Ultraplan while planning.** A non-trivial plan gets maximum reasoning depth plus a multi-agent planning pass (Workflow) before execution. Present the plan, not the first idea.
-- **Ultrathink on brainstorming.** Brainstorming and design exploration get maximum reasoning depth plus the brainstorming process skill before any build work starts.
+- **Never push unreviewed code.** When I am present, stop and ask me to run `/code-review ultra`. When I am away, run a fresh-eyes adversarial review locally and name which gate ran. Docs and coordination-record commits are exempt.
+- **Ultraplan while planning.** A non-trivial plan gets maximum reasoning depth and a multi-agent planning pass before execution. Present the plan, not the first idea.
+- **Ultrathink on brainstorming.** Design exploration gets maximum depth and the brainstorming skill before any build work starts.
 
 # Documentation lookup — order of preference
 
-When I ask about a library, framework, SDK, API, CLI tool, cloud service, or product docs, work down this list. Never answer library API details from training data.
+Never answer library or API details from training data. `find-docs` covers when to look something up. This is the source order.
 
 1. Relevant skill: `find-docs`, `claude-api` (anything Claude or Anthropic), `openai-docs`, `solana-dev`, `masumi`, `agent-browser`.
-2. MCP tools exposing official docs or vendor references (`citadel`, `railway`, `circle`, and so on).
-3. Official documentation sites, fetched live, when current docs matter.
-4. Local repo docs, examples, tests, checked-in references.
-5. `ctx7` last, only when everything above is insufficient or clearly slower.
-
-**`ctx7` is rate-limited. Don't reach for it by default.** If it is needed: `npx ctx7@latest library <name> "<question>"` first unless I already gave a `/org/project` ID, then `npx ctx7@latest docs <libraryId> "<question>"` for the minimum relevant docs. Keep calls few, avoid broad or repeated queries. On quota or auth failure, say so explicitly and continue with the other sources instead of blocking.
+2. MCP tools exposing official docs (`citadel`, `railway`, `circle`, and so on).
+3. Official documentation sites, fetched live.
+4. Local repo docs, examples, tests.
+5. `ctx7` last. It is rate-limited, so never reach for it by default: `npx ctx7@latest library <name> "<q>"` unless I gave a `/org/project` ID, then `npx ctx7@latest docs <libraryId> "<q>"`. On quota or auth failure, say so and use the sources above.
 
 # Written records — provable facts only
 
@@ -149,13 +147,7 @@ Each needs an explicit "yes" from me in your current message. "You mentioned thi
 
 # Git commit rules
 
-- **Commit identity.** Default author for every repo unless I say otherwise for that repo or session: GitHub `sarthib7`, email `sarthiborkar7@gmail.com`. Before creating or amending a commit, set it:
-
-  ```bash
-  git config user.name sarthib7
-  git config user.email sarthiborkar7@gmail.com
-  ```
-
+- **Commit identity.** `sarthib7` / `sarthiborkar7@gmail.com` is set in global git config, so it is already the default. Only set it per repo when that repo overrides it: `git config user.name sarthib7 && git config user.email sarthiborkar7@gmail.com`.
 - **One commit at a time, sequentially.** Never stage and create multiple commits in a single batch or parallel tool calls. Run `git commit` once, wait for it to succeed, then move to the next change. This applies even when the diff would otherwise be split into several commits.
 - **Never add a `Co-Authored-By: Claude …` trailer** (or any `Co-Authored-By` trailer for me) to commit messages. Plain message body only — no attribution footer, no `🤖 Generated with Claude Code` line.
 - The same applies to PR descriptions: do not append the "Generated with Claude Code" footer.
