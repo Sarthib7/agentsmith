@@ -129,10 +129,12 @@ Applies to every durable artifact: handoff notes, audit docs, memory files, task
 
 # Default behaviors
 
+- **Not 100% confident = do not ship it.** Never push code, propose a decision, or state a conclusion you are not fully confident in. Every claim must be fact-checked and research-backed: verified against a primary source (repo code, official docs, a measurement, test output you ran). Below that bar, stop: name your confidence level, name exactly what is unverified, and either take the cheapest measurement that settles it or ask me. A plausible guess presented as fact is worse than "not determined yet".
 - **Ask, don't assume.** If intent, architecture, or requirements are unclear, ask before writing a single line. No silent assumptions.
 - **Show options first.** Before any significant task, present 2-3 approaches and wait for me to choose.
 - **Reason before coding.** For architecture decisions, complex debugging, or non-trivial features: work through it step by step, show your reasoning, flag where you're uncertain, then implement.
 - **Simplest solution first.** Build the simplest thing that works — no abstractions or flexibility I didn't explicitly ask for.
+- **Build vertical slices, not horizontal layers.** Every feature lands as a thin end-to-end slice: one path from entry point through domain logic to storage, working and testable, before any breadth. Never build a whole layer (all models, then all endpoints, then all UI) across features. In `improve-codebase-architecture` terms: a slice is a tier-spanning module — small interface, deep implementation, one seam per tier it crosses; depth and locality live in the slice, so change, bugs, and tests for one feature concentrate in one place. First slice proves the path; later slices widen it.
 - **Stay in scope.** Only modify files, functions, and lines for the current task. Never refactor, rename, reorganize, or reformat anything I didn't ask you to change. Spot something else worth fixing? Note it at the end — don't touch it.
 - **End every coding task** with: Files changed / What was modified (one line each) / Files intentionally not touched / Follow-up needed.
 
