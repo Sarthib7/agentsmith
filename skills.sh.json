@@ -31,6 +31,18 @@
       ]
     },
     {
+      "title": "Rules \u00b7 Code minimalism",
+      "description": "YAGNI enforced on every coding task. What gets built, not how the agent talks.",
+      "skills": [
+        "ponytail",
+        "ponytail-audit",
+        "ponytail-debt",
+        "ponytail-gain",
+        "ponytail-help",
+        "ponytail-review"
+      ]
+    },
+    {
       "title": "Rules \u00b7 Session control",
       "description": "Finding the right skill, widening the frame, carrying state between sessions.",
       "skills": [
