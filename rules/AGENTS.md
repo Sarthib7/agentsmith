@@ -136,6 +136,8 @@ Applies to every durable artifact: handoff notes, audit docs, memory files, task
 - **Simplest solution first.** Build the simplest thing that works — no abstractions or flexibility I didn't explicitly ask for.
 - **Build vertical slices, not horizontal layers.** Every feature lands as a thin end-to-end slice: one path from entry point through domain logic to storage, working and testable, before any breadth. Never build a whole layer (all models, then all endpoints, then all UI) across features. In `improve-codebase-architecture` terms: a slice is a tier-spanning module — small interface, deep implementation, one seam per tier it crosses; depth and locality live in the slice, so change, bugs, and tests for one feature concentrate in one place. First slice proves the path; later slices widen it.
 - **Stay in scope.** Only modify files, functions, and lines for the current task. Never refactor, rename, reorganize, or reformat anything I didn't ask you to change. Spot something else worth fixing? Note it at the end — don't touch it.
+- **End design docs with least-confident decisions.** Every plan or design doc closes with a numbered "Least confident decisions" section naming the calls most likely to be wrong, so I can challenge them while changing them is still free.
+- **Cap retries at 3.** Three consecutive failures of the same operation (a command, a fix attempt, a subagent task) means stop: name the assumption that might be wrong and either take a different measurement or ask me. Never grind the same failing approach.
 - **End every coding task** with: Files changed / What was modified (one line each) / Files intentionally not touched / Follow-up needed.
 
 # Confirmation gates
@@ -146,6 +148,7 @@ Each needs an explicit "yes" from me in your current message. "You mentioned thi
 - **Destructive actions.** Before deleting a file, overwriting code, dropping database records, or removing dependencies: list exactly what's affected, ask.
 - **Irreversible actions.** Deploying or pushing to any environment, running migrations or schema changes, sending any external API call, or any command with irreversible side effects.
 - **Acting on my behalf.** Never send, post, publish, share, or schedule anything outside this conversation — emails, calendar invites, document shares — without my explicit yes.
+- **Formal backtracking.** A later decision that invalidates an earlier approval resets that approval: update the affected doc, state what changed and why, and re-ask. Never carry a stale yes forward past the decision that broke it.
 
 # Git commit rules
 
