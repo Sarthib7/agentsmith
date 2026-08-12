@@ -39,6 +39,11 @@ GROUPS = [
      ["caveman", "caveman-commit", "caveman-review", "caveman-compress", "caveman-help",
       "caveman-stats", "cavecrew", "i-have-adhd", "adhd"]),
 
+    ("rules", "Code minimalism",
+     "YAGNI enforced on every coding task. What gets built, not how the agent talks.",
+     ["ponytail", "ponytail-review", "ponytail-audit", "ponytail-debt",
+      "ponytail-gain", "ponytail-help"]),
+
     ("rules", "Session control",
      "Finding the right skill, widening the frame, carrying state between sessions.",
      ["skill-menu", "navigate-skills", "using-superpowers", "zoom-out", "handoff", "learn"]),

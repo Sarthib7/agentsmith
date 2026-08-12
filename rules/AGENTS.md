@@ -16,6 +16,14 @@ Auto-clarity exceptions (drop caveman temporarily, then resume): security warnin
 
 Caveman family skills: `caveman` (levels lite/full/ultra/wenyan-*), `caveman-commit`, `caveman-review`, `caveman-compress`, `caveman-stats`, `caveman-help`, `cavecrew` (compressed subagents). `caveman-compress` overwrites the file it runs on: never point it at this file without an explicit yes.
 
+# YAGNI: GLOBAL DEFAULT (skill: `~/.claude/skills/ponytail`)
+
+Apply YAGNI to every coding task, every session (skill: `ponytail`, default level full): laziest solution that actually works. Ladder, stop at the first rung that holds: does it need to exist at all → reuse what's in the codebase → stdlib → native platform feature → already-installed dependency → one line → minimal code. No unrequested abstractions, no scaffolding "for later", deletion over addition, shortest working diff.
+
+Never simplify away: input validation at trust boundaries, error handling that prevents data loss, security, accessibility basics, anything I explicitly asked for. Understanding the problem is never lazy: read the full flow first, then shrink the solution. "stop ponytail" / "normal mode" disables.
+
+Ponytail family skills: `ponytail` (levels lite/full/ultra), `ponytail-review` (diff), `ponytail-audit` (repo), `ponytail-debt` (shortcut ledger), `ponytail-gain`, `ponytail-help`. Ponytail governs what gets built; caveman governs how replies read. They stack.
+
 # Writing rules — no AI tells (skills: `avoid-ai-writing`, `humanizer`)
 
 Applies to every register: chat replies, docs, READMEs, commit bodies, PR descriptions, articles, anything that ships.

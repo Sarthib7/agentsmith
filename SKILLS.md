@@ -1,6 +1,6 @@
 # Skill index
 
-119 skills across 5 catalog sections.
+125 skills across 5 catalog sections.
 Generated from `skills/*/SKILL.md` and `my-skills/*/SKILL.md`. Do not edit by hand.
 
 Install one by its declared name:
@@ -15,7 +15,7 @@ Read one without installing it:
 npx skills use Sarthib7/agentsmith@<name>
 ```
 
-## Rules <sub>(18)</sub>
+## Rules <sub>(24)</sub>
 
 Always on, or about the setup itself. Never invoked by name.
 
@@ -34,6 +34,19 @@ How the agent talks. Compression and ordering, applied to every response.
 | [`caveman-review`](skills/caveman-review/SKILL.md) | Ultra-compressed code review comments. |
 | [`caveman-stats`](skills/caveman-stats/SKILL.md) | Show real token usage and estimated savings for the current session. |
 | [`i-have-adhd`](skills/i-have-adhd/SKILL.md) | Shape output for a reader with ADHD: lead with the next action, number multi-step work, restate state across turns, suppress tangents, give specific time estimates, make wins… |
+
+### Code minimalism <sub>(6)</sub>
+
+YAGNI enforced on every coding task. What gets built, not how the agent talks.
+
+| Skill | What it does |
+|---|---|
+| [`ponytail`](skills/ponytail/SKILL.md) | Forces the laziest solution that actually works, simplest, shortest, most minimal. |
+| [`ponytail-audit`](skills/ponytail-audit/SKILL.md) | Whole-repo audit for over-engineering. |
+| [`ponytail-debt`](skills/ponytail-debt/SKILL.md) | Harvest every `ponytail:` comment in the codebase into a debt ledger, so the deliberate shortcuts and deferrals ponytail leaves behind get tracked instead of rotting into "later… |
+| [`ponytail-gain`](skills/ponytail-gain/SKILL.md) | Show ponytail's measured impact as a compact scoreboard: less code, less cost, more speed, from the benchmark medians. |
+| [`ponytail-help`](skills/ponytail-help/SKILL.md) | Quick-reference card for all ponytail modes, skills, and commands. |
+| [`ponytail-review`](skills/ponytail-review/SKILL.md) | Code review focused exclusively on over-engineering. |
 
 ### Session control <sub>(6)</sub>
 
