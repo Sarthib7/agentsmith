@@ -4,7 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agent Smith Flow</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xyflow/react@12.3.6/dist/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xyflow/react@12.11.3/dist/style.css" />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.2.0",
+          "react/jsx-runtime": "https://esm.sh/react@18.2.0/jsx-runtime",
+          "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+          "@xyflow/react": "https://esm.sh/@xyflow/react@12.11.3?deps=react@18.2.0"
+        }
+      }
+    </script>
     <style>
       :root {
         --bg-1: #050816;
@@ -129,9 +140,9 @@
     </div>
 
     <script type="module">
-      import React from 'https://esm.sh/react@18.2.0?bundle';
-      import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client?bundle';
-      import { ReactFlow, Background, Controls, MiniMap, Panel } from 'https://esm.sh/@xyflow/react@12.11.3?bundle';
+      import React from 'react';
+      import { createRoot } from 'react-dom/client';
+      import { ReactFlow, Background, Controls, MiniMap, Panel } from '@xyflow/react';
 
       const StepNode = ({ data }) => {
         const { title, points = [], theme = 'start' } = data;
