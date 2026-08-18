@@ -127,9 +127,9 @@
     <div id="root"></div>
 
     <script type="module">
-      import React from 'https://esm.sh/react@18.2.0';
-      import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
-      import { ReactFlow, Background, Controls, MiniMap, Panel } from 'https://esm.sh/@xyflow/react@12.3.6';
+      import React from 'https://esm.sh/react@18.2.0?bundle';
+      import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client?bundle';
+      import { ReactFlow, Background, Controls, MiniMap, Panel } from 'https://esm.sh/@xyflow/react@12.11.3?bundle';
 
       const StepNode = ({ data }) => {
         const { title, points = [], theme = 'start' } = data;
@@ -507,8 +507,36 @@
           ),
         );
 
-      const root = createRoot(document.getElementById('root'));
-      root.render(React.createElement(App));
+      const escapeHtml = (value) =>
+        String(value)
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#39;');
+
+      const rootNode = document.getElementById('root');
+      if (!rootNode) {
+        throw new Error('Missing #root container');
+      }
+
+      try {
+        const root = createRoot(rootNode);
+        root.render(React.createElement(App));
+      } catch (error) {
+        console.error('Failed to boot Agent Smith flow', error);
+
+        rootNode.innerHTML = `
+          <div class="fallback">
+            <div>
+              <strong>Could not boot Agent Smith flow.</strong><br />
+              The page loaded, but React Flow failed at runtime.
+              <br />
+              ${escapeHtml(error && error.message ? error.message : String(error))}
+            </div>
+          </div>
+        `;
+      }
     </script>
   </body>
 </html>
