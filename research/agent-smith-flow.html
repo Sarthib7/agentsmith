@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Smith Flow</title>
+    <link rel="stylesheet" href="https://unpkg.com/reactflow/dist/style.css" />
+    <style>
+      :root {
+        --bg1: #0f172a;
+        --bg2: #111827;
+        --bg3: #1f2937;
+        --card: #111827;
+        --card-strong: #1d4ed8;
+        --card-mid: #312e81;
+        --card-soft: #3b0764;
+        --text: #f8fafc;
+        --muted: #9ca3af;
+        --line: #334155;
+      }
+
+      html,
+      body,
+      #root {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 50%, var(--bg2) 100%);
+        color: var(--text);
+      }
+
+      .page {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .topbar {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 5;
+        padding: 10px 14px;
+        border-radius: 12px;
+        background: rgba(2, 6, 23, 0.84);
+        color: #f8fafc;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        backdrop-filter: blur(4px);
+      }
+
+      .topbar h1 {
+        margin: 0;
+        font-size: 16px;
+        letter-spacing: 0.2px;
+      }
+
+      .topbar p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .flow-wrap {
+        flex: 1;
+        height: 100%;
+      }
+
+      .node {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--card);
+        color: var(--text);
+        padding: 8px 10px;
+        min-width: 230px;
+        max-width: 250px;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      .node h4 {
+        margin: 0 0 6px;
+        font-size: 13px;
+        line-height: 1.3;
+      }
+
+      .node ul {
+        margin: 0;
+        padding-left: 16px;
+        font-size: 11px;
+        line-height: 1.3;
+      }
+
+      .node li {
+        margin-bottom: 2px;
+      }
+
+      .node-start {
+        background: linear-gradient(160deg, var(--card-strong), #1e40af);
+        border-color: #60a5fa;
+      }
+
+      .node-decision {
+        background: linear-gradient(160deg, #7c3aed, var(--card-soft));
+        border-color: #a78bfa;
+      }
+
+      .node-policy {
+        background: linear-gradient(160deg, #0b7285, #164e63);
+        border-color: #67e8f9;
+      }
+
+      .node-action {
+        background: linear-gradient(160deg, #047857, #166534);
+        border-color: #86efac;
+      }
+
+      .node-final {
+        background: linear-gradient(160deg, #b45309, #92400e);
+        border-color: #fbbf24;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="module">
+      import React from 'https://esm.sh/react@18.2.0';
+      import ReactDOMClient from 'https://esm.sh/react-dom@18.2.0/client';
+      import ReactFlow, {
+        Background,
+        Controls,
+        MiniMap,
+        Panel,
+      } from 'https://esm.sh/reactflow@11.11.3?bundle';
+
+      const StepNode = React.memo(({ data }) => {
+        const themeClass = `node-${data.theme || 'start'}`;
+        return React.createElement(
+          'div',
+          { className: `node ${themeClass}` },
+          React.createElement('h4', null, data.title),
+          data.points
+            ? React.createElement(
+                'ul',
+                null,
+                data.points.map((p, i) => React.createElement('li', { key: i }, p)),
+              )
+            : null,
+        );
+      });
+
+      const nodes = [
+        {
+          id: 'user-input',
+          type: 'detail',
+          position: { x: 640, y: 20 },
+          data: {
+            title: 'User input arrives',
+            theme: 'start',
+            points: ['Session message starts the run', 'Text is parsed for intent and constraints'],
+          },
+        },
+        {
+          id: 'normalize',
+          type: 'detail',
+          position: { x: 640, y: 130 },
+          data: {
+            title: 'Normalize intent',
+            theme: 'start',
+            points: ['Clean language and spelling', 'Detect required output format'],
+          },
+        },
+        {
+          id: 'agents-md',
+          type: 'detail',
+          position: { x: 240, y: 250 },
+          data: {
+            title: 'Load AGENTS.md',
+            theme: 'policy',
+            points: ['Read repo AGENTS.md', 'Set communication and safety envelope'],
+          },
+        },
+        {
+          id: 'rules-agents',
+          type: 'detail',
+          position: { x: 520, y: 250 },
+          data: {
+            title: 'Load rules/AGENTS.md',
+            theme: 'policy',
+            points: ['Read always-on policy', 'Apply coding and review constraints'],
+          },
+        },
+        {
+          id: 'rules-claude',
+          type: 'detail',
+          position: { x: 800, y: 250 },
+          data: {
+            title: 'Load rules/CLAUDE.md',
+            theme: 'policy',
+            points: ['Align harness-specific behavior', 'Keep source of truth in sync'],
+          },
+        },
+        {
+          id: 'notes-artifacts',
+          type: 'detail',
+          position: { x: 1080, y: 250 },
+          data: {
+            title: 'Optional no-text/context artifacts',
+            theme: 'policy',
+            points: [
+              'If request mentions notes, handoff, or prior memory, load those artifacts',
+              'Skip this branch when request is self-contained',
+            ],
+          },
+        },
+        {
+          id: 'context-loaded',
+          type: 'detail',
+          position: { x: 640, y: 360 },
+          data: {
+            title: 'Instruction stack ready',
+            theme: 'action',
+            points: ['All applicable instruction layers are active', 'Next check for skill routing'],
+          },
+        },
+        {
+          id: 'route-decision',
+          type: 'detail',
+          position: { x: 640, y: 470 },
+          data: {
+            title: 'Route decision point',
+            theme: 'decision',
+            points: ['Exact skill mention?', 'Can be one-shot direct work?'],
+          },
+        },
+        {
+          id: 'skill-match',
+          type: 'detail',
+            position: { x: 280, y: 590 },
+          data: {
+            title: 'Read SKILLS.md index',
+            theme: 'action',
+            points: ['Find skill name exact match', 'Verify applicable domain and scope'],
+          },
+        },
+        {
+          id: 'skill-load',
+          type: 'detail',
+          position: { x: 280, y: 710 },
+          data: {
+            title: 'Load target skill',
+            theme: 'action',
+            points: ['Read SKILL.md header', 'Open references, templates, and examples'],
+          },
+        },
+        {
+          id: 'skill-constraints',
+          type: 'detail',
+          position: { x: 280, y: 830 },
+          data: {
+            title: 'Skill constraints gate',
+            theme: 'decision',
+            points: [
+              'Check disable-model-invocation rules',
+              'Check for destructive/confidence requirements',
+            ],
+          },
+        },
+        {
+          id: 'user-approve-skill',
+          type: 'detail',
+          position: { x: 60, y: 980 },
+          data: {
+            title: 'Ask user to invoke',
+            theme: 'final',
+            points: ['If skill needs explicit invocation', 'Pause and request confirmatory step'],
+          },
+        },
+        {
+          id: 'run-skill',
+          type: 'detail',
+          position: { x: 280, y: 1090 },
+          data: {
+            title: 'Execute skill workflow',
+            theme: 'action',
+            points: ['Run skill instructions in order', 'Call domain tools only in sequence'],
+          },
+        },
+        {
+          id: 'direct-route',
+          type: 'detail',
+          position: { x: 1000, y: 590 },
+          data: {
+            title: 'Direct execution path',
+            theme: 'action',
+            points: ['No explicit skill match', 'Use direct instruction layer path'],
+          },
+        },
+        {
+          id: 'direct-plan',
+          type: 'detail',
+          position: { x: 1000, y: 710 },
+          data: {
+            title: 'Plan task slice',
+            theme: 'action',
+            points: ['Identify touched files', 'Pick smallest working step'],
+          },
+        },
+        {
+          id: 'direct-edit',
+          type: 'detail',
+          position: { x: 1000, y: 830 },
+          data: {
+            title: 'Read/modify files',
+            theme: 'action',
+            points: ['Read only needed files', 'Apply minimal diff'],
+          },
+        },
+        {
+          id: 'direct-check',
+          type: 'detail',
+          position: { x: 1000, y: 950 },
+          data: {
+            title: 'Task completion checks',
+            theme: 'action',
+            points: ['Respect explicit confirmation gates', 'Do not run unsolicited validation'],
+          },
+        },
+        {
+          id: 'handoff',
+          type: 'detail',
+          position: { x: 640, y: 1230 },
+          data: {
+            title: 'Post-task synthesis',
+            theme: 'action',
+            points: ['Summarize change outcome', 'State what stayed untouched',
+            ],
+          },
+        },
+        {
+          id: 'final-response',
+          type: 'detail',
+          position: { x: 640, y: 1330 },
+          data: {
+            title: 'Final response',
+            theme: 'final',
+            points: ['Return result and next action', 'Offer follow-up only when relevant'],
+          },
+        },
+        {
+          id: 'iterate',
+          type: 'detail',
+          position: { x: 640, y: 1440 },
+          data: {
+            title: 'Follow-up loop',
+            theme: 'final',
+            points: ['New user request resets classifier', 'Same pipeline runs again with context updated'],
+          },
+        },
+      ];
+
+      const edges = [
+        { id: 'e1', source: 'user-input', target: 'normalize', type: 'smoothstep' },
+        { id: 'e2', source: 'normalize', target: 'agents-md', type: 'smoothstep' },
+        { id: 'e3', source: 'normalize', target: 'rules-agents', type: 'smoothstep' },
+        { id: 'e4', source: 'normalize', target: 'rules-claude', type: 'smoothstep' },
+        { id: 'e5', source: 'normalize', target: 'notes-artifacts', type: 'smoothstep' },
+        { id: 'e6', source: 'agents-md', target: 'context-loaded', type: 'smoothstep' },
+        { id: 'e7', source: 'rules-agents', target: 'context-loaded', type: 'smoothstep' },
+        { id: 'e8', source: 'rules-claude', target: 'context-loaded', type: 'smoothstep' },
+        { id: 'e9', source: 'notes-artifacts', target: 'context-loaded', type: 'smoothstep' },
+        { id: 'e10', source: 'context-loaded', target: 'route-decision', type: 'smoothstep' },
+        {
+          id: 'e11',
+          source: 'route-decision',
+          target: 'skill-match',
+          label: 'Skill requested',
+          type: 'smoothstep',
+          labelStyle: { fill: '#f8fafc', fontSize: 10 },
+        },
+        {
+          id: 'e12',
+          source: 'route-decision',
+          target: 'direct-route',
+          label: 'No skill, direct work',
+          type: 'smoothstep',
+          labelStyle: { fill: '#f8fafc', fontSize: 10 },
+        },
+        { id: 'e13', source: 'skill-match', target: 'skill-load', type: 'smoothstep' },
+        { id: 'e14', source: 'skill-load', target: 'skill-constraints', type: 'smoothstep' },
+        {
+          id: 'e15',
+          source: 'skill-constraints',
+          target: 'run-skill',
+          label: 'Auto-runnable',
+          type: 'smoothstep',
+          labelStyle: { fill: '#f8fafc', fontSize: 10 },
+        },
+        {
+          id: 'e16',
+          source: 'skill-constraints',
+          target: 'user-approve-skill',
+          label: 'Needs user invoke',
+          type: 'smoothstep',
+          labelStyle: { fill: '#f8fafc', fontSize: 10 },
+        },
+        { id: 'e17', source: 'user-approve-skill', target: 'context-loaded', type: 'smoothstep' },
+        {
+          id: 'e18',
+          source: 'run-skill',
+          target: 'handoff',
+          label: 'Skill task complete',
+          type: 'smoothstep',
+          labelStyle: { fill: '#f8fafc', fontSize: 10 },
+        },
+        { id: 'e19', source: 'direct-route', target: 'direct-plan', type: 'smoothstep' },
+        { id: 'e20', source: 'direct-plan', target: 'direct-edit', type: 'smoothstep' },
+        {
+          id: 'e21',
+          source: 'direct-edit',
+          target: 'direct-check',
+          label: 'Edit plan done',
+          type: 'smoothstep',
+          labelStyle: { fill: '#f8fafc', fontSize: 10 },
+        },
+        {
+          id: 'e22',
+          source: 'direct-check',
+          target: 'handoff',
+          label: 'Direct task done',
+          type: 'smoothstep',
+          labelStyle: { fill: '#f8fafc', fontSize: 10 },
+        },
+        { id: 'e23', source: 'handoff', target: 'final-response', type: 'smoothstep' },
+        { id: 'e24', source: 'final-response', target: 'iterate', type: 'smoothstep' },
+        {
+          id: 'e25',
+          source: 'iterate',
+          target: 'user-input',
+          label: 'Next request',
+          type: 'smoothstep',
+          labelStyle: { fill: '#f8fafc', fontSize: 10 },
+        },
+      ];
+
+      const nodeTypes = {
+        detail: StepNode,
+      };
+
+      const nodeDefaults = {
+        sourcePosition: 'right',
+        targetPosition: 'left',
+      };
+
+      const adjustedNodes = nodes.map((node, index) => ({
+        ...node,
+        ...nodeDefaults,
+        data: {
+          ...node.data,
+          // Ensure stable width behavior in reactflow for custom HTML nodes
+          ...node.data,
+        },
+        style: { ...node.style },
+        className: 'rf-node',
+      }));
+
+      const App = () => {
+        return React.createElement(
+          'div',
+          { className: 'page' },
+          React.createElement(
+            'div',
+            { className: 'topbar' },
+            React.createElement('h1', null, 'Agent Smith execution flow'),
+            React.createElement(
+              'p',
+              null,
+              'Full decision flow with AGENTS.md, rules layers, notes artifacts, and skill routing.',
+            ),
+          ),
+          React.createElement(
+            ReactFlow,
+            {
+              nodes: adjustedNodes,
+              edges,
+              nodeTypes,
+              fitView: true,
+              fitViewOptions: { padding: 0.2, includeHiddenNodes: false },
+              minZoom: 0.2,
+              maxZoom: 1.6,
+              proOptions: { hideAttribution: true },
+              nodesDraggable: false,
+              elementsSelectable: false,
+              nodesConnectable: false,
+              zoomOnScroll: true,
+              panOnScroll: true,
+              style: { width: '100%', height: '100%' },
+            },
+            React.createElement(Controls, null),
+            React.createElement(Background, {
+              variant: 'dots',
+              gap: 16,
+              size: 1,
+              color: '#334155',
+            }),
+            React.createElement(
+              MiniMap,
+              {
+                pannable: true,
+                zoomable: true,
+                nodeStrokeColor: '#93c5fd',
+                nodeColor: '#1d4ed8',
+                maskColor: 'rgba(15, 23, 42, 0.45)',
+              },
+            ),
+            React.createElement(
+              Panel,
+              { position: 'bottom-right' },
+              React.createElement(
+                'div',
+                { className: 'node node-final', style: { maxWidth: 360 } },
+                React.createElement('h4', null, 'Legend'),
+                React.createElement(
+                  'ul',
+                  null,
+                  React.createElement('li', null, 'Blue: instruction layers'),
+                  React.createElement('li', null, 'Purple: decisions'),
+                  React.createElement('li', null, 'Green: action nodes'),
+                  React.createElement('li', null, 'Orange: output/closure'),
+                ),
+              ),
+            ),
+          ),
+        );
+      };
+
+      const root = ReactDOMClient.createRoot(document.getElementById('root'));
+      root.render(React.createElement(App));
+    </script>
+  </body>
+</html>
