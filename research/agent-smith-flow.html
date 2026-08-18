@@ -4,58 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agent Smith Flow</title>
-    <link rel="stylesheet" href="https://unpkg.com/reactflow/dist/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xyflow/react@12.3.6/dist/style.css" />
     <style>
       :root {
-        --bg1: #0f172a;
-        --bg2: #111827;
-        --bg3: #1f2937;
-        --card: #111827;
-        --card-strong: #1d4ed8;
-        --card-mid: #312e81;
-        --card-soft: #3b0764;
-        --text: #f8fafc;
-        --muted: #9ca3af;
+        --bg-1: #050816;
+        --bg-2: #0b1220;
+        --text: #eef2ff;
+        --muted: #94a3b8;
         --line: #334155;
+        --card-blue: linear-gradient(160deg, #2563eb, #1d4ed8);
+        --card-violet: linear-gradient(160deg, #7c3aed, #5b21b6);
+        --card-teal: linear-gradient(160deg, #06b6d4, #0e7490);
+        --card-green: linear-gradient(160deg, #10b981, #047857);
+        --card-orange: linear-gradient(160deg, #f59e0b, #b45309);
       }
 
       html,
       body,
       #root {
-        height: 100%;
         margin: 0;
+        width: 100%;
+        height: 100%;
       }
 
       body {
-        font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-        background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 50%, var(--bg2) 100%);
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
         color: var(--text);
-      }
-
-      .page {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
       }
 
       .topbar {
         position: absolute;
-        top: 12px;
-        left: 12px;
-        z-index: 5;
-        padding: 10px 14px;
-        border-radius: 12px;
-        background: rgba(2, 6, 23, 0.84);
-        color: #f8fafc;
+        z-index: 20;
+        left: 14px;
+        top: 14px;
         border: 1px solid rgba(148, 163, 184, 0.4);
+        border-radius: 12px;
+        padding: 10px 12px;
+        background: rgba(2, 6, 23, 0.8);
         backdrop-filter: blur(4px);
       }
 
       .topbar h1 {
         margin: 0;
-        font-size: 16px;
-        letter-spacing: 0.2px;
+        font-size: 15px;
+        line-height: 1.25;
       }
 
       .topbar p {
@@ -64,62 +57,68 @@
         font-size: 12px;
       }
 
-      .flow-wrap {
-        flex: 1;
-        height: 100%;
-      }
-
-      .node {
-        border: 1px solid var(--line);
+      .flow-node {
         border-radius: 10px;
-        background: var(--card);
+        border: 1px solid var(--line);
         color: var(--text);
-        padding: 8px 10px;
-        min-width: 230px;
-        max-width: 250px;
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+        width: 260px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+        padding: 10px 11px;
       }
 
-      .node h4 {
-        margin: 0 0 6px;
+      .flow-node h4 {
+        margin: 0 0 8px;
         font-size: 13px;
-        line-height: 1.3;
       }
 
-      .node ul {
+      .flow-node ul {
         margin: 0;
         padding-left: 16px;
         font-size: 11px;
         line-height: 1.3;
       }
 
-      .node li {
+      .flow-node li {
         margin-bottom: 2px;
       }
 
       .node-start {
-        background: linear-gradient(160deg, var(--card-strong), #1e40af);
+        background: var(--card-blue);
         border-color: #60a5fa;
       }
 
-      .node-decision {
-        background: linear-gradient(160deg, #7c3aed, var(--card-soft));
-        border-color: #a78bfa;
-      }
-
       .node-policy {
-        background: linear-gradient(160deg, #0b7285, #164e63);
+        background: var(--card-teal);
         border-color: #67e8f9;
       }
 
+      .node-decision {
+        background: var(--card-violet);
+        border-color: #a78bfa;
+      }
+
       .node-action {
-        background: linear-gradient(160deg, #047857, #166534);
+        background: var(--card-green);
         border-color: #86efac;
       }
 
       .node-final {
-        background: linear-gradient(160deg, #b45309, #92400e);
+        background: var(--card-orange);
         border-color: #fbbf24;
+      }
+
+      .fallback {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0b1220;
+        color: #e2e8f0;
+        font-size: 14px;
+        padding: 20px;
+        text-align: center;
+        box-sizing: border-box;
       }
     </style>
   </head>
@@ -129,236 +128,229 @@
 
     <script type="module">
       import React from 'https://esm.sh/react@18.2.0';
-      import ReactDOMClient from 'https://esm.sh/react-dom@18.2.0/client';
+      import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
       import ReactFlow, {
         Background,
         Controls,
         MiniMap,
         Panel,
-      } from 'https://esm.sh/reactflow@11.11.3?bundle';
+      } from 'https://esm.sh/@xyflow/react@12.3.6';
 
-      const StepNode = React.memo(({ data }) => {
-        const themeClass = `node-${data.theme || 'start'}`;
+      const StepNode = ({ data }) => {
+        const { title, points = [], theme = 'start' } = data;
+        const cls = `flow-node node-${theme}`;
+
         return React.createElement(
           'div',
-          { className: `node ${themeClass}` },
-          React.createElement('h4', null, data.title),
-          data.points
-            ? React.createElement(
-                'ul',
-                null,
-                data.points.map((p, i) => React.createElement('li', { key: i }, p)),
-              )
-            : null,
+          { className: cls },
+          React.createElement('h4', null, title),
+          React.createElement(
+            'ul',
+            null,
+            points.map((point, index) => React.createElement('li', { key: index }, point)),
+          ),
         );
-      });
+      };
 
       const nodes = [
         {
           id: 'user-input',
-          type: 'detail',
+          type: 'stage',
           position: { x: 640, y: 20 },
           data: {
-            title: 'User input arrives',
+            title: 'User input enters',
             theme: 'start',
-            points: ['Session message starts the run', 'Text is parsed for intent and constraints'],
+            points: ['Parser reads request text', 'Session intent and constraints are extracted'],
           },
         },
         {
           id: 'normalize',
-          type: 'detail',
-          position: { x: 640, y: 130 },
+          type: 'stage',
+          position: { x: 640, y: 120 },
           data: {
-            title: 'Normalize intent',
+            title: 'Normalize request',
             theme: 'start',
-            points: ['Clean language and spelling', 'Detect required output format'],
+            points: ['Normalize language and typos', 'Build action scope'],
           },
         },
         {
           id: 'agents-md',
-          type: 'detail',
-          position: { x: 240, y: 250 },
+          type: 'stage',
+          position: { x: 220, y: 250 },
           data: {
-            title: 'Load AGENTS.md',
+            title: 'Load agents.md',
             theme: 'policy',
-            points: ['Read repo AGENTS.md', 'Set communication and safety envelope'],
+            points: ['Read top-level agent instructions', 'Apply global behavior flags'],
           },
         },
         {
           id: 'rules-agents',
-          type: 'detail',
-          position: { x: 520, y: 250 },
+          type: 'stage',
+          position: { x: 500, y: 250 },
           data: {
             title: 'Load rules/AGENTS.md',
             theme: 'policy',
-            points: ['Read always-on policy', 'Apply coding and review constraints'],
+            points: ['Load always-on operational constraints', 'Apply coding and safety constraints'],
           },
         },
         {
           id: 'rules-claude',
-          type: 'detail',
-          position: { x: 800, y: 250 },
+          type: 'stage',
+          position: { x: 780, y: 250 },
           data: {
             title: 'Load rules/CLAUDE.md',
             theme: 'policy',
-            points: ['Align harness-specific behavior', 'Keep source of truth in sync'],
+            points: ['Load harness-specific policy copy', 'Keep outputs in required shape'],
           },
         },
         {
           id: 'notes-artifacts',
-          type: 'detail',
-          position: { x: 1080, y: 250 },
+          type: 'stage',
+          position: { x: 1060, y: 250 },
           data: {
-            title: 'Optional no-text/context artifacts',
+            title: 'Notes artifacts check',
             theme: 'policy',
-            points: [
-              'If request mentions notes, handoff, or prior memory, load those artifacts',
-              'Skip this branch when request is self-contained',
-            ],
+            points: ['Use notes if request references prior context', 'Otherwise skip this branch'],
           },
         },
         {
           id: 'context-loaded',
-          type: 'detail',
+          type: 'stage',
           position: { x: 640, y: 360 },
           data: {
             title: 'Instruction stack ready',
             theme: 'action',
-            points: ['All applicable instruction layers are active', 'Next check for skill routing'],
+            points: ['All instruction layers ready', 'Route decision for workflow path'],
           },
         },
         {
           id: 'route-decision',
-          type: 'detail',
+          type: 'stage',
           position: { x: 640, y: 470 },
           data: {
-            title: 'Route decision point',
+            title: 'Execution route decision',
             theme: 'decision',
-            points: ['Exact skill mention?', 'Can be one-shot direct work?'],
+            points: ['Skill explicitly asked?', 'Can proceed with direct execution?'],
           },
         },
         {
           id: 'skill-match',
-          type: 'detail',
-            position: { x: 280, y: 590 },
+          type: 'stage',
+          position: { x: 260, y: 590 },
           data: {
-            title: 'Read SKILLS.md index',
+            title: 'Match skill from SKILLS.md',
             theme: 'action',
-            points: ['Find skill name exact match', 'Verify applicable domain and scope'],
+            points: ['Find exact skill', 'Load skill contract and boundaries'],
           },
         },
         {
           id: 'skill-load',
-          type: 'detail',
-          position: { x: 280, y: 710 },
+          type: 'stage',
+          position: { x: 260, y: 700 },
           data: {
-            title: 'Load target skill',
+            title: 'Read SKILL.md',
             theme: 'action',
-            points: ['Read SKILL.md header', 'Open references, templates, and examples'],
+            points: ['Apply declared steps', 'Load references and templates'],
           },
         },
         {
           id: 'skill-constraints',
-          type: 'detail',
-          position: { x: 280, y: 830 },
+          type: 'stage',
+          position: { x: 260, y: 810 },
           data: {
             title: 'Skill constraints gate',
             theme: 'decision',
-            points: [
-              'Check disable-model-invocation rules',
-              'Check for destructive/confidence requirements',
-            ],
+            points: ['Need explicit invocation?', 'Any destructive confirmation requirement?'],
           },
         },
         {
           id: 'user-approve-skill',
-          type: 'detail',
-          position: { x: 60, y: 980 },
+          type: 'stage',
+          position: { x: 40, y: 950 },
           data: {
-            title: 'Ask user to invoke',
+            title: 'Ask user for required action',
             theme: 'final',
-            points: ['If skill needs explicit invocation', 'Pause and request confirmatory step'],
+            points: ['If skill blocked by policy, pause', 'Ask for confirmation message'],
           },
         },
         {
           id: 'run-skill',
-          type: 'detail',
-          position: { x: 280, y: 1090 },
+          type: 'stage',
+          position: { x: 260, y: 1070 },
           data: {
-            title: 'Execute skill workflow',
+            title: 'Run skill workflow',
             theme: 'action',
-            points: ['Run skill instructions in order', 'Call domain tools only in sequence'],
+            points: ['Execute workflow in sequence', 'Use gated tools and approvals'],
           },
         },
         {
           id: 'direct-route',
-          type: 'detail',
+          type: 'stage',
           position: { x: 1000, y: 590 },
           data: {
-            title: 'Direct execution path',
+            title: 'Direct execution route',
             theme: 'action',
-            points: ['No explicit skill match', 'Use direct instruction layer path'],
+            points: ['No skill match', 'Use direct execution engine'],
           },
         },
         {
           id: 'direct-plan',
-          type: 'detail',
-          position: { x: 1000, y: 710 },
+          type: 'stage',
+          position: { x: 1000, y: 700 },
           data: {
-            title: 'Plan task slice',
+            title: 'Build minimal slice',
             theme: 'action',
-            points: ['Identify touched files', 'Pick smallest working step'],
+            points: ['Pick smallest fix', 'Read only required files'],
           },
         },
         {
           id: 'direct-edit',
-          type: 'detail',
-          position: { x: 1000, y: 830 },
+          type: 'stage',
+          position: { x: 1000, y: 810 },
           data: {
-            title: 'Read/modify files',
+            title: 'Edit and patch',
             theme: 'action',
-            points: ['Read only needed files', 'Apply minimal diff'],
+            points: ['Apply minimal diff', 'Keep requested scope'],
           },
         },
         {
           id: 'direct-check',
-          type: 'detail',
-          position: { x: 1000, y: 950 },
+          type: 'stage',
+          position: { x: 1000, y: 920 },
           data: {
-            title: 'Task completion checks',
+            title: 'Exit checks',
             theme: 'action',
-            points: ['Respect explicit confirmation gates', 'Do not run unsolicited validation'],
+            points: ['Respect confirmation gates', 'Skip unsolicited validation'],
           },
         },
         {
           id: 'handoff',
-          type: 'detail',
-          position: { x: 640, y: 1230 },
+          type: 'stage',
+          position: { x: 640, y: 1220 },
           data: {
-            title: 'Post-task synthesis',
+            title: 'Response assembly',
             theme: 'action',
-            points: ['Summarize change outcome', 'State what stayed untouched',
-            ],
+            points: ['Compose outcome summary', 'List changed and unchanged files'],
           },
         },
         {
           id: 'final-response',
-          type: 'detail',
-          position: { x: 640, y: 1330 },
+          type: 'stage',
+          position: { x: 640, y: 1320 },
           data: {
-            title: 'Final response',
+            title: 'Reply to user',
             theme: 'final',
-            points: ['Return result and next action', 'Offer follow-up only when relevant'],
+            points: ['Return result and constraints', 'Offer one clear next action'],
           },
         },
         {
           id: 'iterate',
-          type: 'detail',
-          position: { x: 640, y: 1440 },
+          type: 'stage',
+          position: { x: 640, y: 1430 },
           data: {
-            title: 'Follow-up loop',
+            title: 'Next request loop',
             theme: 'final',
-            points: ['New user request resets classifier', 'Same pipeline runs again with context updated'],
+            points: ['New turn resets pipeline', 'Keep memory updates from prior step'],
           },
         },
       ];
@@ -386,7 +378,7 @@
           id: 'e12',
           source: 'route-decision',
           target: 'direct-route',
-          label: 'No skill, direct work',
+          label: 'No skill path',
           type: 'smoothstep',
           labelStyle: { fill: '#f8fafc', fontSize: 10 },
         },
@@ -404,16 +396,16 @@
           id: 'e16',
           source: 'skill-constraints',
           target: 'user-approve-skill',
-          label: 'Needs user invoke',
+          label: 'Needs user action',
           type: 'smoothstep',
           labelStyle: { fill: '#f8fafc', fontSize: 10 },
         },
-        { id: 'e17', source: 'user-approve-skill', target: 'context-loaded', type: 'smoothstep' },
+        { id: 'e17', source: 'user-approve-skill', target: 'route-decision', type: 'smoothstep' },
         {
           id: 'e18',
           source: 'run-skill',
           target: 'handoff',
-          label: 'Skill task complete',
+          label: 'Skill done',
           type: 'smoothstep',
           labelStyle: { fill: '#f8fafc', fontSize: 10 },
         },
@@ -423,7 +415,7 @@
           id: 'e21',
           source: 'direct-edit',
           target: 'direct-check',
-          label: 'Edit plan done',
+          label: 'Direct task done',
           type: 'smoothstep',
           labelStyle: { fill: '#f8fafc', fontSize: 10 },
         },
@@ -431,7 +423,7 @@
           id: 'e22',
           source: 'direct-check',
           target: 'handoff',
-          label: 'Direct task done',
+          label: 'Checks done',
           type: 'smoothstep',
           labelStyle: { fill: '#f8fafc', fontSize: 10 },
         },
@@ -448,30 +440,13 @@
       ];
 
       const nodeTypes = {
-        detail: StepNode,
+        stage: StepNode,
       };
 
-      const nodeDefaults = {
-        sourcePosition: 'right',
-        targetPosition: 'left',
-      };
-
-      const adjustedNodes = nodes.map((node, index) => ({
-        ...node,
-        ...nodeDefaults,
-        data: {
-          ...node.data,
-          // Ensure stable width behavior in reactflow for custom HTML nodes
-          ...node.data,
-        },
-        style: { ...node.style },
-        className: 'rf-node',
-      }));
-
-      const App = () => {
-        return React.createElement(
-          'div',
-          { className: 'page' },
+      const App = () =>
+        React.createElement(
+          React.Fragment,
+          null,
           React.createElement(
             'div',
             { className: 'topbar' },
@@ -479,33 +454,33 @@
             React.createElement(
               'p',
               null,
-              'Full decision flow with AGENTS.md, rules layers, notes artifacts, and skill routing.',
+              'Full step-by-step pipeline with instruction layers, skill routing, and completion loop.',
             ),
           ),
           React.createElement(
             ReactFlow,
             {
-              nodes: adjustedNodes,
+              nodes,
               edges,
               nodeTypes,
               fitView: true,
-              fitViewOptions: { padding: 0.2, includeHiddenNodes: false },
-              minZoom: 0.2,
-              maxZoom: 1.6,
-              proOptions: { hideAttribution: true },
-              nodesDraggable: false,
-              elementsSelectable: false,
-              nodesConnectable: false,
-              zoomOnScroll: true,
+              fitViewOptions: { padding: 0.15 },
+              minZoom: 0.22,
+              maxZoom: 1.8,
               panOnScroll: true,
+              zoomOnScroll: true,
+              nodesDraggable: false,
+              nodesConnectable: false,
+              elementsSelectable: false,
+              proOptions: { hideAttribution: true },
               style: { width: '100%', height: '100%' },
             },
             React.createElement(Controls, null),
             React.createElement(Background, {
               variant: 'dots',
-              gap: 16,
-              size: 1,
+              gap: 15,
               color: '#334155',
+              size: 1,
             }),
             React.createElement(
               MiniMap,
@@ -513,8 +488,8 @@
                 pannable: true,
                 zoomable: true,
                 nodeStrokeColor: '#93c5fd',
-                nodeColor: '#1d4ed8',
-                maskColor: 'rgba(15, 23, 42, 0.45)',
+                nodeColor: '#1e40af',
+                maskColor: 'rgba(2, 6, 23, 0.44)',
               },
             ),
             React.createElement(
@@ -522,23 +497,22 @@
               { position: 'bottom-right' },
               React.createElement(
                 'div',
-                { className: 'node node-final', style: { maxWidth: 360 } },
+                { className: 'flow-node node-final', style: { width: 340 } },
                 React.createElement('h4', null, 'Legend'),
                 React.createElement(
                   'ul',
                   null,
-                  React.createElement('li', null, 'Blue: instruction layers'),
-                  React.createElement('li', null, 'Purple: decisions'),
-                  React.createElement('li', null, 'Green: action nodes'),
-                  React.createElement('li', null, 'Orange: output/closure'),
+                  React.createElement('li', null, 'Blue: policy and instruction layers'),
+                  React.createElement('li', null, 'Purple: decision points'),
+                  React.createElement('li', null, 'Green: execution steps'),
+                  React.createElement('li', null, 'Orange: closure and response states'),
                 ),
               ),
             ),
           ),
         );
-      };
 
-      const root = ReactDOMClient.createRoot(document.getElementById('root'));
+      const root = createRoot(document.getElementById('root'));
       root.render(React.createElement(App));
     </script>
   </body>
