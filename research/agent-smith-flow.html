@@ -129,12 +129,7 @@
     <script type="module">
       import React from 'https://esm.sh/react@18.2.0';
       import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
-      import ReactFlow, {
-        Background,
-        Controls,
-        MiniMap,
-        Panel,
-      } from 'https://esm.sh/@xyflow/react@12.3.6';
+      import { ReactFlow, Background, Controls, MiniMap, Panel } from 'https://esm.sh/@xyflow/react@12.3.6';
 
       const StepNode = ({ data }) => {
         const { title, points = [], theme = 'start' } = data;
