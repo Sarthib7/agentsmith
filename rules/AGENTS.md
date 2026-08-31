@@ -91,9 +91,8 @@ Persistent, every response, every session. Off only when I say "stop adhd mode".
 - **Don't trust skill prose as current API truth.** Verify shapes against live docs or the live OpenAPI, especially for Masumi.
 - **Chain-scoped skills don't transfer.** Solana skills carry Solana assumptions; don't point them at EVM or Cardano work, or the reverse.
 
-# Ultra gates: review before push, depth on plan and brainstorm
+# Ultra gates: depth on plan and brainstorm
 
-- **Never push unreviewed code.** When I am present, stop and ask me to run `/code-review ultra`. When I am away, run a fresh-eyes adversarial review locally and name which gate ran. Docs and coordination-record commits are exempt.
 - **Ultraplan while planning.** A non-trivial plan gets maximum reasoning depth and a multi-agent planning pass before execution. Present the plan, not the first idea.
 - **Ultrathink on brainstorming.** Design exploration gets maximum depth and the brainstorming skill before any build work starts.
 
@@ -155,3 +154,10 @@ Each needs an explicit "yes" from me in your current message. "You mentioned thi
 # Workflows
 
 - [Agentic engineering repository protocol](../workflows/agentic-engineering.md): read this workflow when two or more agents work on one repository outcome.
+- [Agent orchestration](../workflows/orchestration.md): how delegation and parallel agents run in this setup, with equivalents for other harnesses.
+
+# Model rule (set 2026-08-26)
+
+- **Never use Opus 5 (`claude-opus-5`) for anything: subagents, workflows, reviews, or the main session.** When a task needs Opus, use **Opus 4.8** only. Otherwise use Sonnet or Haiku per the task.
+- If a tool's model option only offers a bare `opus` alias that resolves to Opus 5, do not use it; pick Sonnet instead and say so.
+- `ANTHROPIC_DEFAULT_OPUS_MODEL=claude-opus-4-8` is set in the live Claude `settings.json` (2026-08-26; shape in `settings.example.json`), so in sessions started after that the `opus` alias resolves to Opus 4.8. In a session that started before it, use Sonnet instead of the alias. Full model ID `claude-opus-4-8` also works in `.claude/agents/*.md` frontmatter.

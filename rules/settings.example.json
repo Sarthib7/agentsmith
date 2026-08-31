@@ -1,8 +1,12 @@
 {
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-8"
   },
-  "model": "opus[1m]",
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "claude-fable-5[1m]",
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true,
     "cartographer@cartographer-marketplace": true,
@@ -21,8 +25,10 @@
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
-  "theme": "dark",
+  "theme": "auto",
   "editorMode": "normal",
+  "verbose": true,
   "teammateMode": "auto",
+  "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": false
 }
