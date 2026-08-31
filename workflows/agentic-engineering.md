@@ -9,6 +9,7 @@ Use this protocol whenever a repository has two or more agents working on one ou
 - `/Users/sarthiborkar/AGENTS.md` is the global agent entry point. It resolves to `/Users/sarthiborkar/.claude/CLAUDE.md`.
 - `/Users/sarthiborkar/.agents/AGENTS.md` resolves to the same source.
 - `/Users/sarthiborkar/.codex/AGENTS.md` is Codex's global instruction entry point. It resolves to the same source.
+- Oh My Pi (`omp`) is the primary harness. It loads the same global source plus applicable repository `AGENTS.md` files. Its model roles live in `~/.omp/agent/config.yml`.
 - Codex loads `$CODEX_HOME/AGENTS.md` plus applicable repository `AGENTS.md` files. More deeply nested repository files take precedence over broader files. Claude tooling may also read applicable `CLAUDE.md` files.
 - Local `AGENTS.md` or `CLAUDE.md` files may add repository rules. Read the file format used by the active agent before changing files in that repository.
 - User instructions outrank repository rules. Repository rules outrank this global file. This global file outranks skill prose.
@@ -241,6 +242,7 @@ Read status.md
 - A handoff must state owner, status, files changed, contract changes, decisions, verification, blockers, and the next action.
 - Reviewers inspect the final diff against the task, interface contract, decision log, and verification evidence. A green test command proves only that command passed.
 - Coordinator merges or integrates work only after ownership, contracts, and status are current. Resolve conflicts by returning to the contract and decision records.
+- When the harness is Oh My Pi, use the native mechanics described in [orchestration.md](orchestration.md): typed subagent batches, hub messaging, and one validation pass on the merged result. The ownership and contract rules in this section still apply.
 
 ## Daily standup format
 

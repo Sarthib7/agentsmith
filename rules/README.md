@@ -4,11 +4,11 @@ The always-on layer. Skills load when a task matches; these apply to every messa
 
 Because this file loads into every session, size has a cost in adherence as well as tokens. Claude Code's docs target under 200 lines per file and warn that longer files "reduce adherence". Anything that is only true during one kind of work belongs in `workflows/` or in a skill, not here. Note that `@path` imports do not help: imported files load at launch too.
 
-## `CLAUDE.md` and `AGENTS.md`
+## `AGENTS.md`
 
-Use `CLAUDE.md` with Claude Code. Use the matching `AGENTS.md` with Codex and other AGENTS.md-compatible harnesses. The repository copies must remain identical.
+One rules snapshot under the neutral name. Oh My Pi (`omp`, the primary harness) and Codex load `AGENTS.md` files natively. Claude Code reads the same policy from the live source at `~/.claude/CLAUDE.md`. A `CLAUDE.md` twin used to sit here; one copy under the shared name serves every harness, so it is gone.
 
-For one shared global source, install `CLAUDE.md`, then symlink each harness entry point:
+For one shared global source, install the live file as `~/.claude/CLAUDE.md` (same content as `AGENTS.md` here), then symlink each harness entry point:
 
 ```bash
 ln -s ~/.claude/CLAUDE.md ~/AGENTS.md
@@ -28,13 +28,14 @@ What it covers, in the order the file sets it out:
 | Output shaping | Lead with the next action, number multi-step work, restate state every turn, cap lists at five |
 | Cavekit | SPEC.md is source of truth where it exists. Only `spec` may write it |
 | Skills routing | Process skill first, implementation skill second. One skill per job. Announce before following |
-| Ultra gates | Review before every push. Maximum depth on planning and brainstorming |
+| Ultra gates | Maximum depth on planning and brainstorming |
 | Documentation lookup | A five-step order that puts training data last. Skills, then MCP, then live official docs |
 | Written records | Provenance tags, quoted evidence, method blind spots, explicit corrections |
 | Default behaviors | Ask rather than assume, show options first, stay in scope, cap retries at three |
 | Confirmation gates | Five categories that need an explicit yes: altering my content, destructive, irreversible, acting on my behalf, formal backtracking |
 | Git commit rules | Commit identity, one commit at a time, no `Co-Authored-By` trailer |
-| Workflows | Links out to the agentic engineering protocol, so it loads only when the work needs it |
+| Workflows | Links out to the agentic engineering protocol and the orchestration workflow, so they load only when the work needs them |
+| Model rule | Opus 5 is banned everywhere. Opus 4.8 is the only Opus; otherwise Sonnet or Haiku |
 
 Two things in there do more work than the rest.
 
@@ -44,11 +45,11 @@ Two things in there do more work than the rest.
 
 ## `sync.py`
 
-The two copies above are generated, so edit the live `~/.claude/CLAUDE.md` and never the copies.
+The copy above is generated, so edit the live `~/.claude/CLAUDE.md` and never the copy.
 
 ```bash
-python3 rules/sync.py           # rebuild both copies from the live file
-python3 rules/sync.py --check   # exit 1 if they have gone stale
+python3 rules/sync.py           # rebuild the copy from the live file
+python3 rules/sync.py --check   # exit 1 if it has gone stale
 ```
 
 It rewrites machine-local paths to repo-relative ones. If it meets a path it has no rewrite for, or a rewrite that no longer matches, it stops and says which. Drift fails loudly rather than shipping a half-converted snapshot. This repo has drifted before: the `Ultra gates` section existed in the live file and was missing from the copies.
@@ -56,6 +57,10 @@ It rewrites machine-local paths to repo-relative ones. If it meets a path it has
 ## `settings.example.json`
 
 Claude Code settings with the local hook paths stripped. Copy to `~/.claude/settings.json` and adjust. Plugin entries assume you have added the marketplaces they reference.
+
+## `omp-config.example.yml`
+
+Snapshot of `~/.omp/agent/config.yml`, the Oh My Pi harness config. The part that matters is `modelRoles` plus `task.agentModelOverrides`: which model plans, which model runs task subagents, and which vendor reviews. [`workflows/orchestration.md`](../workflows/orchestration.md) explains how those roles get used.
 
 ## Adapting this
 
