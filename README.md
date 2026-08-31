@@ -57,7 +57,7 @@ Read in this order:
 agentsmith/
 ├── AGENTS.md          rules for contributing to this repository
 ├── CONTRIBUTING.md    contributor workflow and validation steps
-├── rules/             global AGENTS.md and CLAUDE.md files
+├── rules/             global AGENTS.md snapshot and harness config examples
 ├── workflows/         reusable operating workflows linked by agent rules
 ├── skills/            collected skills used in my setup
 ├── my-skills/         skills with verified sarthib7 authorship
@@ -89,7 +89,7 @@ Authorship stays conservative. A skill remains in `skills/` when its origin is u
 
 ## How the pieces fit
 
-`rules/` contains standing instructions loaded for every session. The AGENTS.md and CLAUDE.md copies target different agent harnesses but carry the same policy.
+`rules/` contains standing instructions loaded for every session. One `AGENTS.md` snapshot serves every harness: Oh My Pi and Codex read `AGENTS.md` natively, and Claude Code reads the same policy from its live `CLAUDE.md` source. [`workflows/orchestration.md`](workflows/orchestration.md) records how delegation and parallel agents run on top of those rules.
 
 `skills/` and `my-skills/` contain task procedures. Each skill has a `SKILL.md` entry point and may include references, scripts, templates, or assets.
 

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Regenerate the repo rules snapshot from the live global file.
 
-    python3 rules/sync.py           rewrite rules/CLAUDE.md and rules/AGENTS.md
-    python3 rules/sync.py --check   exit 1 if they are stale, write nothing
+    python3 rules/sync.py           rewrite rules/AGENTS.md
+    python3 rules/sync.py --check   exit 1 if it is stale, write nothing
 
 The live file is ~/.claude/CLAUDE.md. It uses absolute paths for a single
-machine. The repo copies use repo-relative paths so they read correctly on
+machine. The repo copy uses repo-relative paths so it reads correctly on
 GitHub. Everything else must stay identical, so this script owns the rewrite
-list and nothing else edits the copies by hand.
+list and nothing else edits the copy by hand.
 
 If a required rewrite no longer matches, the script stops instead of shipping a
 half-converted snapshot. That is the point: drift should fail loudly.
@@ -17,7 +17,7 @@ import pathlib
 import sys
 
 SOURCE = pathlib.Path.home() / ".claude" / "CLAUDE.md"
-TARGETS = ("CLAUDE.md", "AGENTS.md")
+TARGETS = ("AGENTS.md",)
 
 # Each of these must match exactly once. A miss means the global file changed
 # shape and the rewrite below needs updating too.
@@ -37,6 +37,14 @@ REQUIRED = (
     (
         "(~/.agents/workflows/agentic-engineering.md)",
         "(../workflows/agentic-engineering.md)",
+    ),
+    (
+        "(~/.agents/workflows/orchestration.md)",
+        "(../workflows/orchestration.md)",
+    ),
+    (
+        "is set in `~/.claude/settings.json` (2026-08-26)",
+        "is set in the live Claude `settings.json` (2026-08-26; shape in `settings.example.json`)",
     ),
 )
 
