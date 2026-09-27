@@ -1,6 +1,8 @@
 # Attribution
 
-This repository collects skills I use. `my-skills/` contains seven skills attributed to `sarthib7`. Five declare the author in their original files. The user reported authorship of `deterministic-code-review` and `git-worktree-runner` on 2026-08-07, and their frontmatter now records it. `skills/` contains collected work and skills whose source is not fully recorded.
+This repository collects skills I use. VERIFIED: `my-skills/` contains eight skills with `author: sarthib7` in their frontmatter. REPORTED: The user identified `deterministic-code-review` and `git-worktree-runner` as their work on 2026-08-07. Their frontmatter now records that attribution. `skills/` contains collected work and skills whose source is not fully recorded.
+
+VERIFIED correction, 2026-09-27: The previous introduction said seven skills, but the author table listed eight. The introduction had not kept pace with the collection. All eight current `my-skills/*/SKILL.md` files declare `author: sarthib7`.
 
 This file records what the repository can verify. Author and license claims come from each skill's files unless a source is named explicitly.
 
@@ -46,3 +48,21 @@ Correction, 2026-08-07: `deterministic-code-review` and `git-worktree-runner` we
 There may be more skills here that I wrote or adapted. The rest stay unattributed until a source settles ownership.
 
 Skills reachable through my own [designskills](https://github.com/Sarthib7/designskills) repo: `diagnose`, `edit-article`, `git-guardrails-claude-code`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `migrate-to-shoehorn`, `obsidian-vault`, `prototype`, `review`, `scaffold-exercises`, `setup-matt-pocock-skills`, `setup-pre-commit`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, `writing-beats`, `writing-fragments`, `writing-shape`, `zoom-out`. That repo is where they are maintained; they are vendored here so a single install gets the whole setup.
+
+## Local refresh, 2026-09-27
+
+VERIFIED: This refresh copied 159 files from the local `~/.agents/skills/` snapshot. All copied file hashes matched their source. That comparison proves snapshot equality; it does not establish upstream freshness or permission to redistribute.
+
+VERIFIED: The refresh added these 22 collected skills:
+
+`apply-grant`, `ask-matt`, `claude-handoff`, `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `grilling`, `impeccable`, `implement`, `implement-spec`, `loop-me`, `research`, `resolving-merge-conflicts`, `retro`, `setup-ts-deep-modules`, `teach`, `to-questionnaire`, `to-spec`, `to-tickets`, `wait-what`, `writing-for-agents`.
+
+REPORTED: The source review found no author or license declaration in these skills' frontmatter, and no standalone license file. Upstream attribution remains undetermined. Keep them in `skills/` until evidence supports a different owner.
+
+VERIFIED correction: The hash comparison above records the initial copy. The final snapshot has these deliberate source changes:
+
+- `temprouter/SKILL.md` uses a folded description scalar. Its original unquoted colon caused the skills CLI to skip it.
+- `grill-me/SKILL.md` and `grill-with-docs/SKILL.md` show their prerequisite install commands.
+- `apply-grant/SKILL.md` resolves its exporter from the installed skill directory and requires the user to select a transcript. Its telemetry sections were removed because they could send before consent and overwrite unrelated configuration.
+- `apply-grant/export-session.sh` copies only the selected file and refuses an existing output. Its fixture tests use disposable transcripts.
+- `impeccable/reference/extract.md`, `harden.md`, and `optimize.md` had five trailing spaces and one extra blank line removed. VERIFIED: `git diff --cached --check` identified those six lines during release staging.

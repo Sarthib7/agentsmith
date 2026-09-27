@@ -17,7 +17,7 @@
       ]
     },
     {
-      "title": "Rules \u00b7 Output rules",
+      "title": "Agent setup \u00b7 Output rules",
       "description": "How the agent talks. Compression and ordering, applied to every response.",
       "skills": [
         "adhd",
@@ -28,11 +28,12 @@
         "caveman-help",
         "caveman-review",
         "caveman-stats",
-        "i-have-adhd"
+        "i-have-adhd",
+        "wait-what"
       ]
     },
     {
-      "title": "Rules \u00b7 Code minimalism",
+      "title": "Agent setup \u00b7 Code minimalism",
       "description": "YAGNI enforced on every coding task. What gets built, not how the agent talks.",
       "skills": [
         "ponytail",
@@ -44,25 +45,30 @@
       ]
     },
     {
-      "title": "Rules \u00b7 Session control",
+      "title": "Agent setup \u00b7 Session control",
       "description": "Finding the right skill, widening the frame, carrying state between sessions.",
       "skills": [
+        "ask-matt",
+        "claude-handoff",
         "handoff",
         "learn",
         "navigate-skills",
         "research-url",
+        "retro",
         "skill-menu",
+        "teach",
         "using-superpowers",
         "zoom-out"
       ]
     },
     {
-      "title": "Rules \u00b7 Skill authoring",
+      "title": "Agent setup \u00b7 Skill authoring",
       "description": "Writing and maintaining skills themselves.",
       "skills": [
         "setup-matt-pocock-skills",
         "skill-creator",
-        "write-a-skill"
+        "write-a-skill",
+        "writing-for-agents"
       ]
     },
     {
@@ -72,7 +78,10 @@
         "backprop",
         "build",
         "check",
+        "implement",
+        "implement-spec",
         "spec",
+        "to-spec",
         "wayfinder"
       ]
     },
@@ -81,9 +90,11 @@
       "description": "Catching what you got wrong before someone else does, and proving fixes actually hold.",
       "skills": [
         "bench-it",
+        "code-review",
         "cso",
         "deterministic-code-review",
         "diagnose",
+        "diagnosing-bugs",
         "followup-review",
         "fresh-eyes",
         "improve",
@@ -95,14 +106,27 @@
       ]
     },
     {
+      "title": "Coding \u00b7 Architecture and domain modeling",
+      "description": "Design module interfaces and define the language used in a codebase.",
+      "skills": [
+        "codebase-design",
+        "domain-modeling",
+        "setup-ts-deep-modules"
+      ]
+    },
+    {
       "title": "Coding \u00b7 Planning and issue tracking",
       "description": "Stress-testing a plan before writing code, then turning it into trackable work.",
       "skills": [
         "grill-me",
         "grill-with-docs",
+        "grilling",
+        "loop-me",
         "prototype",
         "to-issues",
         "to-prd",
+        "to-questionnaire",
+        "to-tickets",
         "triage",
         "wizard"
       ]
@@ -112,7 +136,8 @@
       "description": "React and Next.js architecture, plus interface craft.",
       "skills": [
         "frontend-architect",
-        "frontend-design-guidelines"
+        "frontend-design-guidelines",
+        "impeccable"
       ]
     },
     {
@@ -157,7 +182,8 @@
       "description": "Fetching current API docs instead of guessing from training data.",
       "skills": [
         "find-docs",
-        "openai-docs"
+        "openai-docs",
+        "research"
       ]
     },
     {
@@ -171,6 +197,7 @@
         "janitor",
         "migrate-to-shoehorn",
         "obsidian-vault",
+        "resolving-merge-conflicts",
         "scaffold-exercises",
         "setup-pre-commit"
       ]
@@ -223,6 +250,7 @@
       "title": "Crypto \u00b7 Ecosystem research",
       "description": "Reading the market before committing to a build.",
       "skills": [
+        "apply-grant",
         "colosseum-copilot",
         "defillama-research",
         "find-next-crypto-idea",

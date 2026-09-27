@@ -1,7 +1,7 @@
 ---
 name: fresh-eyes
-description: Get a second opinion from a subagent that has none of your context, either to independently corroborate a diagnosis or to adversarially break your work. Use before a conclusion blocks or justifies significant work, before merging security-sensitive code, when you have already changed your mind once on the same question, or when the user says "second opinion", "fresh eyes", "challenge this", "red team this", or "get another POV".
 author: sarthib7
+description: Get a second opinion from a subagent that has none of your context, either to independently corroborate a diagnosis or to adversarially break your work. Use before a conclusion blocks or justifies significant work, before merging security-sensitive code, when you have already changed your mind once on the same question, or when the user says "second opinion", "fresh eyes", "challenge this", "red team this", or "get another POV".
 ---
 
 # Fresh Eyes

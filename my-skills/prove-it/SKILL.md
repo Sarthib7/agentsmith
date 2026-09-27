@@ -1,7 +1,7 @@
 ---
 name: prove-it
-description: Verify a change in both directions before claiming it works. Confirm it passes, then break it on purpose and confirm it fails. Use when a fix ships with a test, when touching anything that detects or gates (linter, secret scanner, CI check, validator, rate limiter, auth guard, allowlist), when resolving a merge conflict, or before reporting "tests pass", "the scan is clean", or "CI is green".
 author: sarthib7
+description: Verify a change in both directions before claiming it works. Confirm it passes, then break it on purpose and confirm it fails. Use when a fix ships with a test, when touching anything that detects or gates (linter, secret scanner, CI check, validator, rate limiter, auth guard, allowlist), when resolving a merge conflict, or before reporting "tests pass", "the scan is clean", or "CI is green".
 ---
 
 # Prove it, both directions

@@ -1,7 +1,7 @@
 ---
 name: followup-review
-description: Re-review a pull request after the author has pushed fixes for your earlier findings. Establishes which bugs are new versus ones you missed, checks each prior finding closed end-to-end rather than at the patched line, and treats the fix commit itself as unreviewed code. Use when returning to a PR you already reviewed, when the author says "addressed your feedback" or pushes a commit like "address review comments", when asked to follow up on or re-check a review, or before converting a CHANGES_REQUESTED review into an approval.
 author: sarthib7
+description: Re-review a pull request after the author has pushed fixes for your earlier findings. Establishes which bugs are new versus ones you missed, checks each prior finding closed end-to-end rather than at the patched line, and treats the fix commit itself as unreviewed code. Use when returning to a PR you already reviewed, when the author says "addressed your feedback" or pushes a commit like "address review comments", when asked to follow up on or re-check a review, or before converting a CHANGES_REQUESTED review into an approval.
 ---
 
 # Following up on your own review
