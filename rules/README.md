@@ -32,7 +32,7 @@ What it covers, in the order the file sets it out:
 | Documentation lookup | A five-step order that puts training data last. Skills, then MCP, then live official docs |
 | Written records | Provenance tags, quoted evidence, method blind spots, explicit corrections |
 | Default behaviors | Ask rather than assume, show options first, stay in scope, cap retries at three |
-| Confirmation gates | Five categories that need an explicit yes: altering my content, destructive, irreversible, acting on my behalf, formal backtracking |
+| Confirmation gates | Approval for content changes, destructive actions, irreversible actions, database migrations, acting on my behalf, and formal backtracking |
 | Git commit rules | Commit identity, one commit at a time, no `Co-Authored-By` trailer |
 | Workflows | Links out to the agentic engineering protocol and the orchestration workflow, so they load only when the work needs them |
 | Model rule | Opus 5 is banned everywhere. Opus 4.8 is the only Opus; otherwise Sonnet or Haiku |
@@ -56,7 +56,7 @@ It rewrites machine-local paths to repo-relative ones. If it meets a path it has
 
 ## `settings.example.json`
 
-Claude Code settings with the local hook paths stripped. Copy to `~/.claude/settings.json` and adjust. Plugin entries assume you have added the marketplaces they reference.
+Selected Claude Code settings. Local hooks and approval overrides are omitted. Copy to `~/.claude/settings.json` and adjust. Plugin entries assume you have added the marketplaces they reference.
 
 ## `omp-config.example.yml`
 
