@@ -1,6 +1,6 @@
 ---
 name: collab-canvas
-description: Control Collaborator's spatial canvas from the terminal using the collab-canvas CLI. Use when placing, moving, or resizing tiles (terminals, files, images, graphs) on the pannable canvas surface.
+description: Control Collaborator's spatial canvas from the terminal.
 ---
 
 # Collaborator Canvas

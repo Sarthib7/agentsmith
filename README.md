@@ -9,10 +9,10 @@ Agent rules and reusable skills from my daily setup, with a separate workspace f
 </a>
 
 <!-- counts:start -->
-![skills](https://img.shields.io/badge/skills-125-1a1a1a?style=flat-square&labelColor=1a1a1a&color=FF51FF)
-![rules](https://img.shields.io/badge/rules-25-1a1a1a?style=flat-square)
-![coding](https://img.shields.io/badge/coding-62-1a1a1a?style=flat-square)
-![crypto](https://img.shields.io/badge/crypto-24-1a1a1a?style=flat-square)
+![skills](https://img.shields.io/badge/skills-147-1a1a1a?style=flat-square&labelColor=1a1a1a&color=FF51FF)
+![setup skills](https://img.shields.io/badge/setup%20skills-31-1a1a1a?style=flat-square)
+![coding](https://img.shields.io/badge/coding-77-1a1a1a?style=flat-square)
+![crypto](https://img.shields.io/badge/crypto-25-1a1a1a?style=flat-square)
 ![writing](https://img.shields.io/badge/writing-6-1a1a1a?style=flat-square)
 ![product](https://img.shields.io/badge/product-8-1a1a1a?style=flat-square)
 <!-- counts:end -->

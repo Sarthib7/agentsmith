@@ -1,12 +1,7 @@
 ---
 name: temprouter
-description: >-
-  Call tempRouter — a payable, end-to-end-encrypted LLM inference endpoint on MPP (Tempo).
-  Pay per inference in pathUSD stablecoin AFTER your agent verifies (Intel DCAP) that the
-  prompt runs inside a real Phala Intel TDX enclave that can't read it. Use when a prompt
-  holds secrets/PII (API keys sk-…, private keys 0x…, seed phrases, JWTs, passwords,
-  customer data) that must never reach a public model host. Verify-before-pay: a failed
-  attestation pays nothing; the relay is blind (ciphertext only).
+description: >
+  Call tempRouter — a payable, end-to-end-encrypted LLM inference endpoint on MPP (Tempo). Pay per inference in pathUSD stablecoin AFTER your agent verifies (Intel DCAP) that the prompt runs inside a real Phala Intel TDX enclave that can't read it. Use when a prompt holds secrets/PII (API keys sk-…, private keys 0x…, seed phrases, JWTs, passwords, customer data) that must never reach a public model host. Verify-before-pay: a failed attestation pays nothing; the relay is blind (ciphertext only).
 ---
 
 # tempRouter — payable confidential inference (entrypoint)

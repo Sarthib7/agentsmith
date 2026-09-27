@@ -1,25 +1,27 @@
 # Skill index
 
-125 skills across 5 catalog sections.
+147 skills across 5 catalog sections.
 Generated from `skills/*/SKILL.md` and `my-skills/*/SKILL.md`. Do not edit by hand.
 
 Install one by its declared name:
 
 ```bash
-npx skills add Sarthib7/agentsmith --skill <name>
+npx skills add Sarthib7/agentsmith --full-depth --skill <name>
 ```
 
 Read one without installing it:
 
 ```bash
-npx skills use Sarthib7/agentsmith@<name>
+npx skills use Sarthib7/agentsmith@<name> --full-depth
 ```
 
-## Rules <sub>(25)</sub>
+<a id="rules"></a>
 
-Always on, or about the setup itself. Never invoked by name.
+## Agent setup <sub>(31)</sub>
 
-### Output rules <sub>(9)</sub>
+Response preferences, session control, and skill setup. Check each skill for its trigger.
+
+### Output rules <sub>(10)</sub>
 
 How the agent talks. Compression and ordering, applied to every response.
 
@@ -34,6 +36,7 @@ How the agent talks. Compression and ordering, applied to every response.
 | [`caveman-review`](skills/caveman-review/SKILL.md) | Ultra-compressed code review comments. |
 | [`caveman-stats`](skills/caveman-stats/SKILL.md) | Show real token usage and estimated savings for the current session. |
 | [`i-have-adhd`](skills/i-have-adhd/SKILL.md) | Shape output for a reader with ADHD: lead with the next action, number multi-step work, restate state across turns, suppress tangents, give specific time estimates, make wins… |
+| [`wait-what`](skills/wait-what/SKILL.md) | Stop. |
 
 ### Code minimalism <sub>(6)</sub>
 
@@ -48,35 +51,42 @@ YAGNI enforced on every coding task. What gets built, not how the agent talks.
 | [`ponytail-help`](skills/ponytail-help/SKILL.md) | Quick-reference card for all ponytail modes, skills, and commands. |
 | [`ponytail-review`](skills/ponytail-review/SKILL.md) | Code review focused exclusively on over-engineering. |
 
-### Session control <sub>(7)</sub>
+### Session control <sub>(11)</sub>
 
 Finding the right skill, widening the frame, carrying state between sessions.
 
 | Skill | What it does |
 |---|---|
+| [`ask-matt`](skills/ask-matt/SKILL.md) | Ask which skill or flow fits your situation. |
+| [`claude-handoff`](skills/claude-handoff/SKILL.md) | Hand the current conversation off to a fresh background agent that picks up the work immediately. |
 | [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff document for another agent to pick up. |
 | [`learn`](skills/learn/SKILL.md) | Manage project learnings across sessions. |
 | [`navigate-skills`](skills/navigate-skills/SKILL.md) | Meta skill — browse all installed solana-new skills, repos, and MCPs to find the right tool for any task |
 | [`research-url`](my-skills/research-url/SKILL.md) | Research a URL (repo, gist, article, doc) with one dedicated subagent per URL, producing a fixed-format distilled report plus entries in the project learnings file. |
+| [`retro`](skills/retro/SKILL.md) | Conduct a retrospective on a coding session. |
 | [`skill-menu`](skills/skill-menu/SKILL.md) | Use when the user asks to list, choose, or explicitly invoke skills with skill:<name>; loads local skill files on demand. |
+| [`teach`](skills/teach/SKILL.md) | Teach the user a new skill or concept, within this workspace. |
 | [`using-superpowers`](skills/using-superpowers/SKILL.md) | Use when starting any conversation - establishes how to find and use skills, requiring Skill tool invocation before ANY response including clarifying questions |
 | [`zoom-out`](skills/zoom-out/SKILL.md) | Tell the agent to zoom out and give broader context or a higher-level perspective. |
 
-### Skill authoring <sub>(3)</sub>
+### Skill authoring <sub>(4)</sub>
 
 Writing and maintaining skills themselves.
 
 | Skill | What it does |
 |---|---|
-| [`setup-matt-pocock-skills`](skills/setup-matt-pocock-skills/SKILL.md) | Sets up an `## Agent skills` block in AGENTS.md/CLAUDE.md and `docs/agents/` so the engineering skills know this repo's issue tracker (GitHub or local markdown), triage label… |
+| [`setup-matt-pocock-skills`](skills/setup-matt-pocock-skills/SKILL.md) | Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. |
 | [`skill-creator`](skills/skill-creator/SKILL.md) | Create new skills, modify and improve existing skills, and measure skill performance. |
 | [`write-a-skill`](skills/write-a-skill/SKILL.md) | Create new agent skills with proper structure, progressive disclosure, and bundled resources. |
+| [`writing-for-agents`](skills/writing-for-agents/SKILL.md) | Writing documents for agents. |
 
-## Coding <sub>(62)</sub>
+<a id="coding"></a>
+
+## Coding <sub>(77)</sub>
 
 Writing, reviewing, and shipping code. Chain-agnostic.
 
-### Spec-driven development <sub>(5)</sub>
+### Spec-driven development <sub>(8)</sub>
 
 SPEC.md as source of truth: distill it, build against it, check drift, feed every bug back in.
 
@@ -84,44 +94,63 @@ SPEC.md as source of truth: distill it, build against it, check drift, feed ever
 |---|---|
 | [`backprop`](skills/backprop/SKILL.md) | Bug → spec protocol. |
 | [`check`](skills/check/SKILL.md) | Read-only drift detector. |
+| [`implement`](skills/implement/SKILL.md) | Implement a piece of work based on a spec or set of tickets. |
+| [`implement-spec`](skills/implement-spec/SKILL.md) | Implement a specification in code. |
 | [`spec`](skills/spec/SKILL.md) | Create, amend, or backprop bugs into SPEC.md at repo root. |
 | [`build` <sub>(dir `spec-build`)</sub>](skills/spec-build/SKILL.md) | Plan-then-execute implementation against SPEC.md. |
-| [`wayfinder`](skills/wayfinder/SKILL.md) | Plan a huge chunk of work — more than one agent session can hold — as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the… |
+| [`to-spec`](skills/to-spec/SKILL.md) | Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed. |
+| [`wayfinder`](skills/wayfinder/SKILL.md) | Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the… |
 
-### Review and verification <sub>(12)</sub>
+### Review and verification <sub>(14)</sub>
 
 Catching what you got wrong before someone else does, and proving fixes actually hold.
 
 | Skill | What it does |
 |---|---|
 | [`bench-it`](my-skills/bench-it/SKILL.md) | Benchmark a product claim against a named baseline or competitor. |
+| [`code-review`](skills/code-review/SKILL.md) | Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec… |
 | [`cso`](skills/cso/SKILL.md) | Chief Security Officer mode. |
 | [`deterministic-code-review`](my-skills/deterministic-code-review/SKILL.md) | Reviews code changes with deterministic scope selection, isolated review units, evidence-backed findings, exact line anchoring, and a final falsification pass. |
 | [`diagnose`](skills/diagnose/SKILL.md) | Disciplined diagnosis loop for hard bugs and performance regressions. |
+| [`diagnosing-bugs`](skills/diagnosing-bugs/SKILL.md) | Diagnosis loop for hard bugs and performance regressions. |
 | [`followup-review`](my-skills/followup-review/SKILL.md) | Re-review a pull request after the author has pushed fixes for your earlier findings. |
 | [`fresh-eyes`](my-skills/fresh-eyes/SKILL.md) | Get a second opinion from a subagent that has none of your context, either to independently corroborate a diagnosis or to adversarially break your work. |
 | [`improve`](skills/improve/SKILL.md) | Survey any codebase as a senior advisor and produce prioritized, self-contained implementation plans for OTHER models/agents to execute. |
-| [`improve-codebase-architecture`](skills/improve-codebase-architecture/SKILL.md) | Find deepening opportunities in a codebase, informed by the domain language in CONTEXT.md and the decisions in docs/adr/. |
+| [`improve-codebase-architecture`](skills/improve-codebase-architecture/SKILL.md) | Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick. |
 | [`prove-it`](my-skills/prove-it/SKILL.md) | Verify a change in both directions before claiming it works. |
 | [`review`](skills/review/SKILL.md) | Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec… |
 | [`review-and-iterate`](skills/review-and-iterate/SKILL.md) | Review Solana project code for quality, security, and production readiness. |
-| [`tdd`](skills/tdd/SKILL.md) | Test-driven development with red-green-refactor loop. |
+| [`tdd`](skills/tdd/SKILL.md) | Test-driven development. |
 
-### Planning and issue tracking <sub>(7)</sub>
+### Architecture and domain modeling <sub>(3)</sub>
+
+Design module interfaces and define the language used in a codebase.
+
+| Skill | What it does |
+|---|---|
+| [`codebase-design`](skills/codebase-design/SKILL.md) | Shared vocabulary for designing deep modules. |
+| [`domain-modeling`](skills/domain-modeling/SKILL.md) | Build and sharpen a project's domain model. |
+| [`setup-ts-deep-modules`](skills/setup-ts-deep-modules/SKILL.md) | Wire dependency-cruiser into a TypeScript repo so each package is a deep module, with implementation hidden in subfolders and reachable only through its entry-point files. |
+
+### Planning and issue tracking <sub>(11)</sub>
 
 Stress-testing a plan before writing code, then turning it into trackable work.
 
 | Skill | What it does |
 |---|---|
-| [`grill-me`](skills/grill-me/SKILL.md) | Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. |
-| [`grill-with-docs`](skills/grill-with-docs/SKILL.md) | Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. |
-| [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype to flesh out a design before committing to it. |
+| [`grill-me`](skills/grill-me/SKILL.md) | A relentless interview to sharpen a plan or design. |
+| [`grill-with-docs`](skills/grill-with-docs/SKILL.md) | A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go. |
+| [`grilling`](skills/grilling/SKILL.md) | Grill the user relentlessly about a plan, decision, or idea. |
+| [`loop-me`](skills/loop-me/SKILL.md) | Grill me about specs for the workflows I want to build, within this workspace. |
+| [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype to answer a design question. |
 | [`to-issues`](skills/to-issues/SKILL.md) | Break a plan, spec, or PRD into independently-grabbable issues on the project issue tracker using tracer-bullet vertical slices. |
 | [`to-prd`](skills/to-prd/SKILL.md) | Turn the current conversation context into a PRD and publish it to the project issue tracker. |
-| [`triage`](skills/triage/SKILL.md) | Triage issues through a state machine driven by triage roles. |
-| [`wizard`](skills/wizard/SKILL.md) | Generate an interactive bash wizard that walks a human through a manual procedure — third-party setup, a one-off migration, an A→B state transition — opening URLs, capturing… |
+| [`to-questionnaire`](skills/to-questionnaire/SKILL.md) | Turn a decision you can't fully answer into a questionnaire for someone else to fill in. |
+| [`to-tickets`](skills/to-tickets/SKILL.md) | Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one… |
+| [`triage`](skills/triage/SKILL.md) | Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs. |
+| [`wizard`](skills/wizard/SKILL.md) | Generate an interactive bash wizard that walks a human through steps only they can perform. |
 
-### Frontend <sub>(2)</sub>
+### Frontend <sub>(3)</sub>
 
 React and Next.js architecture, plus interface craft.
 
@@ -129,6 +158,7 @@ React and Next.js architecture, plus interface craft.
 |---|---|
 | [`frontend-architect`](skills/frontend-architect/SKILL.md) | Expert frontend architecture and UI engineering for React, Next.js/App Router, TypeScript, Tailwind, shadcn/ui, accessibility, performance, design systems, Web3 transaction UX,… |
 | [`frontend-design-guidelines`](skills/frontend-design-guidelines/SKILL.md) | Apply high-quality web interface design rules when building, reviewing, or styling frontend code. |
+| [`impeccable`](skills/impeccable/SKILL.md) | Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a… |
 
 ### Backend and databases <sub>(3)</sub>
 
@@ -169,7 +199,7 @@ Render and Railway. Blueprints, services, domains, and what to do when a deploy 
 | [`render-workflows`](skills/render-workflows/SKILL.md) | Sets up, develops, tests, and deploys Render Workflows. |
 | [`use-railway`](skills/use-railway/SKILL.md) | Operate Railway infrastructure: create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage… |
 
-### Documentation lookup <sub>(2)</sub>
+### Documentation lookup <sub>(3)</sub>
 
 Fetching current API docs instead of guessing from training data.
 
@@ -177,24 +207,28 @@ Fetching current API docs instead of guessing from training data.
 |---|---|
 | [`find-docs`](skills/find-docs/SKILL.md) | Retrieves up-to-date documentation, API references, and code examples for any developer technology. |
 | [`openai-docs`](skills/openai-docs/SKILL.md) | Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations (for example: Codex, Responses API, Chat Completions,… |
+| [`research`](skills/research/SKILL.md) | Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. |
 
-### Tooling <sub>(9)</sub>
+### Tooling <sub>(10)</sub>
 
 Hooks, pre-commit, migrations, and the tools the agent drives outside a codebase.
 
 | Skill | What it does |
 |---|---|
 | [`agent-browser`](skills/agent-browser/SKILL.md) | Browser automation CLI for AI agents. |
-| [`collab-canvas`](skills/collab-canvas/SKILL.md) | Control Collaborator's spatial canvas from the terminal using the collab-canvas CLI. |
+| [`collab-canvas`](skills/collab-canvas/SKILL.md) | Control Collaborator's spatial canvas from the terminal. |
 | [`git-guardrails-claude-code`](skills/git-guardrails-claude-code/SKILL.md) | Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. |
 | [`git-worktree-runner`](my-skills/git-worktree-runner/SKILL.md) | Manages isolated development worktrees with git gtr, including creation, validation, command execution, tool launch, and safe cleanup. |
 | [`janitor`](skills/janitor/SKILL.md) | Performs a read-only, platform-aware audit of cache and temporary storage, then reports cleanup candidates with measured sizes and risk notes. |
 | [`migrate-to-shoehorn`](skills/migrate-to-shoehorn/SKILL.md) | Migrate test files from `as` type assertions to @total-typescript/shoehorn. |
 | [`obsidian-vault`](skills/obsidian-vault/SKILL.md) | Search, create, and manage notes in the Obsidian vault with wikilinks and index notes. |
+| [`resolving-merge-conflicts`](skills/resolving-merge-conflicts/SKILL.md) | Use when you need to resolve an in-progress git merge/rebase conflict. |
 | [`scaffold-exercises`](skills/scaffold-exercises/SKILL.md) | Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. |
 | [`setup-pre-commit`](skills/setup-pre-commit/SKILL.md) | Set up Husky pre-commit hooks with lint-staged (Prettier), type checking, and tests in the current repo. |
 
-## Crypto <sub>(24)</sub>
+<a id="crypto"></a>
+
+## Crypto <sub>(25)</sub>
 
 Blockchain work: Solana, EVM, and agent payment rails.
 
@@ -246,16 +280,19 @@ Agents that pay: Masumi on Cardano, MPP and x402, paid APIs, confidential infere
 | [`tempo` <sub>(dir `tempo-request`)</sub>](skills/tempo-request/SKILL.md) | Use this skill when the user wants to call an API, make an HTTP request, discover available services, or access external data with automatic payments. |
 | [`temprouter`](skills/temprouter/SKILL.md) | Call tempRouter — a payable, end-to-end-encrypted LLM inference endpoint on MPP (Tempo). |
 
-### Ecosystem research <sub>(4)</sub>
+### Ecosystem research <sub>(5)</sub>
 
 Reading the market before committing to a build.
 
 | Skill | What it does |
 |---|---|
+| [`apply-grant`](skills/apply-grant/SKILL.md) | Prepare an Agentic Engineering Grant application by gathering project data, git history, and context files, then presenting all fields needed to fill the Solana Earn grant form. |
 | [`colosseum-copilot`](skills/colosseum-copilot/SKILL.md) | Search and analyze 5,400+ Solana hackathon projects using Colosseum Copilot. |
 | [`defillama-research`](skills/defillama-research/SKILL.md) | Research DeFi protocols and market opportunities using DefiLlama data. |
 | [`find-next-crypto-idea`](skills/find-next-crypto-idea/SKILL.md) | Interview users sharply to discover, rank, or validate what they should build in crypto. |
 | [`submit-to-hackathon`](skills/submit-to-hackathon/SKILL.md) | Prepare and optimize a hackathon submission for a Solana project. |
+
+<a id="writing"></a>
 
 ## Writing <sub>(6)</sub>
 
@@ -268,9 +305,9 @@ Turning fragments and notes into something publishable.
 | Skill | What it does |
 |---|---|
 | [`edit-article`](skills/edit-article/SKILL.md) | Edit and improve articles by restructuring sections, improving clarity, and tightening prose. |
-| [`writing-beats`](skills/writing-beats/SKILL.md) | Shape an article as a journey of beats, choose-your-own-adventure style. |
-| [`writing-fragments`](skills/writing-fragments/SKILL.md) | Grilling session that mines the user for fragments — heterogeneous nuggets of writing (claims, vignettes, sharp sentences, half-thoughts) — and appends them to a single document… |
-| [`writing-shape`](skills/writing-shape/SKILL.md) | Take a markdown file of raw material and shape it into an article through a conversational session — drafting candidate openings, growing the piece paragraph by paragraph,… |
+| [`writing-beats`](skills/writing-beats/SKILL.md) | Writing, exploit; assemble raw material into a journey of beats, grounding each term before a beat leans on it. |
+| [`writing-fragments`](skills/writing-fragments/SKILL.md) | Writing, explore: mine raw fragments, no structure yet. |
+| [`writing-shape`](skills/writing-shape/SKILL.md) | Writing, exploit: shape raw material into an article, paragraph by paragraph. |
 
 ### De-slopping <sub>(2)</sub>
 
@@ -280,6 +317,8 @@ The detector and the rewriter. Run on anything that ships.
 |---|---|
 | [`avoid-ai-writing`](skills/avoid-ai-writing/SKILL.md) | Audit and rewrite content to remove AI writing patterns ("AI-isms"). |
 | [`humanizer`](skills/humanizer/SKILL.md) | Remove signs of AI-generated writing from text. |
+
+<a id="product"></a>
 
 ## Product <sub>(8)</sub>
 
