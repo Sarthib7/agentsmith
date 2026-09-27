@@ -24,7 +24,11 @@ INFERRED decision: Use the existing Python catalog and a static HTML page. A lar
 
 VERIFIED: `scripts/build-site.py` reads `load_catalog()` from `scripts/build-index.py`. The HTML contains the skill cards before JavaScript runs. JavaScript adds filtering and clipboard controls. The browser check confirmed that source links remain usable with JavaScript disabled.
 
-VERIFIED: `.github/workflows/pages.yml` uploads `_site/`. It no longer uploads the repository root. This describes workflow configuration; the deployment was not run.
+VERIFIED at the local handoff: `.github/workflows/pages.yml` uploads `_site/`. The deployment had not run at that point.
+
+VERIFIED release correction: The repository's Pages setting still returned `build_type: legacy` with source `main` at `/`. Both public pages returned HTTP `404` after the workflows passed. The release changed the setting to `workflow`, as supported by the [GitHub Pages API](https://docs.github.com/en/rest/pages/pages#update-information-about-a-github-pages-site).
+
+VERIFIED: [Deployment 36310917068](https://github.com/Sarthib7/agentsmith/actions/runs/36310917068) returned `conclusion: success` for commit `9606ba0`. The homepage, catalog, CSS, JavaScript, and icon each returned HTTP `200` and matched the generated files exactly. `status.md` records the response sizes and the check's limits.
 
 ## Stable source paths
 
