@@ -1,23 +1,30 @@
 # Snapshot of ~/.omp/agent/config.yml: Oh My Pi model roles and UI.
 # The role-to-model mapping is the part workflows/orchestration.md relies on.
+# VERIFIED 2026-09-27: exported fields compared with the local source.
 modelRoles:
-  advisor: openai-codex/gpt-5.6-sol:max
-  default: anthropic/claude-fable-5:max
+  advisor: openai-codex/gpt-6-astra:max
+  default: opencode-zen/mimo-v2.6-flash-free
   vision: anthropic/claude-fable-5:max
   plan: openai-codex/gpt-5.6-sol:max
   designer: anthropic/claude-fable-5:max
   commit: anthropic/claude-opus-4-8:max
   tiny: anthropic/claude-opus-4-8
   task: openai-codex/gpt-5.6-luna:max
+  smol: openai-codex/gpt-5.6-sol:max
 symbolPreset: nerd
 composer:
   shape: claude
 theme:
-  dark: titanium
+  dark: onyx
+  light: light
 setupVersion: 2
 statusLine:
   separator: powerline-thin
+  transparent: true
+  preset: default
 task:
   agentModelOverrides:
-    designer: openai-codex/gpt-5.6-luna
-    reviewer: openai-codex/gpt-5.6-sol
+    reviewer: anthropic/claude-fable-5
+    scout: openai-codex/gpt-5.6-sol
+    security-reviewer: openai-codex/gpt-6-astra
+    task: openai-codex/gpt-5.6-luna
