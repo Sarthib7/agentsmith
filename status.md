@@ -16,6 +16,8 @@ None.
 
 ## Completed
 
+- REPO-METADATA, owner coordinator, status Completed: VERIFIED, GitHub's About fields now include the website URL and the full setup description. `rules/README.md` includes the migration approval gate.
+- HARNESS-AUDIT, owner setup-reviewer, status Completed: REPORTED, the initial Claude example had one differing field and one field absent locally. VERIFIED by coordinator after correction: all 19 remaining Claude fields and all 21 OMP fields match their local sources.
 - RELEASE-SKILLS, owner coordinator, status Completed: VERIFIED, commit `0d61289` was pushed to `main`. Git returned `3fa86f9..0d61289  main -> main`.
 - RELEASE-RULES, owner coordinator, status Completed: VERIFIED, commit `7040365` was pushed to `main`. Git returned `0d61289..7040365  main -> main`. The staged snapshot returned `up to date: AGENTS.md` and `OMP exported fields checked: 7; mismatches: []`.
 - RELEASE-SITE, owner coordinator, status Completed: VERIFIED, commit `9606ba0` was pushed to `main`. Git returned `7040365..9606ba0  main -> main`. The [validation run](https://github.com/Sarthib7/agentsmith/actions/runs/36310806659) and [Pages deployment](https://github.com/Sarthib7/agentsmith/actions/runs/36310917068) returned `conclusion: success` for `9606ba0ba933c79775c88c0da7b359dcce6d3c57`.
@@ -33,6 +35,34 @@ None.
 See `docs/decisions.md` for the static site choice and source adaptations. Skill ownership roots remain stable.
 
 ## Verification and handoff
+
+### Setup audit after publication
+
+VERIFIED: `gh repo view Sarthib7/agentsmith --json homepageUrl,description` returned:
+
+```json
+{"description":"Rules, workflows, harness configuration, and skills for agentic engineering.","homepageUrl":"https://sarthib7.github.io/agentsmith/"}
+```
+
+VERIFIED correction: GitHub's homepage field was empty, although `README.md:9` already linked the website. The About fields now include that link and describe rules, workflows, harness configuration, and skills.
+
+VERIFIED: `python3 -B rules/sync.py --check` returned `up to date: AGENTS.md`. Both workflow files matched their local sources byte for byte. All three global `AGENTS.md` entrypoints resolved to the shared rules source.
+
+VERIFIED correction: `rules/README.md` still listed five approval gates. The source has six, including database migrations. The guide now includes that gate. The rule itself was already current.
+
+VERIFIED correction: The Claude example's `model` was `claude-fable-5[1m]`; the local source uses `claude-fable-5-1[1m]`. The local source no longer has `fastMode`. The example now uses the source model and omits that stale field.
+
+VERIFIED commands returned:
+
+```text
+Claude example: exported fields checked: 19; differences: []
+OMP example: exported fields checked: 21; differences: []
+Shared rules entrypoints checked: 3; different targets: []
+Approval gates checked: 6; migration rule included in source and guide
+README website links: homepage and skill catalog present
+```
+
+VERIFIED: Configuration comparisons cover exported leaf values. They do not test provider access or harness behavior. REPORTED by setup-reviewer: local-only hooks and `autoMode` include machine-specific or personal policy. Those fields remain excluded from the public example.
 
 ### Release checks
 
