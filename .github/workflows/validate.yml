@@ -1,0 +1,32 @@
+name: Validate catalog and site
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run tests
+        run: python3 -B -m unittest discover -s tests -v
+
+      - name: Build catalog
+        run: python3 -B scripts/build-index.py
+
+      - name: Build site
+        run: python3 -B scripts/build-site.py
+
+      - name: Check generated files
+        run: git diff --exit-code -- SKILLS.md skills.sh.json README.md
+
+      - name: Check whitespace
+        run: git diff --check
