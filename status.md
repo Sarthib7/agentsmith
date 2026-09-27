@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-27
 Updated by: coordinator
-Current phase: Release In Progress
+Current phase: Published and verified
 
 ## Scope
 
@@ -12,12 +12,13 @@ REPORTED correction: The user clarified that Agentsmith covers rules, workflows,
 
 ## In Progress
 
-- RELEASE, owner coordinator, status In Progress: REPORTED, the user requested "push one by one feat and update". Publish separate commits for the skill catalog, rules and OMP snapshots, then the website and navigation. The coordinator owns staging, commits, pushes, and this record.
+None.
 
 ## Completed
 
 - RELEASE-SKILLS, owner coordinator, status Completed: VERIFIED, commit `0d61289` was pushed to `main`. Git returned `3fa86f9..0d61289  main -> main`.
 - RELEASE-RULES, owner coordinator, status Completed: VERIFIED, commit `7040365` was pushed to `main`. Git returned `0d61289..7040365  main -> main`. The staged snapshot returned `up to date: AGENTS.md` and `OMP exported fields checked: 7; mismatches: []`.
+- RELEASE-SITE, owner coordinator, status Completed: VERIFIED, commit `9606ba0` was pushed to `main`. Git returned `7040365..9606ba0  main -> main`. The [validation run](https://github.com/Sarthib7/agentsmith/actions/runs/36310806659) and [Pages deployment](https://github.com/Sarthib7/agentsmith/actions/runs/36310917068) returned `conclusion: success` for `9606ba0ba933c79775c88c0da7b359dcce6d3c57`.
 - REVIEW-SKILLS, owner skill-reviewer, status Completed: REPORTED, the review found no concrete blocker. Scope and limits appear below.
 - REVIEW-SITE, owner site-reviewer, status Completed: REPORTED, the review found no publication blocker. Scope and limits appear below.
 - HOME and DOCS: VERIFIED, `site/index.html` and `README.md` present rules, workflows, OMP, and skills. `site/skills.html` holds the searchable catalog. `CONTRIBUTING.md` covers each source type.
@@ -35,6 +36,22 @@ See `docs/decisions.md` for the static site choice and source adaptations. Skill
 
 ### Release checks
 
+REPORTED: The user authorized sequential publication with "push one by one feat and update", then "go ahead". The three content commits were created and pushed one at a time.
+
+VERIFIED: The website commit's staged snapshot returned `Ran 23 tests in 0.208s` and `OK`. Both builders succeeded. Generated catalog files matched the staged bytes. JavaScript syntax and staged whitespace checks exited 0.
+
+VERIFIED correction: Successful GitHub checks did not establish that the public website was available. Both pages initially returned HTTP `404`. The Pages API returned `build_type: legacy` with source `main` at `/`. After changing `build_type` to `workflow` and running the Pages workflow, public checks returned:
+
+```text
+index.html: HTTP 200; matches local generated file: True; bytes: 13202
+skills.html: HTTP 200; matches local generated file: True; bytes: 191478
+style.css: HTTP 200; matches local generated file: True; bytes: 27324
+catalog.js: HTTP 200; matches local generated file: True; bytes: 3279
+icon.svg: HTTP 200; matches local generated file: True; bytes: 257
+```
+
+VERIFIED: These checks compared HTTP response bytes with `_site/`. They did not repeat browser interactions against the public origin. The earlier browser checks below used a local server.
+
 VERIFIED correction: Earlier `git diff --check` runs did not cover untracked files. Staging the additions exposed five trailing spaces and one extra blank line in three Impeccable reference files. The release removes those whitespace errors; `ATTRIBUTION.md` records the source change.
 
 VERIFIED: The first commit's temporary snapshot returned `Ran 20 tests in 0.806s` and `OK`. With only the catalog source restored to its original version, two collected regression tests returned `FAILED (failures=5)`. Restoring the new source returned `Ran 2 tests in 0.035s` and `OK`.
@@ -42,6 +59,8 @@ VERIFIED: The first commit's temporary snapshot returned `Ran 20 tests in 0.806s
 REPORTED by skill-reviewer: No concrete blocker found in the skill changes. The review checked metadata, companion links, script syntax, and common credential patterns. Pattern scans cannot prove that private data is absent. Upstream attribution remains undetermined.
 
 REPORTED by site-reviewer: No blocker found in the website and publishing files. The review checked generated cards, source paths, JavaScript syntax, and action manifests. Public deployment remains to be checked.
+
+VERIFIED correction: The public deployment check above now completes the site review's remaining release step. The earlier review covered files; it did not inspect the repository's Pages setting.
 
 ### Final scope correction
 
@@ -103,7 +122,6 @@ VERIFIED: `git diff --check`, JavaScript syntax, and shell syntax checks exited 
 
 ## Next priorities
 
-- RELEASE, owner coordinator, status In Progress: REPORTED correction, the user has now requested publication. The earlier publication gate applied to the build session. Verify each staged commit before its push and check the final Pages deployment.
 - PROVENANCE, owner maintainer, status Planned: Record upstream source and license evidence for the additions when available. The current gaps remain explicit in ATTRIBUTION.md.
 
 ## Scope preserved
