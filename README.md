@@ -1,12 +1,40 @@
-<div align="center">
-
 # Agentsmith
 
-Agent rules and reusable skills from my daily setup, with a separate workspace for plugin packaging.
+My setup for agentic engineering: rules, workflows, harness configuration, and skills.
 
-<a href="https://tenor.com/view/iron-man-iron-man-hammer-iron-hammer-robert-downey-robert-downey-jr-gif-15959050">
-  <img src="https://media1.tenor.com/m/cUDKyJkDr6kAAAAd/iron-man-iron-man-hammer.gif" alt="Tony Stark hammering metal" width="360">
-</a>
+<!-- VERIFIED: rules/README.md and workflows/orchestration.md name OMP as the primary harness. rules/omp-config.example.yml records its model roles. -->
+
+Oh My Pi (`omp`) is my primary harness. This repository records how I configure it and coordinate agents.
+
+**[Read the setup guide](https://sarthib7.github.io/agentsmith/)** · [Search skills](https://sarthib7.github.io/agentsmith/skills.html) · [Contribute](CONTRIBUTING.md)
+
+## Explore the setup
+
+<!-- VERIFIED: The linked rules, workflows, configuration example, and skill catalog define these four parts. -->
+
+| Part | What it does | Start here |
+|---|---|---|
+| Rules | Govern how agents work and when they need approval. | [Rules guide](rules/README.md), [rules snapshot](rules/AGENTS.md) |
+| Workflows | Coordinate agents and record decisions. | [Agent orchestration](workflows/orchestration.md), [repository protocol](workflows/agentic-engineering.md) |
+| OMP harness | Runs sessions and tool tasks with assigned model roles. | [OMP config example](rules/omp-config.example.yml), [operating workflow](workflows/orchestration.md) |
+| Skills | Provide instructions for specific tasks. | [Searchable catalog](https://sarthib7.github.io/agentsmith/skills.html), [GitHub index](SKILLS.md) |
+
+## Adapt the setup
+
+<!-- VERIFIED: rules/README.md documents personal calibration and config snapshots. workflows/orchestration.md defines file ownership and task briefs. -->
+
+1. Read the [rules guide](rules/README.md). Adapt the personal background, response preferences, and approval rules to your work.
+2. Review the [OMP config](rules/omp-config.example.yml). Adapt `modelRoles` and `task.agentModelOverrides` to your available models.
+3. Read the [orchestration workflow](workflows/orchestration.md). Use the [repository protocol](workflows/agentic-engineering.md) when several agents share an outcome.
+4. Choose one skill for a real task. Read its instructions and dependencies before installing it.
+
+The OMP file is a configuration snapshot. The workflow explains how its model roles are used. [Claude Code settings](rules/settings.example.json) are another configuration example.
+
+## Find and install skills
+
+The skills CLI installs task instructions. Configure the rules, workflows, and harness separately through the guides above.
+
+The badges count skills in each catalog category.
 
 <!-- counts:start -->
 ![skills](https://img.shields.io/badge/skills-147-1a1a1a?style=flat-square&labelColor=1a1a1a&color=FF51FF)
@@ -17,100 +45,54 @@ Agent rules and reusable skills from my daily setup, with a separate workspace f
 ![product](https://img.shields.io/badge/product-8-1a1a1a?style=flat-square)
 <!-- counts:end -->
 
-</div>
+Browse skill categories: [Coding](SKILLS.md#coding) · [Crypto](SKILLS.md#crypto) · [Writing](SKILLS.md#writing) · [Product](SKILLS.md#product) · [Response and session skills](SKILLS.md#rules).
 
-## Install
-
-Install selected skills:
+Choose skills interactively:
 
 ```bash
-npx skills add Sarthib7/agentsmith
+npx skills add Sarthib7/agentsmith --full-depth
 ```
 
-Install everything globally:
+Install one skill:
 
 ```bash
-npx skills add Sarthib7/agentsmith --all -g
+npx skills add Sarthib7/agentsmith --full-depth --skill prove-it
 ```
 
-Read one skill without installing it:
+List available skills before installing:
 
 ```bash
-npx skills use Sarthib7/agentsmith@caveman
+npx skills add Sarthib7/agentsmith --full-depth --list
 ```
 
-Browse the collection on [Skills.sh](https://www.skills.sh/sarthib7/agentsmith) or open the full generated [skill catalog](SKILLS.md).
+<!-- VERIFIED: Cached skills CLI 1.7.0 discovered all 147 catalog names with --full-depth, including eight entries in my-skills/. CLI flags are documented at https://github.com/vercel-labs/skills. -->
 
-Changes and new skills: [CONTRIBUTING.md](CONTRIBUTING.md).
+The [skills CLI](https://github.com/vercel-labs/skills) supports Claude Code, Codex, Cursor, and other coding agents. Add `-g` for a global installation or `--agent codex` to select an agent. `--full-depth` includes both skill folders.
 
-## Start here
+<!-- VERIFIED: Ownership roots and source gaps are recorded in ATTRIBUTION.md. plugin/README.md describes unfinished packaging. Inspected research/ and data/ contain notes and reference material. -->
 
-Read in this order:
+## Source and supporting files
 
-1. [`rules/`](rules/) — the standing instructions every session runs under. Everything else assumes them.
-2. [`my-skills/`](my-skills/) — the skills written here, then the full collection via the [skill catalog](SKILLS.md).
-3. [`workflows/`](workflows/) — the operating workflows the rules link to.
+[Collected skills](skills/) contain procedures gathered for my setup. [My skills](my-skills/) contain skills attributed to `sarthib7`. [Attribution](ATTRIBUTION.md) records source and license evidence, including gaps.
 
-## Repository layout
+[Research](research/) holds notes about agent engineering. [Data](data/) holds shared references used by some skills. [Plugin packaging](plugin/) is unfinished.
 
-```text
-agentsmith/
-├── AGENTS.md          rules for contributing to this repository
-├── CONTRIBUTING.md    contributor workflow and validation steps
-├── rules/             global AGENTS.md snapshot and harness config examples
-├── workflows/         reusable operating workflows linked by agent rules
-├── skills/            collected skills used in my setup
-├── my-skills/         skills with verified sarthib7 authorship
-├── plugin/            agents, commands, hooks, and manifests
-├── scripts/           catalog generation and validation
-├── data/              shared skill reference data
-├── SKILLS.md          generated skill catalog
-└── skills.sh.json     generated skills.sh grouping manifest
+<!-- VERIFIED: Shared data references occur in collected Solana and DeFi skills. skills/spec-build/SKILL.md declares build; skills/tempo-request/SKILL.md declares tempo. -->
+
+Some skills need external tools, accounts, or files under `data/`. Read their prerequisites and [license notes](ATTRIBUTION.md) before installing. A separate skill installation may need those shared files too.
+
+Install by the declared skill name. `skills/spec-build/` declares `build`; `skills/tempo-request/` declares `tempo`.
+
+## Contribute or preview locally
+
+<!-- VERIFIED: scripts/build-index.py and scripts/build-site.py implement the build commands. CONTRIBUTING.md records source ownership and preview checks. -->
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) to propose changes to rules, workflows, harness examples, or skills.
+
+```bash
+python3 -B scripts/build-index.py
+python3 -B scripts/build-site.py
+python3 -m http.server 8000 --directory _site
 ```
 
-Ownership and purpose stay separate. `skills/` answers what I use. `my-skills/` answers what I wrote. [ATTRIBUTION.md](ATTRIBUTION.md) records known authors, licenses, and source gaps.
-
-## My skills
-
-These eight skills declare `author: sarthib7` in their source:
-
-| Skill | Purpose |
-|---|---|
-| [`adhd`](my-skills/adhd/SKILL.md) | Parallel divergent ideation for coding agents |
-| [`bench-it`](my-skills/bench-it/SKILL.md) | Compare performance claims against a named baseline |
-| [`deterministic-code-review`](my-skills/deterministic-code-review/SKILL.md) | Review diffs with frozen scope, exact anchors, and a falsification pass |
-| [`followup-review`](my-skills/followup-review/SKILL.md) | Review fixes made after an earlier code review |
-| [`fresh-eyes`](my-skills/fresh-eyes/SKILL.md) | Get an independent second opinion without shared context |
-| [`git-worktree-runner`](my-skills/git-worktree-runner/SKILL.md) | Run isolated agent tasks through `git gtr` worktrees |
-| [`prove-it`](my-skills/prove-it/SKILL.md) | Verify that a check passes and can fail |
-| [`research-url`](my-skills/research-url/SKILL.md) | Research a URL with one subagent per URL into a fixed-format report plus learnings |
-
-Authorship stays conservative. A skill remains in `skills/` when its origin is uncertain.
-
-## How the pieces fit
-
-`rules/` contains standing instructions loaded for every session. One `AGENTS.md` snapshot serves every harness: Oh My Pi and Codex read `AGENTS.md` natively, and Claude Code reads the same policy from its live `CLAUDE.md` source. [`workflows/orchestration.md`](workflows/orchestration.md) records how delegation and parallel agents run on top of those rules.
-
-`skills/` and `my-skills/` contain task procedures. Each skill has a `SKILL.md` entry point and may include references, scripts, templates, or assets.
-
-`plugin/` is the packaging workspace. Its capability split follows the [Vercel plugin](https://github.com/vercel/vercel-plugin): specialist agents, commands, hooks, and platform manifests remain separate from skill source. The plugin is a scaffold today and has no published manifest.
-
-## DYOR
-
-Treat every skill as untrusted until you review it. Inclusion in this collection is not a security review or endorsement.
-
-Before installing a skill:
-
-- Read its `SKILL.md`, scripts, hooks, and requested permissions.
-- Check its source and license in [ATTRIBUTION.md](ATTRIBUTION.md).
-- Record the commit SHA you reviewed when reproducibility matters.
-- Test unfamiliar skills in an isolated repository or worktree.
-
-## Known limitations
-
-- Some Solana and DeFi skills reference `../../../data/...`. Those paths depend on the installation layout.
-- `skills/spec-build/` declares `name: build` because the skills CLI treats a directory named `build` as generated output.
-- `skills/tempo-request/` declares `name: tempo`, matching its upstream source.
-- Provenance is incomplete for skills that arrived without author metadata, a license, or a recorded source.
-
-Generated files should not be edited by hand. Follow [CONTRIBUTING.md](CONTRIBUTING.md) when changing the collection.
+Open the [setup guide](http://localhost:8000/) or the [skill catalog](http://localhost:8000/skills.html). Edit `site/` to change the website, then rebuild it.

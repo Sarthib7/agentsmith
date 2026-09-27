@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f2">
+    <meta name="description" content="Find reusable agent skills for coding, research, writing, product work, and crypto. Browse the Agentsmith collection by task, read the source, and install what you need.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Agentsmith | Find the skill for your next task">
+    <meta property="og:description" content="A searchable collection of reusable agent skills. Browse by task, read the source, and install what you need.">
+    <meta property="og:url" content="https://sarthib7.github.io/agentsmith/skills.html">
+    <link rel="canonical" href="https://sarthib7.github.io/agentsmith/skills.html">
+    <title>Agentsmith | Agent skills for your next task</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+    <script src="catalog.js" defer></script>
+  </head>
+  <body class="catalog-page">
+    <a class="skip-link" href="#collection">Skip to the skill collection</a>
+    <header class="site-header page-width">
+      <a class="brand" href="./" aria-label="Agentsmith home">
+        <svg class="brand-mark" width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 22 16 5l11 17H5Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M10 27h12M16 16v7" stroke="currentColor" stroke-width="3"/></svg>
+        Agentsmith<span class="brand-period">.</span>
+      </a>
+      <nav class="header-nav site-navigation" aria-label="Main navigation">
+        <a href="./">The setup</a>
+        <a href="skills.html" aria-current="page">Skills</a>
+        <a href="#get-started">How to use</a>
+        <a class="github-link" href="https://github.com/Sarthib7/agentsmith">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero page-width" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> The Agentsmith skill library</p>
+          <h1 id="hero-title">Find the skill for<br>your <span>next task.</span></h1>
+          <p class="hero-description">Reusable instructions for the work you do. Find a skill, read its source, and put it to work.</p>
+          <a class="browse-link" href="#collection">Explore {{SKILL_COUNT}} skills <span aria-hidden="true">↘</span></a>
+        </div>
+        <aside class="install-panel" aria-labelledby="install-heading">
+          <div class="terminal-header"><span class="terminal-prompt" aria-hidden="true">&gt;_</span><span>YOUR TERMINAL</span><span class="terminal-dot" aria-hidden="true"></span></div>
+          <div class="terminal-body">
+            <p class="terminal-comment" id="install-heading"># Start with the collection</p>
+            <code>npx skills add \<br>Sarthib7/agentsmith \<br><span class="terminal-option">--full-depth</span></code>
+            <button class="terminal-copy" type="button" data-copy="npx skills add Sarthib7/agentsmith --full-depth">Copy install command <span aria-hidden="true">↗</span></button>
+          </div>
+          <p class="install-caption">Choose the skills you need during installation.</p>
+        </aside>
+      </section>
+
+      <section class="collection page-width" id="collection" aria-labelledby="collection-title">
+        <div class="section-heading">
+          <div><p class="eyebrow section-index">01 / THE COLLECTION</p><h2 id="collection-title">Small skills. Useful work.</h2></div>
+          <p class="section-aside">Find your next tool.</p>
+        </div>
+        <div class="catalog-controls js-only">
+          <label class="search-label" for="skill-search">Search skills</label>
+          <div class="search-field">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <input id="skill-search" type="search" placeholder="Try code review, Solana, writing..." autocomplete="off" spellcheck="false" aria-describedby="search-hint" aria-keyshortcuts="Control+k Meta+k">
+            <kbd class="search-shortcut" aria-hidden="true">Ctrl K</kbd>
+            <button id="clear-search" class="clear-search" type="button" aria-label="Clear search" hidden>Clear</button>
+          </div>
+          <p id="search-hint" class="visually-hidden">Search skill names, descriptions, and task groups. Press Control K or Command K to focus search.</p>
+          <div class="filters" role="group" aria-label="Filter by category">
+            <button class="filter-button" type="button" data-section-filter="all" aria-pressed="true">All skills <span>{{SKILL_COUNT}}</span></button>
+            {{SECTION_FILTERS}}
+          </div>
+        </div>
+        <noscript><p class="noscript-note">All skills are listed below. Enable JavaScript to search, filter, and copy install commands.</p></noscript>
+        <div class="results-heading">
+          <p id="result-count" role="status" aria-live="polite" aria-atomic="true">{{SKILL_COUNT}} skills in the collection</p>
+          <a href="https://github.com/Sarthib7/agentsmith/blob/main/SKILLS.md">View text catalog <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="skill-grid" id="skill-grid">
+          {{SKILL_CARDS}}
+        </div>
+        <div class="empty-state" id="empty-state" hidden>
+          <span class="empty-symbol" aria-hidden="true">[ ? ]</span>
+          <h3>No matching skills.</h3>
+          <p>Try a different task or search across all categories.</p>
+          <button type="button" id="reset-filters" class="solid-button">Reset search and filters</button>
+        </div>
+      </section>
+
+      <section class="get-started page-width" id="get-started" aria-labelledby="get-started-title">
+        <div class="guide-intro"><p class="eyebrow section-index">02 / PUT IT TO WORK</p><h2 id="get-started-title">Find. Read. Install.</h2><p>A skill is a set of instructions your agent can follow for a specific task.</p><p>The skills CLI installs skills. Review and adapt <a href="./#setup">rules, workflows, and harness settings</a> separately.</p><a href="https://github.com/Sarthib7/agentsmith/blob/main/CONTRIBUTING.md">Help improve the collection <span aria-hidden="true">↗</span></a></div>
+        <ol class="guide-steps">
+          <li><span class="step-number" aria-hidden="true">01</span><div><h3>Start with your task</h3><p>Search for the work you need to do. Use a category to narrow the collection.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">02</span><div><h3>Read before you install</h3><p>Open the skill source. Check its instructions, scripts, and <a href="https://github.com/Sarthib7/agentsmith/blob/main/ATTRIBUTION.md">source and license notes</a>.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">03</span><div><h3>Add it to your setup</h3><p>Copy a skill's install command and run it in your terminal. Follow the CLI prompts to choose your agent.</p></div></li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="site-footer page-width">
+      <div><a class="footer-brand" href="./">Agentsmith.</a><p>Original and collected skills, maintained by <a href="https://github.com/Sarthib7">sarthib7</a>.</p></div>
+      <nav aria-label="Footer navigation"><a href="./">The full setup</a><a href="https://github.com/Sarthib7/agentsmith/blob/main/ATTRIBUTION.md">Attribution</a><a href="https://github.com/Sarthib7/agentsmith">Source on GitHub <span aria-hidden="true">↗</span></a><a href="#">Back to top ↑</a></nav>
+    </footer>
+
+    <p class="copy-status" id="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    <dialog class="copy-dialog" id="copy-fallback" aria-labelledby="copy-dialog-title" aria-describedby="copy-dialog-description">
+      <h2 id="copy-dialog-title">Copy the command</h2>
+      <p id="copy-dialog-description">Automatic copy is unavailable. Copy the selected command below, then paste it into your terminal.</p>
+      <label for="copy-command">Install command</label>
+      <textarea id="copy-command" rows="3" readonly spellcheck="false"></textarea>
+      <form method="dialog"><button class="solid-button" type="submit">Done</button></form>
+    </dialog>
+  </body>
+</html>

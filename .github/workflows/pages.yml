@@ -20,17 +20,28 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+
+      - name: Validate collection
+        run: |
+          python3 -B -m unittest discover -s tests -v
+          python3 -B scripts/build-index.py
+          git diff --exit-code -- SKILLS.md skills.sh.json README.md
+
+      - name: Build catalog site
+        run: python3 -B scripts/build-site.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: .
+          path: _site
 
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
