@@ -6,9 +6,7 @@ Use this protocol whenever a repository has two or more agents working on one ou
 
 ## Global configuration topology
 
-- `/Users/sarthiborkar/AGENTS.md` is the global agent entry point. It resolves to `/Users/sarthiborkar/.claude/CLAUDE.md`.
-- `/Users/sarthiborkar/.agents/AGENTS.md` resolves to the same source.
-- `/Users/sarthiborkar/.codex/AGENTS.md` is Codex's global instruction entry point. It resolves to the same source.
+- Read [the rules guide](../rules/README.md) for the canonical global file and harness symlinks. Do not repeat its path list here.
 - Oh My Pi (`omp`) is the primary harness. It loads the same global source plus applicable repository `AGENTS.md` files. Its model roles live in `~/.omp/agent/config.yml`.
 - Codex loads `$CODEX_HOME/AGENTS.md` plus applicable repository `AGENTS.md` files. More deeply nested repository files take precedence over broader files. Claude tooling may also read applicable `CLAUDE.md` files.
 - Local `AGENTS.md` or `CLAUDE.md` files may add repository rules. Read the file format used by the active agent before changing files in that repository.
