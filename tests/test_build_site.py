@@ -23,6 +23,38 @@ class Elements(HTMLParser):
         self.elements.append((tag, dict(attrs)))
 
 
+class Anchors(HTMLParser):
+    """Collect anchors with the text a visitor sees, skipping aria-hidden glyphs."""
+
+    def __init__(self, text):
+        super().__init__()
+        self.anchors = []
+        self._current = None
+        self._hidden_depth = 0
+        self.feed(text)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "a":
+            self._current = {"attrs": attrs, "text": []}
+            self._hidden_depth = 0
+        elif self._current is not None and attrs.get("aria-hidden") == "true":
+            self._hidden_depth += 1
+
+    def handle_endtag(self, tag):
+        if tag == "a" and self._current is not None:
+            text = " ".join("".join(self._current["text"]).split())
+            self.anchors.append({**self._current["attrs"], "label": text})
+            self._current = None
+        elif self._current is not None and self._hidden_depth:
+            self._hidden_depth -= 1
+
+    def handle_data(self, data):
+        if self._current is not None and not self._hidden_depth:
+            self._current["text"].append(data)
+
+
+
 class SiteTests(unittest.TestCase):
     def test_metadata_stays_text_in_cards(self):
         description = '<img src=x onerror="alert(1)"> & {{SECTION_FILTERS}}'
@@ -53,6 +85,30 @@ class SiteTests(unittest.TestCase):
     def test_missing_template_token_is_an_error(self):
         with self.assertRaisesRegex(ValueError, "missing site template token"):
             site.render_template("<p>Broken template</p>", {"{{SKILL_CARDS}}": ""})
+
+    def test_rendered_homepage_links_to_contact_and_omp_docs(self):
+        self.assertEqual(site.main(), 0)
+        markup = (site.REPO / "_site/index.html").read_text(encoding="utf-8")
+        anchors = Anchors(markup).anchors
+        by_label = {anchor["label"]: anchor for anchor in anchors}
+        self.assertEqual(by_label["Sarthiii.me"]["href"], "https://sarthiii.me/")
+        self.assertEqual(by_label["Book a call"]["href"], "https://cal.com/sarthi")
+        # Visible text is the accessible name: no aria-label may override it.
+        for label in ("Sarthiii.me", "Book a call"):
+            self.assertNotIn("aria-label", by_label[label])
+        # Existing navigation survives.
+        hrefs = {anchor["href"] for anchor in anchors if "href" in anchor}
+        self.assertTrue({
+            "#setup",
+            "skills.html",
+            "https://github.com/Sarthib7/agentsmith",
+            "https://github.com/Sarthib7/agentsmith/blob/main/rules/omp-advisors.example.yml",
+            "https://github.com/Sarthib7/agentsmith/blob/main/rules/agent-profiles.example.md",
+        } <= hrefs)
+        advisor = next(anchor for anchor in anchors if anchor.get("href", "").endswith("omp-advisors.example.yml"))
+        profiles = next(anchor for anchor in anchors if anchor.get("href", "").endswith("agent-profiles.example.md"))
+        self.assertIn("Advisor roster", advisor["label"])
+        self.assertIn("Custom agent profiles", profiles["label"])
 
 
 if __name__ == "__main__":
