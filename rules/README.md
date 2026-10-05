@@ -60,7 +60,15 @@ Selected Claude Code settings. Local hooks and approval overrides are omitted. C
 
 ## `omp-config.example.yml`
 
-Snapshot of `~/.omp/agent/config.yml`, the Oh My Pi harness config. The part that matters is `modelRoles` plus `task.agentModelOverrides`: which model plans, which model runs task subagents, and which vendor reviews. [`workflows/orchestration.md`](../workflows/orchestration.md) explains how those roles get used.
+Snapshot of [`~/.omp/agent/config.yml`](omp-config.example.yml), the Oh My Pi harness config. It records the `modelRoles` mapping, `task.agentModelOverrides` (which model runs task subagents and which reviews), the work style (one-at-a-time steering, fresh agents, sharpshooter memory, autolearn) and the shared advisor limits. Theme, status line, credentials and local permissions are left out. [`workflows/orchestration.md`](../workflows/orchestration.md) explains how those roles get used.
+
+## `omp-advisors.example.yml`
+
+Snapshot of [`~/.omp/agent/WATCHDOG.yml`](omp-advisors.example.yml): three read-only advisors, each with its own scope and note limit. `astra` checks correctness, invariants and security. `fable` checks architecture, API design and YAGNI. `grok` checks obvious regressions and test gaps. They attach to the main session only, never to a subagent. The file holds the full instructions, and its header explains why the name `grok` says nothing about which model runs.
+
+## `agent-profiles.example.md`
+
+[Snapshot](agent-profiles.example.md) of the four custom agent profiles: `proxy-fix-builder`, `proxy-verifier`, `sonnet-builder` and `sonnet-tester`. Two builders write code, two testers only observe and report. The file has the full prompts, with product-specific wording generalized.
 
 ## Adapting this
 

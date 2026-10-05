@@ -1,30 +1,48 @@
-# Snapshot of ~/.omp/agent/config.yml: Oh My Pi model roles and UI.
+# Snapshot of ~/.omp/agent/config.yml: Oh My Pi model roles and work style.
 # The role-to-model mapping is the part workflows/orchestration.md relies on.
-# VERIFIED 2026-09-27: exported fields compared with the local source.
+# VERIFIED 2026-10-05: exported fields compared with the local source.
+# Left out on purpose: UI theme and status line, credentials, local permissions
+# and consent flags, and provider controls unrelated to the workflow.
+# Provider and model IDs mirror the live snapshot. Replace them with IDs
+# available in your own OMP configuration.
 modelRoles:
-  advisor: openai-codex/gpt-6-astra:max
-  default: opencode-zen/mimo-v2.6-flash-free
+  advisor: anthropic/claude-sonnet-5
+  default: openai-codex/gpt-6-luna
   vision: anthropic/claude-fable-5:max
-  plan: openai-codex/gpt-5.6-sol:max
+  plan: anthropic/claude-opus-4-8:xhigh
   designer: anthropic/claude-fable-5:max
   commit: anthropic/claude-opus-4-8:max
   tiny: anthropic/claude-opus-4-8
-  task: openai-codex/gpt-5.6-luna:max
-  smol: openai-codex/gpt-5.6-sol:max
-symbolPreset: nerd
-composer:
-  shape: claude
-theme:
-  dark: onyx
-  light: light
-setupVersion: 2
-statusLine:
-  separator: powerline-thin
-  transparent: true
-  preset: default
+  task: anthropic/claude-sonnet-5-5:xhigh
+  smol: xai-oauth/grok-4.6
+defaultThinkingLevel: auto
+extendedContext: true
 task:
+  maxEffort: max
+  isolation:
+    enabled: false
   agentModelOverrides:
     reviewer: anthropic/claude-fable-5
-    scout: openai-codex/gpt-5.6-sol
-    security-reviewer: openai-codex/gpt-6-astra
-    task: openai-codex/gpt-5.6-luna
+    scout: xai-oauth/grok-4.6
+    security-reviewer: xai-oauth/grok-4.6:xhigh
+    task: anthropic/claude-sonnet-5-5
+
+# Work style. See workflows/orchestration.md for how these play out.
+steeringMode: one-at-a-time   # one steering message at a time while the agent works
+eval:
+  workpool:
+    freshAgents: true
+  autoBackground:
+    enabled: true
+memory:
+  backend: sharpshooter       # project decision memory
+autolearn:
+  enabled: true
+
+# Advisors. The per-advisor roles live in omp-advisors.example.yml.
+# Advisors attach to the main session only, never to subagents or tasks.
+advisor:
+  enabled: true
+  maxNotesPerUpdate: 4
+  immuneTurns: 3
+  syncBacklog: "off"
