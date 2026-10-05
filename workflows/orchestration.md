@@ -22,7 +22,7 @@ Subagents are typed. The lead picks the narrowest type that fits:
 | `designer` | UI and UX implementation and review. |
 | `librarian` | External library and API research by reading source. |
 
-Installed plugins can add more specialists to this roster.
+Installed plugins can add more specialists to this roster. Four custom profiles add implementation and testing roles: `proxy-fix-builder`, `proxy-verifier`, `sonnet-builder` and `sonnet-tester`. Builders write code in an assigned worktree. Testers and verifiers run the real program, never edit what they test, and report evidence. Their prompts are in [`rules/agent-profiles.example.md`](../rules/agent-profiles.example.md).
 
 Subagents start blank. They inherit no chat history. Every assignment must be self-contained: exact files and symbols, the change to make, and an observable acceptance criterion. A one-line task is a defect in the delegation, not in the subagent.
 
@@ -47,7 +47,18 @@ Context passes by reference, not by paste. Bulk payloads travel as shared local 
 
 ## Model roles
 
-Each role in the harness maps to its own model in `~/.omp/agent/config.yml`. The current mapping is snapshotted at [`rules/omp-config.example.yml`](../rules/omp-config.example.yml): one model family drives the main session, another drives planning and task subagents, and dedicated roles cover commits, vision, and small utility calls. Reviewer and designer subagents run on a different vendor than the lead, so a review is a second opinion from a second model family, not the same model grading itself.
+Each role in the harness maps to its own model in `~/.omp/agent/config.yml`. The current mapping is snapshotted at [`rules/omp-config.example.yml`](../rules/omp-config.example.yml). The `default` role drives the main session. `plan` and `task` roles cover planning and task subagents, with dedicated roles for commits, vision, design and small utility calls. Task overrides pin `reviewer`, `scout` and `security-reviewer` to their own models. The lead's default model and the reviewer's model come from different vendors, so a review is a second opinion from a second model family, not the same model grading itself.
+
+## Advisors
+
+Three read-only advisors watch the main session. `astra` checks correctness, invariants and security. `fable` checks architecture, API design and YAGNI. `grok` checks obvious regressions and test gaps. The name `grok` is a label for the advisor, not a statement about which model runs it. Never attach advisors to subagents or tasks: they run unadvised, and worker attachment multiplies subscription cost. The roster is [`rules/omp-advisors.example.yml`](../rules/omp-advisors.example.yml). The shared defaults are four notes per update and three immune turns.
+
+## Work pattern
+
+1. The lead plans and fixes the contracts. Steering messages reach a running agent one at a time.
+2. Every delegated item starts a fresh agent, so no slice inherits another's context.
+3. Builders prove a failing-first test in their own worktree. Testers and verifiers run the real thing and mark what they observed versus inferred.
+4. The lead validates once on the merged state. Sharpshooter memory keeps decisions across sessions, and autolearn is on.
 
 ## Without OMP
 
