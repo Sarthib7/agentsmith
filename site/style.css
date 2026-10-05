@@ -215,6 +215,13 @@ h2 { margin: 0; font-size: 29px; font-weight: 680; letter-spacing: -1px; line-he
 .solid-link:hover { background: #42473a; }
 .text-link { display: inline-flex; align-items: center; gap: 9px; padding-block: 7px; text-decoration: none; font-size: 12px; font-weight: 600; }
 .text-link:hover { color: var(--accent); text-decoration: underline; }
+.hero-contact { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--line); max-width: 510px; }
+.contact-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 44px; padding: 10px 16px; border: 1px solid #afb3a5; border-radius: 5px; color: var(--ink); text-decoration: none; font-size: 13px; font-weight: 600; transition: border-color 120ms ease, color 120ms ease, background-color 120ms ease; }
+.contact-link:hover { border-color: var(--ink); background: var(--surface); }
+.contact-link-primary { border-color: var(--accent); color: var(--accent); }
+.contact-link-primary:hover { border-color: var(--accent); background: var(--accent-light); }
+.contact-link span { color: var(--muted); }
+.contact-link-primary span { color: var(--accent); }
 .setup-map { overflow: hidden; border: 1px solid var(--ink); border-radius: 7px; background: var(--ink); box-shadow: 6px 6px 0 #e3e1d8; }
 .repo-tree { padding: 15px 18px 13px; }
 .repo-tree a { display: flex; align-items: flex-start; gap: 12px; padding: 13px 0; color: #f7f6ec; text-decoration: none; }
@@ -268,13 +275,13 @@ h2 { margin: 0; font-size: 29px; font-weight: 680; letter-spacing: -1px; line-he
 .reference-kind { flex-shrink: 0; min-width: 36px; padding-top: 3px; color: var(--accent); font: 9px var(--mono); letter-spacing: .2px; }
 .reference-link h3 { margin: 0; font-size: 13px; font-weight: 650; }
 .reference-link p { margin: 7px 0 10px; color: var(--muted); font-size: 11px; line-height: 1.7; }
-.reference-link code { display: block; color: #747869; font: 9px/1.5 var(--mono); overflow-wrap: anywhere; }
+.reference-link code { display: block; color: var(--muted); font: 9px/1.5 var(--mono); overflow-wrap: anywhere; }
 .reference-link > span:last-child { color: var(--muted); font-size: 14px; }
 .adapt-section { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: 70px; border: 1px solid #dddacd; border-radius: 7px; background: #eeeee5; padding: 34px; }
 .adapt-section h2 { font-size: 27px; }
 .adapt-section > div > p:not(.eyebrow) { max-width: 440px; color: #646758; margin: 15px 0 12px; font-size: 13px; line-height: 1.8; }
 .install-scope { border-left: 1px solid #cfd2c3; padding-left: 32px; align-self: center; }
-.install-scope-label { color: #70765f; font: 9px/1.5 var(--mono); letter-spacing: 1px; }
+.install-scope-label { color: var(--muted); font: 9px/1.5 var(--mono); letter-spacing: 1px; }
 .install-scope p { font-size: 13px; color: #646758; line-height: 1.8; margin: 12px 0 17px; }
 .install-scope a { font-size: 11px; font-weight: 600; line-height: 1.7; text-decoration: none; }
 .install-scope a:hover { color: var(--accent); text-decoration: underline; }
@@ -350,6 +357,8 @@ h2 { margin: 0; font-size: 29px; font-weight: 680; letter-spacing: -1px; line-he
   .home-hero .hero-description { font-size: 14px; }
   .home-hero .eyebrow { font-size: 8px; letter-spacing: .6px; }
   .hero-actions { gap: 14px; }
+  .hero-contact { flex-direction: column; margin-top: 18px; padding-top: 18px; }
+  .contact-link { width: 100%; }
   .solid-link { min-height: 44px; font-size: 12px; padding-inline: 13px; gap: 15px; }
   .hero-actions .text-link { font-size: 11px; }
   .setup-grid { grid-template-columns: 1fr; }
