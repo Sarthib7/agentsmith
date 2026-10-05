@@ -4,10 +4,9 @@
     python3 rules/sync.py           rewrite rules/AGENTS.md
     python3 rules/sync.py --check   exit 1 if it is stale, write nothing
 
-The live file is ~/.claude/CLAUDE.md. It uses absolute paths for a single
-machine. The repo copy uses repo-relative paths so it reads correctly on
-GitHub. Everything else must stay identical, so this script owns the rewrite
-list and nothing else edits the copy by hand.
+The canonical file is the user's ~/AGENTS.md. Each harness entry point
+symlinks to it. The repo copy rewrites local paths so the snapshot works
+on GitHub. This script owns the mapping. Never edit the generated copy.
 
 If a required rewrite no longer matches, the script stops instead of shipping a
 half-converted snapshot. That is the point: drift should fail loudly.
@@ -16,7 +15,7 @@ half-converted snapshot. That is the point: drift should fail loudly.
 import pathlib
 import sys
 
-SOURCE = pathlib.Path.home() / ".claude" / "CLAUDE.md"
+SOURCE = pathlib.Path.home() / "AGENTS.md"
 TARGETS = ("AGENTS.md",)
 
 # Each of these must match exactly once. A miss means the global file changed
@@ -45,6 +44,50 @@ REQUIRED = (
     (
         "is set in `~/.claude/settings.json` (2026-08-26)",
         "is set in the live Claude `settings.json` (2026-08-26; shape in `settings.example.json`)",
+    ),
+    (
+        f"Canonical source: {SOURCE}. All harness entrypoints MUST symlink to this file.",
+        "Canonical source: ~/AGENTS.md. Point each installed harness entrypoint to this shared file.",
+    ),
+    (
+        "- Skill router: ~/.agents/skills/SKILLS.md. Read the selected skill at ~/.agents/skills/<name>/SKILL.md.",
+        "- Skill index: [SKILLS.md](../SKILLS.md) at the repo root. Read selected skills at ../skills/<name>/SKILL.md.",
+    ),
+    (
+        "- Repository coordination: ~/.agents/workflows/agentic-engineering.md. Use when two or more agents share one repository outcome.",
+        "- Repository coordination: [agentic-engineering.md](../workflows/agentic-engineering.md). Use when two or more agents share one repository outcome.",
+    ),
+    (
+        "- OMP orchestration: ~/.agents/workflows/orchestration.md. Use for typed subagent batches and handoffs.",
+        "- OMP orchestration: [orchestration.md](../workflows/orchestration.md). Use for typed subagent batches and handoffs.",
+    ),
+    (
+        "- OMP runtime and model roles: ~/omp-config/config.yml. Runtime settings remain separate from policy.",
+        "- OMP runtime and model roles: [omp-config.example.yml](omp-config.example.yml). Runtime settings remain separate from policy.",
+    ),
+    (
+        "- OMP advisor rules: ~/omp-config/WATCHDOG.yml. Read before changing reviewer roles or instructions.",
+        "- OMP advisor rules are harness-local. Keep reviewer scope separate from global policy.",
+    ),
+    (
+        "- OMP agent definitions: ~/omp-config/agents/*.md. Read the selected definition before dispatch.",
+        "- OMP agent definitions are harness-local. Read the selected definition before dispatch.",
+    ),
+    (
+        "- OMP commands: ~/omp-config/commands/*.md. Read the matching command file before invoking it.",
+        "- OMP commands are harness-local. Read the matching command file before invoking it.",
+    ),
+    (
+        "- Claude runtime settings: ~/.claude/settings.json. Runtime settings remain separate from policy.",
+        "- Claude runtime settings: [settings.example.json](settings.example.json). Runtime settings remain separate from policy.",
+    ),
+    (
+        "- Project memory: ~/.omp/agent/memories/sharpshooter/<project>/state.json. Read only the matching project's memory.",
+        "- Project memory is harness-local. Read only the matching project's memory.",
+    ),
+    (
+        "- Reference notes: ~/Desktop/learnings.md and ~/Desktop/learnings1.md. These are source notes, not active policy.",
+        "- Reference notes are source material, not active policy. Load only when the user points to them.",
     ),
 )
 
