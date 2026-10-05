@@ -6,14 +6,14 @@ Because this file loads into every session, size has a cost in adherence as well
 
 ## `AGENTS.md`
 
-One rules snapshot under the neutral name. Oh My Pi (`omp`, the primary harness) and Codex load `AGENTS.md` files natively. Claude Code reads the same policy from the live source at `~/.claude/CLAUDE.md`. A `CLAUDE.md` twin used to sit here; one copy under the shared name serves every harness, so it is gone.
+The live policy has one canonical file: ~/AGENTS.md. Oh My Pi and Codex load AGENTS.md natively. Claude Code reads ~/.claude/CLAUDE.md, a symlink to the canonical file.
 
-For one shared global source, install the live file as `~/.claude/CLAUDE.md` (same content as `AGENTS.md` here), then symlink each harness entry point:
+Keep the real global policy at ~/AGENTS.md. After moving your existing policy into that file, link each harness entrypoint to it:
 
 ```bash
-ln -s ~/.claude/CLAUDE.md ~/AGENTS.md
-ln -s ~/.claude/CLAUDE.md ~/.agents/AGENTS.md
-ln -s ~/.claude/CLAUDE.md ~/.codex/AGENTS.md
+ln -sfn ~/AGENTS.md ~/.agents/AGENTS.md
+ln -sfn ~/AGENTS.md ~/.claude/CLAUDE.md
+ln -sfn ~/AGENTS.md ~/.codex/AGENTS.md
 ```
 
 What it covers, in the order the file sets it out:
@@ -25,13 +25,13 @@ What it covers, in the order the file sets it out:
 | Caveman mode | Terse fragments by default, with named exceptions for security warnings and coding explanations |
 | YAGNI | The laziest solution that works, and the short list of things never to simplify away |
 | Writing rules | Banned constructions. Em dashes, AI vocabulary, rule of three, negative parallelism, vague attribution |
-| Output shaping | Lead with the next action, number multi-step work, restate state every turn, cap lists at five |
+| Output shaping | Lead with the next action, restate status at phase changes, cap lists at five |
 | Cavekit | SPEC.md is source of truth where it exists. Only `spec` may write it |
 | Skills routing | Process skill first, implementation skill second. One skill per job. Announce before following |
 | Ultra gates | Maximum depth on planning and brainstorming |
 | Documentation lookup | A five-step order that puts training data last. Skills, then MCP, then live official docs |
 | Written records | Provenance tags, quoted evidence, method blind spots, explicit corrections |
-| Default behaviors | Ask rather than assume, show options first, stay in scope, cap retries at three |
+| Default behaviors | Label uncertainty, ask only about material choices, recommend options when trade-offs matter |
 | Confirmation gates | Approval for content changes, destructive actions, irreversible actions, database migrations, acting on my behalf, and formal backtracking |
 | Git commit rules | Commit identity, one commit at a time, no `Co-Authored-By` trailer |
 | Workflows | Links out to the agentic engineering protocol and the orchestration workflow, so they load only when the work needs them |
@@ -45,7 +45,7 @@ Two things in there do more work than the rest.
 
 ## `sync.py`
 
-The copy above is generated, so edit the live `~/.claude/CLAUDE.md` and never the copy.
+The copy above is generated. Edit the live ~/AGENTS.md, then run the sync script. Never edit the copy by hand.
 
 ```bash
 python3 rules/sync.py           # rebuild the copy from the live file
