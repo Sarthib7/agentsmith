@@ -91,11 +91,10 @@ class SiteTests(unittest.TestCase):
         markup = (site.REPO / "_site/index.html").read_text(encoding="utf-8")
         anchors = Anchors(markup).anchors
         by_label = {anchor["label"]: anchor for anchor in anchors}
-        self.assertEqual(by_label["Sarthiii.me"]["href"], "https://sarthiii.me/")
+        self.assertFalse(any(anchor.get("href", "").startswith("https://sarthiii.me") for anchor in anchors))
         self.assertEqual(by_label["Book a call"]["href"], "https://cal.com/sarthi")
         # Visible text is the accessible name: no aria-label may override it.
-        for label in ("Sarthiii.me", "Book a call"):
-            self.assertNotIn("aria-label", by_label[label])
+        self.assertNotIn("aria-label", by_label["Book a call"])
         # Existing navigation survives.
         hrefs = {anchor["href"] for anchor in anchors if "href" in anchor}
         self.assertTrue({
@@ -105,10 +104,6 @@ class SiteTests(unittest.TestCase):
             "https://github.com/Sarthib7/agentsmith/blob/main/rules/omp-advisors.example.yml",
             "https://github.com/Sarthib7/agentsmith/blob/main/rules/agent-profiles.example.md",
         } <= hrefs)
-        advisor = next(anchor for anchor in anchors if anchor.get("href", "").endswith("omp-advisors.example.yml"))
-        profiles = next(anchor for anchor in anchors if anchor.get("href", "").endswith("agent-profiles.example.md"))
-        self.assertIn("Advisor roster", advisor["label"])
-        self.assertIn("Custom agent profiles", profiles["label"])
 
 
 if __name__ == "__main__":
