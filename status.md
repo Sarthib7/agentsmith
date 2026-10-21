@@ -1,8 +1,8 @@
 # Status
 
-Last updated: 2026-09-27
+Last updated: 2026-10-21
 Updated by: coordinator
-Current phase: Published and verified
+Current phase: Local homepage cleanup verified; not deployed
 
 ## Scope
 
@@ -161,3 +161,15 @@ VERIFIED: The pre-existing untracked `research/masumi-citadel.md` remains outsid
 ## Least confident decisions
 
 1. INFERRED: Five existing sections should be enough for initial browsing. No developer usability study was performed.
+
+## Homepage link cleanup, 2026-10-21
+
+REPORTED: The user requested removal of an obsolete contact link and the duplicate repository link in the homepage hero. The navbar GitHub link and Book a call remain in scope.
+
+VERIFIED: Before the HTML change, `python3 -B -m unittest discover -s tests -p test_build_site.py -v` returned `Ran 4 tests in 0.098s` and `FAILED (failures=1)`. The failure was the rendered obsolete contact link, not a collection or fixture error.
+
+VERIFIED: After the change, the focused `-k rendered_homepage` run returned `Ran 1 test in 0.107s` and `OK`. This result covers the homepage link regression, not the full test suite.
+
+VERIFIED: A real Brave check of generated `_site/index.html` returned `{"obsoleteContact":false,"duplicateHeroRepository":false,"bookCall":true,"navbarGitHub":true}` and `console: clean`. The check did not visit external contact destinations.
+
+The earlier release records remain historical. This change does not merge or deploy the site.
