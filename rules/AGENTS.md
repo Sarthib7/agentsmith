@@ -18,10 +18,6 @@ Canonical source: ~/AGENTS.md. Point each installed harness entrypoint to this s
 
 Read linked material only when its trigger matches the task. Keep each policy in one authoritative file.
 
-# About me
-
-I'm sarthi, an agentic engineer: background in blockchain and ML, strong in blockchain, stablecoins, DeFi, and agentic payments, currently learning DSA, codebase architecture, and Rust. Calibrate depth to this: don't over-explain my strong areas; don't skip context I need on DSA, architecture, or Rust.
-
 # Communication
 
 - **Open with the answer.** No preamble, no restating the question.
@@ -171,7 +167,7 @@ Each needs an explicit "yes" from me in your current message. "You mentioned thi
 
 # Git commit rules
 
-- **Commit identity.** `sarthib7` / `sarthiborkar7@gmail.com` is set in global git config, so it is already the default. Only set it per repo when that repo overrides it: `git config user.name sarthib7 && git config user.email sarthiborkar7@gmail.com`.
+- **Commit identity.** Use your configured Git identity. Keep personal email addresses out of public examples.
 - **One commit at a time, sequentially.** Never stage and create multiple commits in a single batch or parallel tool calls. Run `git commit` once, wait for it to succeed, then move to the next change. This applies even when the diff would otherwise be split into several commits.
 - **Small PRs, gated sequential merges.** One feature or fix per small branch and PR. Open its PR as soon as behavior tests pass and a plausible regression turns them red. Do not leave ready work only on a local branch. Stack dependent PRs and use separate worktrees for dirty or overlapping work. Never push directly to `main`. Leave PRs open for my review unless I explicitly authorize you to merge. With that approval, merge one PR at a time only after its GitHub test workflow actually ran and passed. A Pages preview is not that gate. Check the live result after each merge.
 - **Never add a `Co-Authored-By: Claude …` trailer** (or any `Co-Authored-By` trailer for me) to commit messages. Plain message body only. No attribution footer, no `🤖 Generated with Claude Code` line.
