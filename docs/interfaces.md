@@ -28,9 +28,9 @@ Validation must finish before writing outputs. Missing names, missing descriptio
 
 ## Website template
 
-Interface ID: site-v4
+Interface ID: site-v5
 Provider: scripts/build-site.py
-Consumers: the six page templates and shared assets under site/, plus six canonical architecture SVGs under docs/diagrams/.
+Consumers: the six page templates, shared assets under site/, six canonical architecture SVGs under docs/diagrams/, and the two generated Anatomy views under site/anatomy/.
 
 REPORTED scope correction: The homepage presents rules, workflows, the OMP harness, and skills as separate parts of the setup. The searchable skill catalog has its own page.
 
@@ -39,10 +39,13 @@ The builder replaces {{SKILL_COUNT}} in site/index.html. It replaces {{SKILL_CAR
 The shared site navigation links the six local pages in this order: The setup (./), Rules, Workflows, OMP, Architecture, and Skills, followed by the existing GitHub link. The catalog keeps canonical URL https://sarthib7.github.io/agentsmith/skills.html; only it loads catalog.js. Homepage source links point to inspected repository files.
 
 Architecture uses relative links for the GitHub Pages project prefix. Its primary view is the whole-system SVG, using the native viewer's initial contain-fit, zoom, pan, keyboard, fullscreen, and minimap behavior. The viewer describes source structure and does not fetch live runtime state. Five detailed reference maps remain below it.
+Rules, Workflows, OMP, and Architecture each provide one initially closed `<details class="illustration-disclosure">` for the user-optional visual demo. Each contains a lazy-loaded, same-origin `anatomy/workbench-light.html` iframe and a standalone link to that full-size view; the native primary flowchart viewer and minimap remain first as the page's architecture explanation. The embedded view accesses its parent iframe from the same origin and uses a `ResizeObserver` on the workbench to set iframe height to measured content height, including borders.
 
-The six SVGs are sourced from docs/diagrams/ and emitted byte-for-byte under _site/diagrams/: system-overview.svg, worker-farms.svg, configuration-flow.svg, approval-flow.svg, site-build.svg, and whole-architecture.svg. The native viewer module is emitted as _site/architecture-viewer.mjs.
+The six SVGs are sourced from docs/diagrams/ and emitted byte-for-byte under _site/diagrams/: system-overview.svg, worker-farms.svg, configuration-flow.svg, approval-flow.svg, site-build.svg, and whole-architecture.svg. The native viewer module is emitted as _site/architecture-viewer.mjs. The builder copies only the two generated Anatomy views into _site/anatomy/; it does not package their generator, tests, or vendor inputs.
 
-Before writing outputs, the builder validates the catalog and reads all six page templates, all four shared site assets, and all six required diagrams. A missing or invalid catalog, missing required input, or missing template token returns an error before it creates or modifies `_site`, preserving its previous bytes. After preflight succeeds, `_site` is builder-owned derived output: the builder removes its previous contents and regenerates the six pages, four shared assets, six diagrams, and `.nojekyll`, so stale files are not included in a successful build. Cleanup is confined to `_site`; canonical sources under `site/` and `docs/diagrams/` are not removed. A filesystem failure during output replacement or writes can leave `_site` absent or partial; the build does not promise whole-build atomicity. The map-only build has no Anatomy input or output dependency. The configured Pages workflow describes publication automation; this interface does not establish that a local artifact was published.
+These disclosures are optional UI only; both generated views remain mandatory builder inputs. Before writing outputs, the builder validates the catalog, renders tokenized templates, and reads all six page templates, all four shared site assets, all six required diagrams, and both required generated views: `site/anatomy/workbench.html` and `site/anatomy/workbench-light.html`. An invalid catalog, missing required input, or missing template token returns an error before creating or modifying `_site`, preserving its previous bytes.
+After preflight succeeds, `_site` is builder-owned derived output: the builder removes its previous contents and regenerates the six pages, four shared assets, six diagrams, the two Anatomy views, and `.nojekyll`, so stale files are not included in a successful build. Cleanup is confined to `_site`; canonical inputs under `site/` and `docs/diagrams/` are not removed. A filesystem failure during output replacement or writes can leave `_site` absent or partial; the build does not promise whole-build atomicity.
+The map-only first PR remains independently buildable without Anatomy inputs or outputs; this contract adds the two mandatory generated views only in the optional-demo PR. The configured Pages workflow describes publication automation but does not establish that a local artifact was published.
 
 Shared assets are style.css, catalog.js, architecture-viewer.mjs, and icon.svg.
 

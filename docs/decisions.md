@@ -67,3 +67,20 @@ Ownership:
 
 1. INFERRED: The two-PR boundary is the clearest review split, but no contributor feedback on that split is recorded.
 2. INFERRED: The map remains useful as a standalone source view without the demo; that has not been evaluated with contributor feedback.
+
+## Optional illustration PR boundary, 2026-10-23
+
+REPORTED: The optional workbench belongs in a second PR stacked on the map-only PR #7. The map-only PR must remain independently buildable.
+
+VERIFIED correction: Map-only [PR #7](https://github.com/Sarthib7/agentsmith/pull/7), previously recorded as OPEN, merged as `92c52719858c3fbd0676b3ed0cb46e74747a590c`. Main-branch [validation 39965102703](https://github.com/Sarthib7/agentsmith/actions/runs/39965102703) and [Pages deployment 39965102624](https://github.com/Sarthib7/agentsmith/actions/runs/39965102624) passed. The optional-demo PR now targets `main`; the map-only release remains independently buildable.
+
+INFERRED decision: Keep the native map viewer and flowcharts as the primary architecture explanation. Present the workbench only through closed optional disclosures with full-size theme views. Its authored motion is an illustration, not system activity.
+
+REQUIRED invariant: Generate both theme views. The site builder must read both generated views and every other input before changing `_site`, then copy only the two views into `_site/anatomy` while retaining the map cleanup behavior. Optional describes the UI, not a missing-build-input fallback.
+
+VERIFIED integrated demo checks: The Node model/viewer suite returned 9 passed, 0 failed; the Python suite returned 28 tests and `OK`. Dark and light geometry audits each returned 16 sampled poses passed, 0 failed. Two missing-theme controls failed against the map-only entry point and passed against the demo entry point, with zero fixture errors. Real Brave reached all six routes at desktop and phone widths; the four disclosures started closed and loaded their illustrations when opened. The resource probe returned HTTP 200 for 18 resources. These finite checks do not prove continuous geometry or universal accessibility. Provenance and earlier phone/pause measurements remain in `docs/anatomy-figure.md`.
+
+### Least confident decisions
+
+1. INFERRED: The two-PR boundary is clear enough for review, but contributor feedback on the split is not recorded.
+2. INFERRED: The workbench adds value when it stays secondary to the maps; this has not been evaluated with contributor feedback.

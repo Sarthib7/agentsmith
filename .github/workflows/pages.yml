@@ -30,8 +30,16 @@ jobs:
         with:
           node-version: 24
 
-      - name: Test architecture viewer
-        run: node --test site/architecture-viewer.test.mjs
+      - name: Test architecture viewer and Anatomy model
+        run: node --test site/architecture-viewer.test.mjs site/anatomy/model.test.mjs
+
+      - name: Build and audit dark and light Anatomy views
+        run: |
+          node site/anatomy/build.mjs --audit
+          node site/anatomy/build.mjs --light --audit
+
+      - name: Check generated Anatomy views
+        run: git diff --exit-code -- site/anatomy/workbench.html site/anatomy/workbench-light.html
 
       - name: Validate collection
         run: |
