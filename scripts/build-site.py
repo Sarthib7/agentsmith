@@ -18,6 +18,10 @@ DIAGRAMS = (
     "site-build",
     "whole-architecture",
 )
+ANATOMY_VIEWS = (
+    "workbench.html",
+    "workbench-light.html",
+)
 
 
 def render_card(skill, short_description):
@@ -103,6 +107,10 @@ def main():
             f"{name}.svg": (REPO / "docs" / "diagrams" / f"{name}.svg").read_bytes()
             for name in DIAGRAMS
         }
+        anatomy_views = {
+            name: (REPO / "site" / "anatomy" / name).read_bytes()
+            for name in ANATOMY_VIEWS
+        }
     except ValueError as error:
         print(f"ERROR {error}", file=sys.stderr)
         return 1
@@ -121,14 +129,18 @@ def main():
     output.mkdir()
     diagram_output = output / "diagrams"
     diagram_output.mkdir(exist_ok=True)
+    anatomy_output = output / "anatomy"
+    anatomy_output.mkdir()
     for name, content in pages.items():
         (output / name).write_text(content, encoding="utf-8")
     for name, content in assets.items():
         (output / name).write_bytes(content)
     for name, content in diagrams.items():
         (diagram_output / name).write_bytes(content)
+    for name, content in anatomy_views.items():
+        (anatomy_output / name).write_bytes(content)
     (output / ".nojekyll").write_text("", encoding="utf-8")
-    print(f"OK website: six pages and {len(catalog)} skills in _site/")
+    print(f"OK website: six pages, {len(anatomy_views)} Anatomy views, and {len(catalog)} skills in _site/")
     return 0
 
 
