@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-23
 Updated by: coordinator
-Current phase: In Progress, optional-demo publication
+Current phase: Validated architecture and optional-demo release
 
 ## Scope
 
@@ -10,13 +10,13 @@ REPORTED: The user requested a refresh, restructuring, and easier discovery. The
 
 REPORTED correction: The user clarified that Agentsmith covers rules, workflows, and the OMP harness as well as skills. The earlier homepage and README gave skills too much prominence.
 
-## In Progress
+## Architecture release evidence
 
-### Optional demo preparation, 2026-10-23
+### Optional demo validation, 2026-10-23
 
-- DEMO-PREP, owner coordinator, status In Progress: The optional illustration is prepared as a second PR stacked on map-only PR #7. The integrated stack has passed the checks below; exact staged review and publication remain.
+- DEMO-PREP, owner coordinator, status Completed: The optional illustration was published as [PR #8](https://github.com/Sarthib7/agentsmith/pull/8), initially stacked on PR #7. Exact-head [CI run 39962744946](https://github.com/Sarthib7/agentsmith/actions/runs/39962744946) passed for the first demo head, `6e24522ca24e1c7c732d964d1e197b2e46e24b99`. Current merge and deployment state is recorded on GitHub.
 
-VERIFIED map-only baseline: [PR #7](https://github.com/Sarthib7/agentsmith/pull/7) is OPEN. Exact-head CI run [39943337652](https://github.com/Sarthib7/agentsmith/actions/runs/39943337652) passed for map commit `86af90fb8cc7d950085fc66a6c6d9672c7cfbb21`. This records the map baseline only, not demo validation.
+VERIFIED correction: PR #7 was previously listed as OPEN. It merged as `92c52719858c3fbd0676b3ed0cb46e74747a590c`. Main-branch [validation 39965102703](https://github.com/Sarthib7/agentsmith/actions/runs/39965102703) and [Pages deployment 39965102624](https://github.com/Sarthib7/agentsmith/actions/runs/39965102624) both passed. The public resource probe returned HTTP 200 for all 16 map resources. This records the map release only, not a demo deployment.
 
 VERIFIED demo stack: `node --test site/anatomy/model.test.mjs site/architecture-viewer.test.mjs` returned 9 passed, 0 failed. The Python suite returned `Ran 28 tests in 27.042s` and `OK`. The catalog reported 147 skills, 8 verified as mine; the site builder reported six pages and two Anatomy views. Both geometry audits sampled 16 poses and returned 16 passed, 0 failed. These finite samples do not prove continuous motion or real hardware.
 
@@ -196,4 +196,4 @@ VERIFIED: After the change, the focused `-k rendered_homepage` run returned `Ran
 
 VERIFIED: A real Brave check of generated `_site/index.html` returned `{"obsoleteContact":false,"duplicateHeroRepository":false,"bookCall":true,"navbarGitHub":true}` and `console: clean`. The check did not visit external contact destinations.
 
-The earlier release records remain historical. This change does not merge or deploy the site.
+The earlier release records remain historical. REPORTED: The user approved sequential merges and automatic GitHub Pages publication. Current PR and deployment state is recorded on GitHub.

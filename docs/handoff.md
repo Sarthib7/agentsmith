@@ -2,7 +2,9 @@
 
 ## Current review state
 
-VERIFIED correction, 2026-10-23: The earlier working handoff said both feature PRs were unpublished. Map-only [PR #7](https://github.com/Sarthib7/agentsmith/pull/7) is now open. Its exact-head [CI run 39943337652](https://github.com/Sarthib7/agentsmith/actions/runs/39943337652) passed for `86af90fb8cc7d950085fc66a6c6d9672c7cfbb21`. Cleanup [PR #6](https://github.com/Sarthib7/agentsmith/pull/6) was merged separately. The coordinator did not initiate a merge or deployment in this release pass.
+VERIFIED correction, 2026-10-23: The earlier working handoff said both feature PRs were unpublished, then listed PR #7 as open. Map-only [PR #7](https://github.com/Sarthib7/agentsmith/pull/7) merged as `92c52719858c3fbd0676b3ed0cb46e74747a590c`. Its main-branch [validation 39965102703](https://github.com/Sarthib7/agentsmith/actions/runs/39965102703) and [Pages deployment 39965102624](https://github.com/Sarthib7/agentsmith/actions/runs/39965102624) passed. All 16 public map resources returned HTTP 200. Cleanup PR #6 was merged separately.
+
+VERIFIED: Optional-demo [PR #8](https://github.com/Sarthib7/agentsmith/pull/8) was published and retargeted to `main` after #7 merged. Its first head, `6e24522ca24e1c7c732d964d1e197b2e46e24b99`, passed [CI run 39962744946](https://github.com/Sarthib7/agentsmith/actions/runs/39962744946). This is the release-preparation snapshot; the linked PR and Actions record current merge and deployment state.
 
 VERIFIED scope: The second branch adds only the optional Anatomy illustration and its build integration. The native viewer, minimap, six pages, and six SVGs remain. Four disclosures start closed. The flowcharts explain architecture; the workbench does not represent live telemetry, provider access, runtime control, or worker capacity.
 
@@ -24,4 +26,6 @@ REQUIRED: Keep private configuration, sessions, model profiles, operational note
 
 ## Publication boundary
 
-REQUIRED: Review the exact staged files, publish the optional-demo branch as a second PR, and verify its exact-head CI. Keep both feature PRs unmerged for human review. This record reports local integration evidence, not a successful demo CI run or deployment.
+VERIFIED: The first demo snapshot's 28-file staged scope passed whitespace and selected privacy-pattern checks with a positive control and zero findings. The published PR body was read back and retained the contributor's explanation.
+
+REPORTED: The user approved sequential merges and their automatic GitHub Pages deployments. REQUIRED: Merge one PR at a time only after exact-head CI passes; inspect the deployed result after each. Local integration evidence and CI success do not alone establish a working public site.
