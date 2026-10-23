@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
-"""Build the setup homepage and skill browser from repository sources."""
+"""Build the six-page setup site and its visual assets from repository sources."""
 
 import html
 import importlib.util
+import shutil
 from pathlib import Path
 import re
-import shutil
 import sys
 
 REPO = Path(__file__).resolve().parent.parent
 SOURCE_URL = "https://github.com/Sarthib7/agentsmith/blob/main/"
+DIAGRAMS = (
+    "system-overview",
+    "worker-farms",
+    "configuration-flow",
+    "approval-flow",
+    "site-build",
+    "whole-architecture",
+)
 
 
 def render_card(skill, short_description):
@@ -82,19 +90,45 @@ def main():
             "skills.html": render_template(
                 (REPO / "site/skills.html").read_text(encoding="utf-8"), replacements,
             ),
+            "architecture.html": (REPO / "site/architecture.html").read_text(encoding="utf-8"),
+            "rules.html": (REPO / "site/rules.html").read_text(encoding="utf-8"),
+            "workflows.html": (REPO / "site/workflows.html").read_text(encoding="utf-8"),
+            "omp.html": (REPO / "site/omp.html").read_text(encoding="utf-8"),
         }
-    except (ValueError, OSError) as error:
+        assets = {
+            name: (REPO / "site" / name).read_bytes()
+            for name in ("style.css", "catalog.js", "icon.svg", "architecture-viewer.mjs")
+        }
+        diagrams = {
+            f"{name}.svg": (REPO / "docs" / "diagrams" / f"{name}.svg").read_bytes()
+            for name in DIAGRAMS
+        }
+    except ValueError as error:
         print(f"ERROR {error}", file=sys.stderr)
+        return 1
+    except OSError as error:
+        try:
+            relative_path = Path(error.filename).relative_to(REPO).as_posix()
+        except (TypeError, ValueError):
+            relative_path = "a required site input"
+        detail = error.strerror or "input could not be read"
+        print(f"ERROR cannot read required site input {relative_path}: {detail}", file=sys.stderr)
         return 1
 
     output = REPO / "_site"
-    output.mkdir(exist_ok=True)
+    if output.exists():
+        shutil.rmtree(output)
+    output.mkdir()
+    diagram_output = output / "diagrams"
+    diagram_output.mkdir(exist_ok=True)
     for name, content in pages.items():
         (output / name).write_text(content, encoding="utf-8")
-    for name in ("style.css", "catalog.js", "icon.svg"):
-        shutil.copyfile(REPO / "site" / name, output / name)
+    for name, content in assets.items():
+        (output / name).write_bytes(content)
+    for name, content in diagrams.items():
+        (diagram_output / name).write_bytes(content)
     (output / ".nojekyll").write_text("", encoding="utf-8")
-    print(f"OK website: setup homepage and {len(catalog)} skills in _site/")
+    print(f"OK website: six pages and {len(catalog)} skills in _site/")
     return 0
 
 

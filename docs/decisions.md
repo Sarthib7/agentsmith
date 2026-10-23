@@ -46,3 +46,24 @@ INFERRED decision: Exclude personal session bindings and private production exam
 
 1. INFERRED: The five main catalog sections fit the initial audience. Search and task groups may need changes after developer feedback.
 2. VERIFIED limitation: The refresh checked local source bytes and packaging. It did not establish upstream freshness or missing licenses.
+
+## Map-only release boundary, 2026-10-23
+
+REPORTED: The release is split into two independent PRs. The first is map-only. A second may restore the optional demo with its required generated inputs, licenses, and model/audit gates. "Optional" describes the demo UI, not whether its build inputs can be missing.
+
+INFERRED decision: Keep the map build standalone and independent of Anatomy. Its public source paths include `docs/architecture.md`, `docs/diagrams/`, `site/architecture.html`, `site/architecture-viewer.mjs`, `scripts/build-site.py`, and `docs/interfaces.md`. The viewer is native and read-only, with no React dependency. It presents documented source topology, not live telemetry.
+
+VERIFIED: A pre-correction parent probe placed an obsolete generated HTML page in `_site`, ran the valid map build, and observed the old page still returned HTTP 200. The Pages workflow uploads the whole `_site` tree. The cause was reusing the output directory without removing stale generated files.
+
+REQUIRED invariant: Read and validate all inputs before changing output. Missing input preserves the prior output unchanged. After successful preflight, regenerate only the builder-owned output set so stale files cannot leak into a successful artifact. This makes no whole-build atomicity claim for later filesystem failures.
+
+Ownership:
+
+- `site/architecture.html`, `site/rules.html`, `site/workflows.html`, `site/omp.html`, and `site/style.css`: MAP-UI implementer.
+- `scripts/build-site.py`, `tests/test_build_site.py`, `.github/workflows/validate.yml`, `.github/workflows/pages.yml`, and `docs/interfaces.md`: MAP-BUILD implementer.
+- Remaining projection files, including `docs/architecture.md`, `docs/diagrams/`, `site/architecture-viewer.mjs`, `status.md`, `docs/decisions.md`, and `ATTRIBUTION.md`: coordinator. The coordinator owns integrated verification and release work.
+
+### Least confident decisions
+
+1. INFERRED: The two-PR boundary is the clearest review split, but no contributor feedback on that split is recorded.
+2. INFERRED: The map remains useful as a standalone source view without the demo; that has not been evaluated with contributor feedback.
