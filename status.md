@@ -197,3 +197,11 @@ VERIFIED: After the change, the focused `-k rendered_homepage` run returned `Ran
 VERIFIED: A real Brave check of generated `_site/index.html` returned `{"obsoleteContact":false,"duplicateHeroRepository":false,"bookCall":true,"navbarGitHub":true}` and `console: clean`. The check did not visit external contact destinations.
 
 The earlier release records remain historical. REPORTED: The user approved sequential merges and automatic GitHub Pages publication. Current PR and deployment state is recorded on GitHub.
+
+## Homepage booking CTA, 2026-10-23
+
+REPORTED: The user requested Book a call instead of Explore the setup in the homepage hero and approved promoting the existing booking link.
+
+VERIFIED working tree: The hero has one primary Book a call link with the existing destination. The duplicate contact block and its unused styles were removed. The Architecture link and setup accessibility skip link remain.
+
+VERIFIED: The focused site-builder suite returned 7 tests and `OK`. Both builders passed with 147 skills, six pages, and two Anatomy views. Isolated Brave checks at desktop and phone widths found one booking link, no document overflow, a focusable primary CTA, and clean consoles. The booking destination was not opened or submitted.
