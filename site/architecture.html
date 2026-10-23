@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f2">
+    <meta name="description" content="A source-led map of the Agentsmith setup: task routing, policy boundaries, approvals, and the static site build.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Agentsmith | Architecture in context">
+    <meta property="og:description" content="How the setup fits together, what its policies say, and what its sources do not prove.">
+    <meta property="og:url" content="https://sarthib7.github.io/agentsmith/architecture.html">
+    <link rel="canonical" href="https://sarthib7.github.io/agentsmith/architecture.html">
+    <title>Architecture | Agentsmith</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="architecture-page">
+    <a class="skip-link" href="#whole-architecture">Skip to the whole-system graph</a>
+    <header class="site-header page-width" id="top">
+      <a class="brand" href="./" aria-label="Agentsmith home">
+        <svg class="brand-mark" width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 22 16 5l11 17H5Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M10 27h12M16 16v7" stroke="currentColor" stroke-width="3"/></svg>
+        Agentsmith<span class="brand-period">.</span>
+      </a>
+      <nav class="header-nav site-navigation" aria-label="Main navigation">
+        <a href="./">The setup</a>
+        <a href="rules.html">Rules</a>
+        <a href="workflows.html">Workflows</a>
+        <a href="omp.html">OMP</a>
+        <a href="architecture.html" aria-current="page">Architecture</a>
+        <a href="skills.html">Skills</a>
+        <a class="github-link" href="https://github.com/Sarthib7/agentsmith">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="architecture-hero page-width" aria-labelledby="hero-title">
+        <h1 id="hero-title">Architecture <span>in context.</span></h1>
+        <p class="hero-description">A source-led map of task routing and policy boundaries, plus what sources cannot establish about implementation or live state.</p>
+      </section>
+
+      <section class="architecture-primary page-width" id="whole-architecture" aria-labelledby="whole-architecture-title">
+        <header class="architecture-primary-heading">
+          <div>
+            <p class="architecture-kicker">Whole-system view</p>
+            <h2 id="whole-architecture-title">How the setup fits together</h2>
+          </div>
+          <p>Explore the full map, then use the detailed references below for source-specific views.</p>
+        </header>
+        <div data-architecture-viewer class="architecture-viewer" role="group" aria-label="Interactive full system architecture graph">
+          <div class="graph-toolbar" role="group" aria-label="Graph controls">
+            <button type="button" data-graph-action="zoom-out" aria-label="Zoom out">−</button>
+            <button type="button" data-graph-action="zoom-in" aria-label="Zoom in">+</button>
+            <button type="button" data-graph-action="fit">Fit all</button>
+            <button type="button" data-graph-action="actual">100%</button>
+            <button type="button" data-graph-action="fullscreen" aria-label="Toggle fullscreen">Fullscreen</button>
+            <output data-graph-zoom aria-live="off">100%</output>
+          </div>
+          <div class="architecture-canvas graph-viewport" data-graph-viewport tabindex="0" role="region" aria-label="Architecture diagram; use arrow keys to pan, plus or minus to zoom, 0 to fit, Escape to exit fullscreen">
+            <div class="graph-world" data-graph-world>
+              <img class="graph-image" data-graph-image src="diagrams/whole-architecture.svg" alt="Full architecture map for the Agentsmith setup">
+            </div>
+            <svg class="graph-minimap" data-graph-minimap viewBox="0 0 3000 1800" role="img" aria-label="Overview of the full architecture graph and the current visible area">
+              <image data-graph-minimap-image x="0" y="0" width="3000" height="1800" href="diagrams/whole-architecture.svg" aria-hidden="true"></image>
+              <rect data-graph-minimap-window x="0" y="0" width="3000" height="1800" vector-effect="non-scaling-stroke" aria-hidden="true"></rect>
+            </svg>
+          </div>
+          <p class="graph-status" data-graph-status role="status" aria-live="polite">Full graph shown</p>
+        </div>
+        <p class="architecture-primary-caption">Use the controls or keyboard to explore. This map is a source-led explanation, not live runtime telemetry. <a href="diagrams/whole-architecture.svg">Open the full SVG <span aria-hidden="true">↗</span></a></p>
+      </section>
+
+      <nav class="architecture-index page-width" aria-label="On this page">
+        <p>On this page</p>
+        <ul>
+          <li><a href="#whole-architecture">Whole-system graph</a></li>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#workers">Workers</a></li>
+          <li><a href="#configuration">Configuration</a></li>
+          <li><a href="#approvals">Approvals</a></li>
+          <li><a href="#publishing">Publishing</a></li>
+          <li><a href="#learnings">Learnings</a></li>
+          <li><a href="#sources">Sources</a></li>
+        </ul>
+      </nav>
+
+      <aside class="architecture-key page-width" aria-labelledby="key-title">
+        <h2 id="key-title">How to read this map</h2>
+        <dl>
+          <div><dt>Observed source</dt><dd>What cited repository documents and pinned code show.</dd></div>
+          <div><dt>Chosen policy</dt><dd>How this setup asks people and agents to work; not necessarily enforced by the harness.</dd></div>
+          <div><dt>Unknown runtime state</dt><dd>What is running, authorized, or deployed now. This page is not live telemetry.</dd></div>
+        </dl>
+      </aside>
+
+      <div class="architecture-content">
+        <section class="architecture-section page-width" id="overview" aria-labelledby="overview-title">
+          <header class="architecture-section-heading"><h2 id="overview-title">System overview</h2></header>
+          <div class="architecture-reading">
+            <p><strong>Observed source.</strong> The public examples declare three optional advisor roles. They do not establish whether any role is enabled or attached to a current session.</p>
+            <p><strong>Chosen policy.</strong> Treat the “worker farm” as bounded logical work scopes, with the lead owning the final review. It is not a separately installed product.</p>
+          </div>
+          <figure class="architecture-figure">
+            <div class="diagram-scroll" role="region" tabindex="0" aria-labelledby="overview-caption" aria-describedby="overview-scroll-hint">
+              <img class="architecture-diagram" src="diagrams/system-overview.svg" width="960" alt="A person starts a task; a lead coordinates optional advisor reviews and bounded worker tasks; outputs return for parent-owned verification before a separate publishing step." loading="lazy">
+            </div>
+            <p class="diagram-scroll-hint" id="overview-scroll-hint">Scroll horizontally to inspect the full diagram and read every label.</p>
+            <figcaption id="overview-caption"><strong>One lead, bounded work, and parent-owned checks.</strong> The roles describe a workflow, not live system telemetry. <a href="diagrams/system-overview.svg">Open the full SVG <span aria-hidden="true">↗</span></a></figcaption>
+          </figure>
+        </section>
+
+        <section class="architecture-section page-width" id="workers" aria-labelledby="workers-title">
+          <header class="architecture-section-heading"><h2 id="workers-title">Worker farms</h2></header>
+          <div class="architecture-reading">
+            <p><strong>Observed source.</strong> At the pinned Oh My Pi revision, task dispatch resolves policy and artifact leases. The ordinary route calls <code>createAgentSession()</code> in-process; an optional isolation route is a dispatch choice, not evidence of a separate operating-system process or a sandbox.</p>
+            <p><strong>Chosen policy.</strong> Keep advisor review on the main session. The inspected code permits child opt-ins, so this is a policy boundary rather than a hard runtime restriction.</p>
+          </div>
+          <figure class="architecture-figure">
+            <div class="diagram-scroll" role="region" tabindex="0" aria-labelledby="workers-caption" aria-describedby="workers-scroll-hint">
+              <img class="architecture-diagram" src="diagrams/worker-farms.svg" width="960" alt="A request becomes a bounded task with policy and an artifact lease, then follows the ordinary in-process agent-session route or an optional isolation dispatch and returns a result; route selection alone proves no containment." loading="lazy">
+            </div>
+            <p class="diagram-scroll-hint" id="workers-scroll-hint">Scroll horizontally to inspect the full diagram and read every label.</p>
+            <figcaption id="workers-caption"><strong>Dispatch is not a containment guarantee.</strong> The source describes how a route is selected, not the isolation properties of the host. <a href="diagrams/worker-farms.svg">Open the full SVG <span aria-hidden="true">↗</span></a></figcaption>
+          </figure>
+        </section>
+
+        <section class="architecture-section page-width" id="configuration" aria-labelledby="configuration-title">
+          <header class="architecture-section-heading"><h2 id="configuration-title">Configuration flow</h2></header>
+          <div class="architecture-reading">
+            <p><strong>Observed source.</strong> The model resolver considers request patterns, settings overrides, agent definitions, and inherited or default patterns. Repository examples describe role selectors and task overrides; resolution does not prove provider authorization or which backend handled a request.</p>
+            <p><strong>Unknown runtime state.</strong> The active profile, usable provider access, and selected backend for any live request are not established here. A catalog entry also does not mean a skill is installed.</p>
+          </div>
+          <figure class="architecture-figure">
+            <div class="diagram-scroll" role="region" tabindex="0" aria-labelledby="configuration-caption" aria-describedby="configuration-scroll-hint">
+              <img class="architecture-diagram" src="diagrams/configuration-flow.svg" width="960" alt="Repository policy and workflow documents lead to example configuration, model-selector resolution, and an optional advisor roster; skill prerequisites, exports, and generated registry entries remain distinct steps." loading="lazy">
+            </div>
+            <p class="diagram-scroll-hint" id="configuration-scroll-hint">Scroll horizontally to inspect the full diagram and read every label.</p>
+            <figcaption id="configuration-caption"><strong>Policy, resolution, and distribution are separate layers.</strong> Example settings are reference material, not a live configuration dump. <a href="diagrams/configuration-flow.svg">Open the full SVG <span aria-hidden="true">↗</span></a></figcaption>
+          </figure>
+        </section>
+
+        <section class="architecture-section page-width" id="approvals" aria-labelledby="approvals-title">
+          <header class="architecture-section-heading"><h2 id="approvals-title">Approval flow</h2></header>
+          <div class="architecture-reading">
+            <p><strong>Chosen policy.</strong> Trace a decision to its source revision, approve the scope directly, keep worker slices disjoint, and return integration and verification to the parent. A material scope or source change calls for fresh review.</p>
+            <p>Publication remains a separate decision from approving the work. This sequence is process guidance; the diagram is not a runtime lock or an approval interface.</p>
+          </div>
+          <figure class="architecture-figure">
+            <div class="diagram-scroll" role="region" tabindex="0" aria-labelledby="approvals-caption" aria-describedby="approvals-scroll-hint">
+              <img class="architecture-diagram" src="diagrams/approval-flow.svg" width="960" alt="A source trace and revisioned decision lead to direct scope approval, disjoint worker slices, parent verification, and a separate publication approval; a material revision returns for review." loading="lazy">
+            </div>
+            <p class="diagram-scroll-hint" id="approvals-scroll-hint">Scroll horizontally to inspect the full diagram and read every label.</p>
+            <figcaption id="approvals-caption"><strong>Review the work, then decide separately about publication.</strong> Approval is an explicit workflow boundary, not a tool-enforced gate. <a href="diagrams/approval-flow.svg">Open the full SVG <span aria-hidden="true">↗</span></a></figcaption>
+          </figure>
+        </section>
+
+        <section class="architecture-section page-width" id="publishing" aria-labelledby="publishing-title">
+          <header class="architecture-section-heading"><h2 id="publishing-title">Site build and publishing</h2></header>
+          <div class="architecture-reading">
+            <p><strong>Observed source.</strong> The workflow runs the native viewer behavior tests, then the Python builder validates the catalog and preflights six pages, shared assets, and all six canonical architecture SVGs before writing <code>_site/</code>. The Pages workflow uploads that output and deploys it on pushes to <code>main</code>; it also supports a manual run.</p>
+            <p><strong>Limit.</strong> This describes configured automation, not a current build or deployment. A generated artifact alone does not prove that a site was published.</p>
+          </div>
+          <figure class="architecture-figure">
+            <div class="diagram-scroll" role="region" tabindex="0" aria-labelledby="publishing-caption" aria-describedby="publishing-scroll-hint">
+              <img class="architecture-diagram" src="diagrams/site-build.svg" width="960" alt="The pipeline connects six canonical architecture SVGs, native graph viewer behavior tests, the Python catalog and site builder, and the configured GitHub Pages upload and deployment steps." loading="lazy">
+            </div>
+            <p class="diagram-scroll-hint" id="publishing-scroll-hint">Scroll horizontally to inspect the full diagram and read every label.</p>
+            <figcaption id="publishing-caption"><strong>Build output is not deployment evidence.</strong> The map-only pipeline covers six canonical SVGs, native graph viewer behavior tests, the Python catalog and site builder, and its configured GitHub Pages delivery. <a href="diagrams/site-build.svg">Open the full SVG <span aria-hidden="true">↗</span></a></figcaption>
+          </figure>
+        </section>
+
+        <section class="architecture-section architecture-learnings page-width" id="learnings" aria-labelledby="learnings-title">
+          <header class="architecture-section-heading"><h2 id="learnings-title">Learnings</h2></header>
+          <div class="architecture-reading learning-intro">
+            <p>Three useful distinctions keep a diagram honest:</p>
+          </div>
+          <ul class="learning-list">
+            <li><h3>Scope is not isolation.</h3><p>A worker can have a bounded task and artifact lease without running in a separate process or a guaranteed sandbox.</p></li>
+            <li><h3>Configuration is not capability.</h3><p>A selector or roster expresses intent. It does not prove provider entitlement, successful authorization, or a live invocation.</p></li>
+            <li><h3>Validation is not publication.</h3><p>A generated catalog or <code>_site/</code> is an output of a build, not evidence that the public deployment completed.</p></li>
+          </ul>
+        </section>
+
+        <section class="architecture-section architecture-sources page-width" id="sources" aria-labelledby="sources-title">
+          <header class="architecture-section-heading"><h2 id="sources-title">Sources</h2></header>
+          <div class="architecture-reading source-intro">
+            <p>The Oh My Pi implementation references below are pinned to one public revision. Repository examples describe policy; they do not establish the state of a running installation.</p>
+          </div>
+          <ol class="source-list">
+            <li><a href="https://github.com/Sarthib7/agentsmith/blob/main/docs/architecture.md">Architecture notes</a><p>Companion overview and evidence boundaries.</p></li>
+            <li><a href="https://github.com/Sarthib7/agentsmith/blob/main/docs/decisions.md">Architecture decisions</a><p>Chosen boundaries for workers, review, and publication.</p></li>
+            <li><a href="https://github.com/Sarthib7/agentsmith/blob/main/workflows/orchestration.md">Orchestration workflow</a><p>Repository guidance for delegation and integration.</p></li>
+            <li><a href="https://github.com/Sarthib7/agentsmith/blob/main/rules/omp-config.example.yml">OMP configuration example</a> · <a href="https://github.com/Sarthib7/agentsmith/blob/main/rules/omp-advisors.example.yml">Advisor roster example</a><p>Reference examples for selectors, task overrides, and optional roles.</p></li>
+            <li><a href="https://github.com/Sarthib7/oh-my-pi/tree/6d31705a08530fcaa79c1ff45b4862c113184a18">Oh My Pi source at the pinned revision</a><p><code>6d31705a08530fcaa79c1ff45b4862c113184a18</code>; a source snapshot, not proof of an installed build.</p></li>
+            <li><a href="https://github.com/Sarthib7/oh-my-pi/blob/6d31705a08530fcaa79c1ff45b4862c113184a18/packages/coding-agent/src/task/structured-subagent.ts#L604-L716">Task policy, artifact leases, and dispatch</a><p>Source for the task-routing distinctions in the worker diagrams.</p></li>
+            <li><a href="https://github.com/Sarthib7/oh-my-pi/blob/6d31705a08530fcaa79c1ff45b4862c113184a18/packages/coding-agent/src/task/executor.ts#L3258-L3261">In-process <code>runSubprocess()</code> behavior</a> · <a href="https://github.com/Sarthib7/oh-my-pi/blob/6d31705a08530fcaa79c1ff45b4862c113184a18/packages/coding-agent/src/task/executor.ts#L3829">The <code>createAgentSession()</code> call</a> · <a href="https://github.com/Sarthib7/oh-my-pi/blob/6d31705a08530fcaa79c1ff45b4862c113184a18/packages/coding-agent/src/task/executor.ts#L3315-L3335">Child advisor opt-ins</a><p>Implementation capability can be broader than the setup policy.</p></li>
+            <li><a href="https://github.com/Sarthib7/oh-my-pi/blob/6d31705a08530fcaa79c1ff45b4862c113184a18/packages/coding-agent/src/config/model-resolver.ts#L1215-L1265">Model-selector resolution</a><p>Source for the resolver behavior described above.</p></li>
+            <li><a href="https://github.com/Sarthib7/agentsmith/blob/main/scripts/build-site.py">Static site builder</a> · <a href="https://github.com/Sarthib7/agentsmith/blob/main/.github/workflows/pages.yml">GitHub Pages workflow</a><p>Build output, artifact upload, and the configured deployment trigger.</p></li>
+          </ol>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer page-width">
+      <div><a class="footer-brand" href="./">Agentsmith.</a><p>An agentic engineering setup maintained by <a href="https://github.com/Sarthib7">sarthib7</a>.</p></div>
+      <nav aria-label="Footer navigation"><a href="./">The full setup</a><a href="rules.html">Rules</a><a href="workflows.html">Workflows</a><a href="omp.html">OMP</a><a href="architecture.html" aria-current="page">Architecture</a><a href="skills.html">Skill library</a><a href="https://github.com/Sarthib7/agentsmith/blob/main/CONTRIBUTING.md">Contribute</a><a href="https://github.com/Sarthib7/agentsmith">Source on GitHub <span aria-hidden="true">↗</span></a><a href="#top">Back to top ↑</a></nav>
+    </footer>
+    <script type="module" src="architecture-viewer.mjs"></script>
+  </body>
+</html>

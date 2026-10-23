@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f2">
+    <meta name="description" content="A source-led visual guide to Oh My Pi: optional advisor roles, a lead orchestrator, and logical subagent work scopes.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Oh My Pi | Agentsmith">
+    <meta property="og:description" content="Three optional reviewer roles above the lead, with delegated logical task scopes below.">
+    <meta property="og:url" content="https://sarthib7.github.io/agentsmith/omp.html">
+    <link rel="canonical" href="https://sarthib7.github.io/agentsmith/omp.html">
+    <title>Oh My Pi | Agentsmith</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="architecture-page">
+    <a class="skip-link" href="#whole-architecture">Skip to the full OMP architecture graph</a>
+    <header class="site-header page-width" id="top">
+      <a class="brand" href="./" aria-label="Agentsmith home">
+        <svg class="brand-mark" width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 22 16 5l11 17H5Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M10 27h12M16 16v7" stroke="currentColor" stroke-width="3"/></svg>
+        Agentsmith<span class="brand-period">.</span>
+      </a>
+      <nav class="header-nav site-navigation" aria-label="Main navigation">
+        <a href="./">The setup</a>
+        <a href="rules.html">Rules</a>
+        <a href="workflows.html">Workflows</a>
+        <a href="omp.html" aria-current="page">OMP</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="skills.html">Skills</a>
+        <a class="github-link" href="https://github.com/Sarthib7/agentsmith">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="architecture-hero page-width" id="overview" aria-labelledby="hero-title">
+        <p class="eyebrow section-index">03 / THE PRIMARY HARNESS</p>
+        <h1 id="hero-title">Oh My Pi.<br><span>One lead, many tasks.</span></h1>
+        <p class="hero-description">A source-led view of the OMP pattern: optional advisor roles review the main session, the lead orchestrates work, and logical task scopes return results for parent review.</p>
+      </section>
+
+      <section class="architecture-primary page-width" id="whole-architecture" aria-labelledby="whole-architecture-title">
+        <header class="architecture-primary-heading">
+          <div>
+            <p class="architecture-kicker">Whole-system view</p>
+            <h2 id="whole-architecture-title">Optional advisors above the lead, tasks below</h2>
+          </div>
+          <p>Explore the connected OMP architecture graph, then read the role layers and source limits below.</p>
+        </header>
+        <div data-architecture-viewer class="architecture-viewer" role="group" aria-label="Interactive full OMP architecture graph">
+          <div class="graph-toolbar" role="group" aria-label="Graph controls">
+            <button type="button" data-graph-action="zoom-out" aria-label="Zoom out">−</button>
+            <button type="button" data-graph-action="zoom-in" aria-label="Zoom in">+</button>
+            <button type="button" data-graph-action="fit">Fit all</button>
+            <button type="button" data-graph-action="actual">100%</button>
+            <button type="button" data-graph-action="fullscreen" aria-label="Toggle fullscreen">Fullscreen</button>
+            <output data-graph-zoom aria-live="off">100%</output>
+          </div>
+          <div class="architecture-canvas graph-viewport" data-graph-viewport tabindex="0" role="region" aria-label="OMP architecture diagram; use arrow keys to pan, plus or minus to zoom, 0 to fit, Escape to exit fullscreen">
+            <div class="graph-world" data-graph-world>
+              <img class="graph-image" data-graph-image src="diagrams/whole-architecture.svg" alt="One connected architecture graph with optional Astra, Fable, and Grok advisor roles above the lead orchestrator, logical worker swarms below, shared inputs and returned artifacts, parent verification, and a separate human permission boundary. Worker grouping is illustrative, not a fixed capacity claim.">
+            </div>
+            <svg class="graph-minimap" data-graph-minimap viewBox="0 0 3000 1800" role="img" aria-label="Overview of the full OMP architecture graph and the current visible area">
+              <image data-graph-minimap-image x="0" y="0" width="3000" height="1800" href="diagrams/whole-architecture.svg" aria-hidden="true"></image>
+              <rect data-graph-minimap-window x="0" y="0" width="3000" height="1800" vector-effect="non-scaling-stroke" aria-hidden="true"></rect>
+            </svg>
+          </div>
+          <p class="graph-status" data-graph-status role="status" aria-live="polite">Full graph shown</p>
+        </div>
+        <p class="architecture-primary-caption">Use the controls or keyboard to explore the full graph. Advisor roles are optional, worker grouping is illustrative, and the human permission boundary is not a runtime lock. This is not live telemetry. <a href="diagrams/whole-architecture.svg">Open the full SVG <span aria-hidden="true">↗</span></a></p>
+      </section>
+
+      <section class="architecture-section page-width" id="layers" aria-labelledby="layers-title">
+        <header class="architecture-section-heading"><h2 id="layers-title">Three tiers, read top to bottom</h2></header>
+        <div class="architecture-reading">
+          <p><strong>Read the graph top to bottom.</strong> Optional advisor roles sit above the main-session lead. Logical task scopes sit below it, with results returning for parent verification.</p>
+          <p>These labels describe public role patterns, not active sessions, provider access, or a fixed swarm size.</p>
+        </div>
+        <ol class="guide-steps">
+          <li><span class="step-number" aria-hidden="true">TOP</span><div><h3>Optional advisors: Astra, Fable, Grok</h3><p><strong>Astra</strong> reviews correctness, invariants, and security. <strong>Fable</strong> reviews architecture, API design, and YAGNI. <strong>Grok</strong> checks obvious regressions and test gaps. These are optional reviewer roles in the public roster, not evidence that advisors are active.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">MIDDLE</span><div><h3>Lead orchestrator: the main session</h3><p>The lead owns the plan and cross-slice contracts. It chooses independent typed tasks, gathers returned artifacts, and remains responsible for integration and parent-owned verification.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">BOTTOM</span><div><h3>Subagent swarms: logical task scopes</h3><p>Each delegated item has a bounded brief and an owner. Workers return results to the lead. The group is illustrative: it makes no claim about live agent count, system capacity, or process isolation.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="architecture-section page-width" id="boundaries" aria-labelledby="boundaries-title">
+        <header class="architecture-section-heading"><h2 id="boundaries-title">What this model does not prove</h2></header>
+        <div class="architecture-reading">
+          <p><strong>Policy and implementation are different.</strong> The intended policy keeps advisors on the main session. Public code analysis also finds per-agent opt-ins, so that policy is not a hard technical boundary.</p>
+          <p>The ordinary <code>createAgentSession()</code> route is in-process at the pinned public revision. An optional isolation dispatch does not prove operating-system containment.</p>
+        </div>
+        <ol class="guide-steps">
+          <li><span class="step-number" aria-hidden="true">STATE</span><div><h3>No live activity claim</h3><p>This page is an explanation, not telemetry. It does not show active advisors, a running lead, or a live worker swarm.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">ACCESS</span><div><h3>No model or account claim</h3><p>Model identifiers in dated public examples do not verify current provider settings, subscriptions, credentials, or account access.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">BOUNDARY</span><div><h3>No OS isolation claim</h3><p>Logical task scopes and an isolation dispatch option do not establish a process, sandbox, or operating-system security boundary.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">SCALE</span><div><h3>No capacity claim</h3><p>The swarm drawing is a conceptual layer. It is not a measured count, concurrency setting, or promise of available workers.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">APPROVAL</span><div><h3>No runtime-lock claim</h3><p>The graph marks a human permission boundary. It does not prove publication is enforced by a runtime lock or that a person has already approved it.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="architecture-section architecture-sources page-width" id="sources" aria-labelledby="sources-title">
+        <header class="architecture-section-heading"><h2 id="sources-title">Historical public examples</h2></header>
+        <p class="architecture-reading source-intro">Both configuration examples are marked “VERIFIED 2026-10-05” in their source headers. Treat them here as dated historical references, not a live snapshot. Their model mappings do not establish current account access.</p>
+        <ul class="source-list">
+          <li><a href="https://github.com/Sarthib7/agentsmith/blob/main/rules/omp-config.example.yml">OMP model-role example</a><p>Public example for role mapping and task settings. The runtime installation version is not mapped here.</p></li>
+          <li><a href="https://github.com/Sarthib7/agentsmith/blob/main/rules/omp-advisors.example.yml">OMP advisor roster example</a><p>Public example for the three advisor labels and review scopes. It does not prove an advisor is active.</p></li>
+          <li><a href="https://github.com/Sarthib7/agentsmith/blob/main/workflows/orchestration.md">Orchestration workflow</a><p>Explains main-session coordination, advisor policy, typed tasks, and result artifacts.</p></li>
+          <li><a href="https://github.com/Sarthib7/oh-my-pi/tree/6d31705a08530fcaa79c1ff45b4862c113184a18">Pinned public OMP source revision</a><p>Reference revision for the in-process session and optional dispatch notes. It does not identify the installed runtime or prove containment.</p></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer page-width">
+      <div><a class="footer-brand" href="./">Agentsmith.</a><p>An agentic engineering setup maintained by <a href="https://github.com/Sarthib7">sarthib7</a>.</p></div>
+      <nav aria-label="Footer navigation"><a href="./">The setup</a><a href="rules.html">Rules</a><a href="workflows.html">Workflows</a><a href="omp.html" aria-current="page">OMP</a><a href="architecture.html">Architecture</a><a href="skills.html">Skills</a><a href="https://github.com/Sarthib7/agentsmith">GitHub <span aria-hidden="true">↗</span></a><a href="https://github.com/Sarthib7/agentsmith/blob/main/ATTRIBUTION.md">Attribution</a><a href="#top">Back to top ↑</a></nav>
+    </footer>
+    <script type="module" src="architecture-viewer.mjs"></script>
+  </body>
+</html>
