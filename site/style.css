@@ -390,7 +390,7 @@ h2 { margin: 0; font-size: 29px; font-weight: 680; letter-spacing: -1px; line-he
 .architecture-primary-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px 28px; margin-bottom: 12px; }
 .architecture-primary-heading h2 { margin: 0; font-size: clamp(22px, 2.6vw, 30px); letter-spacing: -.8px; }
 .architecture-primary-heading > p { max-width: 48ch; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
-.architecture-kicker { margin: 0 0 5px; color: var(--accent); font: 600 11px/1.5 var(--mono); letter-spacing: .7px; text-transform: uppercase; }
+.architecture-kicker, .anatomy-kicker { margin: 0 0 5px; color: var(--accent); font: 600 11px/1.5 var(--mono); letter-spacing: .7px; text-transform: uppercase; }
 .architecture-viewer { overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
 .graph-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding: 9px 10px; border-bottom: 1px solid var(--line); background: var(--surface); }
 .graph-toolbar button { min-height: 36px; padding: 6px 11px; border: 1px solid var(--line); border-radius: 5px; background: var(--canvas); font-size: 12px; font-weight: 600; }
@@ -410,6 +410,18 @@ h2 { margin: 0; font-size: 29px; font-weight: 680; letter-spacing: -1px; line-he
 .architecture-primary-caption { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 9px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
 .architecture-primary-caption a { color: var(--ink); font-weight: 600; }
 .architecture-primary-caption a:hover { color: var(--accent); }
+.anatomy-section { padding-block: 30px 36px; border-bottom: 1px solid var(--line); }
+.anatomy-section .architecture-section-heading h2 { margin-bottom: 0; }
+.anatomy-figure { min-width: 0; margin: 0; }
+.anatomy-frame { display: block; width: 100%; height: 1220px; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.anatomy-caption { display: flex; flex-wrap: wrap; gap: 7px 12px; margin-top: 10px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.anatomy-caption a { color: var(--ink); font-weight: 650; }
+.anatomy-caption a:hover { color: var(--accent); }
+details.illustration-disclosure { padding-block: 16px 18px; }
+details.illustration-disclosure > summary { cursor: pointer; font-size: 15px; font-weight: 650; }
+details.illustration-disclosure > summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.visual-demo-note { max-width: 68ch; margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+details.illustration-disclosure[open] .anatomy-figure { margin-top: 16px; }
 .architecture-index { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 24px; padding-block: 17px 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .architecture-index > p { margin: 0; font-size: 12px; font-weight: 650; }
 .architecture-index ul { display: flex; flex-wrap: wrap; gap: 10px 18px; list-style: none; padding: 0; margin: 0; }
@@ -460,6 +472,8 @@ h2 { margin: 0; font-size: 29px; font-weight: 680; letter-spacing: -1px; line-he
   .graph-toolbar { gap: 6px; }
   .graph-toolbar button { min-height: 38px; }
   .graph-minimap { right: 8px; bottom: 8px; width: 132px; height: 79px; }
+  .anatomy-section { padding-block: 26px 32px; }
+  .anatomy-frame { height: clamp(660px, calc(72vw + 380px), 930px); }
   .architecture-key dl { grid-template-columns: 1fr; gap: 16px; }
   .architecture-section { grid-template-columns: 1fr; gap: 17px; padding-block: 30px; }
   .architecture-section-heading h2 { font-size: 26px; }

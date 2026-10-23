@@ -68,3 +68,19 @@ VERIFIED correction: The hash comparison above records the initial copy. The fin
 - `apply-grant/SKILL.md` resolves its exporter from the installed skill directory and requires the user to select a transcript. Its telemetry sections were removed because they could send before consent and overwrite unrelated configuration.
 - `apply-grant/export-session.sh` copies only the selected file and refuses an existing output. Its fixture tests use disposable transcripts.
 - `impeccable/reference/extract.md`, `harden.md`, and `optimize.md` had five trailing spaces and one extra blank line removed. VERIFIED: `git diff --cached --check` identified those six lines during release staging.
+
+## Anatomy workbench runtime, 2026-10-21
+
+VERIFIED: The four modules in `site/anatomy/vendor/` and their `LICENSE` match the reviewed five-file closure from [wheresryan22/anatomy at revision 7895e19d2d8d9b585283b6113e25fc091275f0cc](https://github.com/wheresryan22/anatomy/tree/7895e19d2d8d9b585283b6113e25fc091275f0cc). The local `git hash-object` comparison returned:
+
+| File | Git blob |
+| --- | --- |
+| `iso-kit.mjs` | `248ee01cc00dfaeee9d693f49f63e32913f03115` |
+| `lathe.mjs` | `b2fb74dfda69aa6296152d76ec70f314ce2955f1` |
+| `tube.mjs` | `94d1c84a7b7a1d1b1000de9ae3c84f53d093901a` |
+| `audit.mjs` | `126ec0d83252db3415f32d35acd16567c53dad2d` |
+| `LICENSE` | `aa20733917ffc919b6b04834e6a6e22909df7c76` |
+
+VERIFIED: The copied notice is MIT, copyright (c) 2026 Ryan. The standalone workbench builder includes that complete notice in both generated HTML views. The scene and workflow controls build on these helpers; this addition does not change skill ownership metadata.
+
+VERIFIED limitation: This comparison covers those five files only. It does not pin the entire installed Anatomy skill tree or grant a license to other collected material.

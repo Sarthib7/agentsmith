@@ -28,6 +28,8 @@ DIAGRAM_BASENAMES = (
     "whole-architecture",
 )
 
+ANATOMY_VIEWS = ("workbench.html", "workbench-light.html")
+
 SITE_TEMPLATES = (
     "site/index.html", "site/skills.html", "site/architecture.html",
     "site/rules.html", "site/workflows.html", "site/omp.html",
@@ -40,6 +42,7 @@ SITE_ASSETS = (
 
 def make_site_fixture(
     root, *, missing_page=None, missing_diagram=None, missing_asset=None,
+    missing_anatomy_view=None,
 ):
     (root / "scripts").mkdir()
     (root / "scripts/build-index.py").write_text(
@@ -66,6 +69,14 @@ def make_site_fixture(
         if basename == missing_diagram:
             continue
         relative = f"docs/diagrams/{basename}.svg"
+        source = site.REPO / relative
+        destination = root / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, destination)
+    for basename in ANATOMY_VIEWS:
+        if basename == missing_anatomy_view:
+            continue
+        relative = f"site/anatomy/{basename}"
         source = site.REPO / relative
         destination = root / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -245,6 +256,31 @@ class SiteTests(unittest.TestCase):
                     "rules.html", "workflows.html", "omp.html",
                 },
             )
+            expected_files = {
+                "index.html", "skills.html", "architecture.html",
+                "rules.html", "workflows.html", "omp.html", ".nojekyll",
+            }
+            expected_files.update(path.removeprefix("site/") for path in SITE_ASSETS)
+            expected_files.update(
+                f"diagrams/{basename}.svg" for basename in DIAGRAM_BASENAMES
+            )
+            expected_files.update(f"anatomy/{basename}" for basename in ANATOMY_VIEWS)
+            self.assertEqual(
+                {
+                    path.relative_to(output).as_posix()
+                    for path in output.rglob("*") if path.is_file()
+                },
+                expected_files,
+            )
+            self.assertEqual(
+                {path.name for path in (output / "anatomy").iterdir()},
+                set(ANATOMY_VIEWS),
+            )
+            for basename in ANATOMY_VIEWS:
+                self.assertEqual(
+                    (output / "anatomy" / basename).read_bytes(),
+                    (root / "site" / "anatomy" / basename).read_bytes(),
+                )
 
     def test_missing_required_input_preserves_existing_output(self):
         cases = [
@@ -258,6 +294,10 @@ class SiteTests(unittest.TestCase):
         cases.extend(
             (f"docs/diagrams/{basename}.svg", {"missing_diagram": basename})
             for basename in DIAGRAM_BASENAMES
+        )
+        cases.extend(
+            (f"site/anatomy/{basename}", {"missing_anatomy_view": basename})
+            for basename in ANATOMY_VIEWS
         )
         for missing_input, fixture_options in cases:
             with self.subTest(missing_input=missing_input):
@@ -283,6 +323,7 @@ class SiteTests(unittest.TestCase):
                     }
                     self.assertEqual(after, before)
                     self.assertFalse((output / "diagrams").exists())
+                    self.assertFalse((output / "anatomy").exists())
 
 if __name__ == "__main__":
     unittest.main()
