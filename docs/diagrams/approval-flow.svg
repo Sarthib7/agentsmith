@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="530" viewBox="0 0 960 530" role="img" aria-labelledby="title desc" style="font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f7f6f2">
+  <title id="title">Revision-bound work and publication approvals</title>
+  <desc id="desc">Seven concepts: source evidence feeds a revisioned decision card, direct approval authorizes scoped work, disjoint workers return for parent verification, and publication requires a separate approval before the existing Pages workflow. A material scope change loops back to a new decision card and invalidates prior approval. This is a human policy, not a runtime lock or evidence of deployment.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 10 4 0 8Z" fill="#64665e"/></marker><marker id="reset-arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 10 4 0 8Z" fill="#c2381c"/></marker></defs>
+  <g fill="none" stroke="#64665e" stroke-width="2" marker-end="url(#arrow)">
+    <path d="M240 112H350"/>
+    <path d="M590 112H690"/>
+    <path d="M810 160V235"/>
+    <path d="M690 282H590"/>
+    <path d="M350 282H240"/>
+    <path d="M135 330V400"/>
+  </g>
+  <path d="M470 235V185H500V160" fill="none" stroke="#c2381c" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#reset-arrow)"/>
+  <text x="615" y="191" text-anchor="middle" fill="#a33219" font-size="16" font-weight="650">MATERIAL CHANGE · NEW CARD + APPROVAL</text>
+  <g>
+    <rect x="30" y="65" width="210" height="95" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2"/>
+    <text x="135" y="101" text-anchor="middle" fill="#20211e" font-size="19" font-weight="700">Source trace</text>
+    <text x="135" y="132" text-anchor="middle" fill="#64665e" font-size="16">evidence + limits</text>
+    <rect x="350" y="65" width="240" height="95" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2"/>
+    <text x="470" y="101" text-anchor="middle" fill="#20211e" font-size="19" font-weight="700">Revisioned decision</text>
+    <text x="470" y="132" text-anchor="middle" fill="#64665e" font-size="16">scope + acceptance</text>
+    <rect x="690" y="65" width="240" height="95" rx="8" fill="#fff0e8" stroke="#c2381c" stroke-width="2"/>
+    <text x="810" y="101" text-anchor="middle" fill="#20211e" font-size="19" font-weight="700">Direct approval</text>
+    <text x="810" y="132" text-anchor="middle" fill="#64665e" font-size="16">this revision only</text>
+    <rect x="690" y="235" width="240" height="95" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2"/>
+    <text x="810" y="271" text-anchor="middle" fill="#20211e" font-size="19" font-weight="700">Scoped work</text>
+    <text x="810" y="302" text-anchor="middle" fill="#64665e" font-size="16">disjoint file owners</text>
+    <rect x="350" y="235" width="240" height="95" rx="8" fill="#fffefa" stroke="#20211e" stroke-width="2"/>
+    <text x="470" y="271" text-anchor="middle" fill="#20211e" font-size="19" font-weight="700">Parent verifies</text>
+    <text x="470" y="302" text-anchor="middle" fill="#64665e" font-size="16">merged state · one pass</text>
+    <rect x="30" y="235" width="210" height="95" rx="8" fill="#fff0e8" stroke="#c2381c" stroke-width="2"/>
+    <text x="135" y="271" text-anchor="middle" fill="#20211e" font-size="19" font-weight="700">Publish approval</text>
+    <text x="135" y="302" text-anchor="middle" fill="#64665e" font-size="16">separate direct go-ahead</text>
+    <rect x="30" y="400" width="210" height="90" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="135" y="435" text-anchor="middle" fill="#20211e" font-size="18" font-weight="700">Existing Pages flow</text>
+    <text x="135" y="465" text-anchor="middle" fill="#64665e" font-size="16">triggered workflow</text>
+  </g>
+  <text x="480" y="518" text-anchor="middle" fill="#64665e" font-size="16">Instruction policy only · no runtime approval lock · no deployment claimed</text>
+</svg>

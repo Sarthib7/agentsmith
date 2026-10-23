@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc" style="font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f7f6f2">
+  <title id="title">Canonical documentation to Pages build path</title>
+  <desc id="desc">Seven concepts show the canonical guide and six SVGs, six page templates and application assets, catalog data, and the Pages trigger. The build pipeline validates the catalog and assembles the static Python site. The output contains six pages, diagrams and the graph viewer. The workflow uploads _site and invokes deploy-pages after a main push or manual dispatch. This diagram is a source map, not live build or deployment telemetry.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 10 4 0 8Z" fill="#64665e"/></marker></defs>
+  <text x="20" y="32" fill="#64665e" font-size="16" font-weight="700" letter-spacing="1">SOURCE + CONTROL INPUTS</text>
+  <text x="320" y="174" fill="#64665e" font-size="16" font-weight="700" letter-spacing="1">STATIC BUILD</text>
+  <g fill="none" stroke="#64665e" stroke-width="2" marker-end="url(#arrow)">
+    <path d="M240 100H270V220H320"/>
+    <path d="M240 220H320"/>
+    <path d="M240 340H285V280H320"/>
+    <path d="M240 450H295V310H320" stroke-dasharray="8 6"/>
+    <path d="M540 260H610"/>
+    <path d="M760 260H820"/>
+  </g>
+  <g>
+    <rect x="20" y="55" width="220" height="90" rx="8" fill="#fff0e8" stroke="#c2381c" stroke-width="2"/>
+    <text x="130" y="90" text-anchor="middle" fill="#20211e" font-size="18" font-weight="700">Canonical docs + SVGs</text>
+    <text x="130" y="121" text-anchor="middle" fill="#64665e" font-size="16">Guide + six SVGs</text>
+    <rect x="20" y="175" width="220" height="90" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2"/>
+    <text x="130" y="210" text-anchor="middle" fill="#20211e" font-size="18" font-weight="700">Six pages + app assets</text>
+    <text x="130" y="241" text-anchor="middle" fill="#64665e" font-size="16">HTML · CSS · graph JS</text>
+    <rect x="20" y="295" width="220" height="90" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2"/>
+    <text x="130" y="330" text-anchor="middle" fill="#20211e" font-size="18" font-weight="700">Validated catalog</text>
+    <text x="130" y="361" text-anchor="middle" fill="#64665e" font-size="16">load_catalog() input</text>
+    <rect x="20" y="405" width="220" height="90" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="130" y="440" text-anchor="middle" fill="#20211e" font-size="18" font-weight="700">Pages workflow start</text>
+    <text x="130" y="471" text-anchor="middle" fill="#64665e" font-size="16">main push · manual dispatch</text>
+    <rect x="320" y="195" width="220" height="130" rx="8" fill="#fffefa" stroke="#20211e" stroke-width="2"/>
+    <text x="430" y="231" text-anchor="middle" fill="#20211e" font-size="19" font-weight="700">Build pipeline</text>
+    <text x="430" y="261" text-anchor="middle" fill="#64665e" font-size="16">Catalog validation</text>
+    <text x="430" y="291" text-anchor="middle" fill="#64665e" font-size="16">then build-site.py</text>
+    <text x="430" y="316" text-anchor="middle" fill="#64665e" font-size="16">separate CLI steps</text>
+    <rect x="610" y="195" width="150" height="130" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2"/>
+    <text x="685" y="244" text-anchor="middle" fill="#20211e" font-size="20" font-weight="700">_site/</text>
+    <text x="685" y="276" text-anchor="middle" fill="#64665e" font-size="16">6 static pages</text>
+    <text x="685" y="304" text-anchor="middle" fill="#64665e" font-size="16">+ SVGs + viewer</text>
+    <rect x="820" y="195" width="130" height="130" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2"/>
+    <text x="885" y="231" text-anchor="middle" fill="#20211e" font-size="16" font-weight="700">Pages workflow</text>
+    <text x="885" y="261" text-anchor="middle" fill="#64665e" font-size="16">upload artifact</text>
+    <text x="885" y="291" text-anchor="middle" fill="#64665e" font-size="16">deploy-pages</text>
+  </g>
+  <text x="480" y="523" text-anchor="middle" fill="#64665e" font-size="16">Source mapping only · not live activity · publication needs separate approval</text>
+</svg>
