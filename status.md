@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-23
 Updated by: coordinator
-Current phase: Verified map-only feature, ready for review
+Current phase: In Progress, optional-demo publication
 
 ## Scope
 
@@ -11,6 +11,18 @@ REPORTED: The user requested a refresh, restructuring, and easier discovery. The
 REPORTED correction: The user clarified that Agentsmith covers rules, workflows, and the OMP harness as well as skills. The earlier homepage and README gave skills too much prominence.
 
 ## In Progress
+
+### Optional demo preparation, 2026-10-23
+
+- DEMO-PREP, owner coordinator, status In Progress: The optional illustration is prepared as a second PR stacked on map-only PR #7. The integrated stack has passed the checks below; exact staged review and publication remain.
+
+VERIFIED map-only baseline: [PR #7](https://github.com/Sarthib7/agentsmith/pull/7) is OPEN. Exact-head CI run [39943337652](https://github.com/Sarthib7/agentsmith/actions/runs/39943337652) passed for map commit `86af90fb8cc7d950085fc66a6c6d9672c7cfbb21`. This records the map baseline only, not demo validation.
+
+VERIFIED demo stack: `node --test site/anatomy/model.test.mjs site/architecture-viewer.test.mjs` returned 9 passed, 0 failed. The Python suite returned `Ran 28 tests in 27.042s` and `OK`. The catalog reported 147 skills, 8 verified as mine; the site builder reported six pages and two Anatomy views. Both geometry audits sampled 16 poses and returned 16 passed, 0 failed. These finite samples do not prove continuous motion or real hardware.
+
+VERIFIED demo failure controls: Against the map-only entry point, two collected missing-theme cases produced two assertion failures and zero fixture errors. The demo entry point passed both cases and preserved the previous output. No tracked source was reverted for this comparison.
+
+VERIFIED demo surface: Real Brave reached all six routes at desktop and phone widths without document overflow. All four disclosures started closed; opening each loaded its same-origin iframe with the controls present. A resource probe returned HTTP 200 for 18 resources, matched all six SVGs to their canonical bytes, and found the complete MIT notice in both themes. These checks do not certify arbitrary browsers or accessibility.
 
 - MAP-UI, owner implementer, status Completed: Keep the map-only pages on the native viewer and independent of optional demo assets.
 - MAP-BUILD, owner implementer, status Completed: Preflight preserves output on missing input; successful builds regenerate only the owned output set.

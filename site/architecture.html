@@ -69,10 +69,20 @@
         <p class="architecture-primary-caption">Use the controls or keyboard to explore. This map is a source-led explanation, not live runtime telemetry. <a href="diagrams/whole-architecture.svg">Open the full SVG <span aria-hidden="true">↗</span></a></p>
       </section>
 
+      <details class="anatomy-section page-width illustration-disclosure" id="workbench">
+        <summary>Optional visual demo: Anatomy workbench</summary>
+        <p class="visual-demo-note">Decorative analogy only. It is not the software architecture or live system state.</p>
+        <figure class="anatomy-figure">
+          <iframe class="anatomy-frame" src="anatomy/workbench-light.html" title="Interactive Anatomy workbench, a decorative analogy rather than software architecture" loading="lazy">This illustration is unavailable in the embedded view.</iframe>
+          <figcaption class="anatomy-caption">A separate interactive visual analogy, not a map of software components or a live report. <a href="anatomy/workbench-light.html">Open the standalone illustration <span aria-hidden="true">↗</span></a></figcaption>
+        </figure>
+      </details>
+
       <nav class="architecture-index page-width" aria-label="On this page">
         <p>On this page</p>
         <ul>
           <li><a href="#whole-architecture">Whole-system graph</a></li>
+          <li><a href="#workbench">Optional visual demo</a></li>
           <li><a href="#overview">Overview</a></li>
           <li><a href="#workers">Workers</a></li>
           <li><a href="#configuration">Configuration</a></li>
@@ -156,15 +166,15 @@
         <section class="architecture-section page-width" id="publishing" aria-labelledby="publishing-title">
           <header class="architecture-section-heading"><h2 id="publishing-title">Site build and publishing</h2></header>
           <div class="architecture-reading">
-            <p><strong>Observed source.</strong> The workflow runs the native viewer behavior tests, then the Python builder validates the catalog and preflights six pages, shared assets, and all six canonical architecture SVGs before writing <code>_site/</code>. The Pages workflow uploads that output and deploys it on pushes to <code>main</code>; it also supports a manual run.</p>
+            <p><strong>Observed source.</strong> The parent build runs the Node workbench generator first, producing <code>workbench.html</code> and <code>workbench-light.html</code>. The Python builder validates the catalog and preflights six pages, shared assets, six architecture diagrams, and both generated views before writing <code>_site/</code>. The Pages workflow uploads that output and deploys it on pushes to <code>main</code>; it also supports a manual run.</p>
             <p><strong>Limit.</strong> This describes configured automation, not a current build or deployment. A generated artifact alone does not prove that a site was published.</p>
           </div>
           <figure class="architecture-figure">
             <div class="diagram-scroll" role="region" tabindex="0" aria-labelledby="publishing-caption" aria-describedby="publishing-scroll-hint">
-              <img class="architecture-diagram" src="diagrams/site-build.svg" width="960" alt="The pipeline connects six canonical architecture SVGs, native graph viewer behavior tests, the Python catalog and site builder, and the configured GitHub Pages upload and deployment steps." loading="lazy">
+              <img class="architecture-diagram" src="diagrams/site-build.svg" width="960" alt="The build pipeline connects the Node workbench generator and its two HTML views, six canonical architecture diagrams, the Python six-page site builder, and the configured GitHub Pages upload and deployment steps." loading="lazy">
             </div>
             <p class="diagram-scroll-hint" id="publishing-scroll-hint">Scroll horizontally to inspect the full diagram and read every label.</p>
-            <figcaption id="publishing-caption"><strong>Build output is not deployment evidence.</strong> The map-only pipeline covers six canonical SVGs, native graph viewer behavior tests, the Python catalog and site builder, and its configured GitHub Pages delivery. <a href="diagrams/site-build.svg">Open the full SVG <span aria-hidden="true">↗</span></a></figcaption>
+            <figcaption id="publishing-caption"><strong>Build output is not deployment evidence.</strong> The pipeline includes six canonical SVGs, both generated workbench views, the six-page site, and its native graph viewer. <a href="diagrams/site-build.svg">Open the full SVG <span aria-hidden="true">↗</span></a></figcaption>
           </figure>
         </section>
 
