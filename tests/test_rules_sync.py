@@ -32,9 +32,46 @@ class RulesSyncTests(unittest.TestCase):
         ):
             with self.subTest(expected=expected):
                 self.assertIn(expected, rendered)
-
-        self.assertNotIn("/example/private-home", rendered)
+        self.assertNotIn(str(sync.SOURCE), rendered)
         self.assertNotIn("~/.", rendered)
+
+    def test_render_omits_profile_and_identity_but_keeps_commit_policy(self):
+        source_text = "\n".join(old for old, _ in sync.REQUIRED)
+        source_text += (
+            "\n# About me\n\n"
+            "PRIVATE_PROFILE_FIXTURE\n\n"
+            "# Git commit rules\n\n"
+            "- **Commit identity.** example / person@example.invalid\n"
+            "- Keep feature commits scoped.\n"
+        )
+        with tempfile.TemporaryDirectory(dir=SYNC_PATH.parents[1]) as directory:
+            source = Path(directory) / "AGENTS.md"
+            source.write_text(source_text, encoding="utf-8")
+            with patch.object(sync, "SOURCE", source):
+                rendered = sync.render()
+
+        self.assertNotIn("PRIVATE_PROFILE_FIXTURE", rendered)
+        self.assertNotIn("person@example.invalid", rendered)
+        self.assertIn("- Keep feature commits scoped.", rendered)
+
+    def test_render_rejects_private_leftovers_without_echoing_them(self):
+        private_inputs = (
+            "~/.private-fixture/service-token",
+            str(Path("/") / "Users" / "fixture-user" / "policy.md"),
+            "person@example.invalid",
+        )
+        for private_input in private_inputs:
+            with self.subTest(private_input=private_input):
+                source_text = "\n".join(old for old, _ in sync.REQUIRED)
+                source_text += "\nUnmapped input: " + private_input
+                with tempfile.TemporaryDirectory(dir=SYNC_PATH.parents[1]) as directory:
+                    source = Path(directory) / "AGENTS.md"
+                    source.write_text(source_text, encoding="utf-8")
+                    with patch.object(sync, "SOURCE", source):
+                        with self.assertRaises(SystemExit) as failure:
+                            sync.render()
+
+                self.assertNotIn(private_input, str(failure.exception))
 
 
 if __name__ == "__main__":
