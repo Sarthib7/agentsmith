@@ -72,7 +72,7 @@ Ownership:
 
 REPORTED: The optional workbench belongs in a second PR stacked on the map-only PR #7. The map-only PR must remain independently buildable.
 
-VERIFIED map baseline: [PR #7](https://github.com/Sarthib7/agentsmith/pull/7) is OPEN. Exact-head CI run [39943337652](https://github.com/Sarthib7/agentsmith/actions/runs/39943337652) passed for map commit `86af90fb8cc7d950085fc66a6c6d9672c7cfbb21`. This evidence applies to the map baseline, not the optional-demo integration.
+VERIFIED correction: Map-only [PR #7](https://github.com/Sarthib7/agentsmith/pull/7), previously recorded as OPEN, merged as `92c52719858c3fbd0676b3ed0cb46e74747a590c`. Main-branch [validation 39965102703](https://github.com/Sarthib7/agentsmith/actions/runs/39965102703) and [Pages deployment 39965102624](https://github.com/Sarthib7/agentsmith/actions/runs/39965102624) passed. The optional-demo PR now targets `main`; the map-only release remains independently buildable.
 
 INFERRED decision: Keep the native map viewer and flowcharts as the primary architecture explanation. Present the workbench only through closed optional disclosures with full-size theme views. Its authored motion is an illustration, not system activity.
 
