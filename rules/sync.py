@@ -13,6 +13,7 @@ half-converted snapshot. That is the point: drift should fail loudly.
 """
 
 import pathlib
+import re
 import sys
 
 SOURCE = pathlib.Path.home() / "AGENTS.md"
@@ -102,35 +103,55 @@ def fail(message):
     sys.exit(f"sync.py: {message}")
 
 
+def public_policy(text):
+    """Remove personal fields and reject unsafe export leftovers."""
+    lines = []
+    private_section = False
+    for line in text.splitlines(keepends=True):
+        if line.startswith("# "):
+            private_section = line.strip().casefold() == "# about me"
+        if private_section:
+            continue
+        if line.startswith("- **Commit identity.**"):
+            lines.append(
+                "- **Commit identity.** Use your configured Git identity. "
+                "Keep personal email addresses out of public examples.\n"
+            )
+        else:
+            lines.append(line)
+
+    public = "".join(lines)
+    if "~/." in public:
+        fail("unmapped machine-local paths remain; update the rewrite list")
+    if re.search(r"/(?:Users|Volumes)/|\b[A-Za-z]:\\Users\\", public):
+        fail("absolute machine paths remain; update the rewrite list")
+    if re.search(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b", public):
+        fail("email identifiers remain; use generic public guidance")
+    return public
+
+
 def render():
-    """Return the repo-relative form of the global rules file."""
+    """Return the repo-relative public form of the rules input."""
     if not SOURCE.exists():
-        fail(f"{SOURCE} not found. Nothing to sync from.")
+        fail("rules source not found; nothing to sync")
+    try:
+        text = SOURCE.read_text()
+    except (OSError, UnicodeError):
+        fail("cannot read the rules source")
 
-    text = SOURCE.read_text()
-
-    for old, new in REQUIRED:
+    for index, (old, new) in enumerate(REQUIRED, 1):
         count = text.count(old)
         if count != 1:
             fail(
-                f"required rewrite matched {count} times, expected 1.\n"
-                f"  looking for: {old!r}\n"
-                f"  Fix the rewrite list in this file, then run again."
+                f"required rewrite {index} matched {count} times, expected 1; "
+                "update the rewrite list"
             )
         text = text.replace(old, new)
 
     for old, new in OPTIONAL:
         text = text.replace(old, new)
 
-    leftover = [line for line in text.splitlines() if "~/." in line]
-    if leftover:
-        fail(
-            "machine-local paths survived the rewrite:\n"
-            + "\n".join(f"  {line}" for line in leftover)
-            + "\n  Add a rewrite for each, then run again."
-        )
-
-    return text
+    return public_policy(text)
 
 
 def main():
@@ -153,7 +174,7 @@ def main():
         (here / name).write_text(rendered)
     lines = len(rendered.splitlines())
     changed = ", ".join(stale) if stale else "nothing changed"
-    print(f"wrote {', '.join(TARGETS)} from {SOURCE} ({lines} lines, {changed})")
+    print(f"wrote {', '.join(TARGETS)} ({lines} lines, {changed})")
     return 0
 
 

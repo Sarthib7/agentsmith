@@ -84,3 +84,11 @@ VERIFIED: The four modules in `site/anatomy/vendor/` and their `LICENSE` match t
 VERIFIED: The copied notice is MIT, copyright (c) 2026 Ryan. The standalone workbench builder includes that complete notice in both generated HTML views. The scene and workflow controls build on these helpers; this addition does not change skill ownership metadata.
 
 VERIFIED limitation: This comparison covers those five files only. It does not pin the entire installed Anatomy skill tree or grant a license to other collected material.
+
+## Public policy privacy correction, 2026-10-23
+
+VERIFIED correction: The earlier paths-only review did not remove the personal profile and identity text from the public rules snapshot. The exporter now removes those fields, rejects private-style leftovers, and omits input values from diagnostics. The snapshot was regenerated from already-published bytes, without copying new private input.
+
+VERIFIED: Two collected privacy regression cases failed against the prior exporter. The corrected three-test rules suite passed, including distinct leftover-path and email cases. A synthetic CLI run removed the profile and email while retaining commit policy; a rejected input left prior output unchanged without echoing the input.
+
+VERIFIED: A tracked generated Python cache containing a machine path was removed. Bytecode ignore rules prevent new cache files from being added accidentally. This current-tree correction does not by itself remove historical Git objects or metadata.
