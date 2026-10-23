@@ -1,8 +1,8 @@
 # Status
 
-Last updated: 2026-10-21
+Last updated: 2026-10-23
 Updated by: coordinator
-Current phase: Local homepage cleanup verified; not deployed
+Current phase: Verified map-only feature, ready for review
 
 ## Scope
 
@@ -12,7 +12,19 @@ REPORTED correction: The user clarified that Agentsmith covers rules, workflows,
 
 ## In Progress
 
-None.
+- MAP-UI, owner implementer, status Completed: Keep the map-only pages on the native viewer and independent of optional demo assets.
+- MAP-BUILD, owner implementer, status Completed: Preflight preserves output on missing input; successful builds regenerate only the owned output set.
+- MAP-VERIFY, owner coordinator, status Completed: Corrected build, behavior regressions, browser paths, and resource checks passed. Publication remains separate.
+
+### Current review and correction, 2026-10-23
+
+VERIFIED corrected working tree: `node --test site/architecture-viewer.test.mjs` returned 5 passed, 0 failed. The Python suite returned `Ran 28 tests in 0.739s` and `OK`. The catalog reported `147 skills total; 8 verified as mine`, and the site builder reported six pages.
+
+VERIFIED pre-correction probe: An obsolete generated HTML page was placed in `_site`; the valid map build left it there and it still returned HTTP 200. The Pages workflow uploads the whole `_site` tree. The builder reused the output directory without removing stale files.
+
+REQUIRED correction: Read and validate every input before changing output. Missing input must leave the prior output unchanged. After successful preflight, regenerate only the builder-owned output set. This does not claim whole-build atomicity after later filesystem failures.
+
+VERIFIED negative controls: The original missing-input behavior and the pre-correction stale-output behavior each failed one collected consumer test with one assertion failure and zero fixture errors. The corrected entry point passed both cases. The retired generated page changed from HTTP 200 before the correction to HTTP 404 after it. Real Brave navigation reached all six map-only pages at desktop and phone widths without document overflow; fit, zoom, and reset were exercised. These checks do not certify arbitrary browser states or external content.
 
 ## Completed
 
@@ -32,7 +44,7 @@ None.
 
 ## Decisions
 
-See `docs/decisions.md` for the static site choice and source adaptations. Skill ownership roots remain stable.
+See `docs/decisions.md` for the static-site choice, source adaptations, and the 2026-10-23 map-only release boundary and stale-output invariant. Skill ownership roots remain stable.
 
 ## Verification and handoff
 

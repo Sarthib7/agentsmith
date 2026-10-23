@@ -51,7 +51,9 @@ Skills reachable through my own [designskills](https://github.com/Sarthib7/desig
 
 ## Local refresh, 2026-09-27
 
-VERIFIED: This refresh copied 159 files from the local `~/.agents/skills/` snapshot. All copied file hashes matched their source. That comparison proves snapshot equality; it does not establish upstream freshness or permission to redistribute.
+VERIFIED historical record: The 2026-09-27 refresh copied 159 files from a maintainer-selected skills snapshot. All copied file hashes matched their source. That comparison proves snapshot equality; it does not establish upstream freshness or permission to redistribute.
+
+Privacy correction, 2026-10-21: The source machine path has been omitted from that historical record. Its recorded count, comparison method, and limits are unchanged.
 
 VERIFIED: The refresh added these 22 collected skills:
 

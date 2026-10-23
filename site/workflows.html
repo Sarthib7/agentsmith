@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f2">
+    <meta name="description" content="A visual guide to scoped delegation, typed work, durable artifacts, parent verification, and human handoff.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Workflows | Agentsmith">
+    <meta property="og:description" content="Scope the work, delegate typed tasks, verify the merged result, and hand it back to a person.">
+    <meta property="og:url" content="https://sarthib7.github.io/agentsmith/workflows.html">
+    <link rel="canonical" href="https://sarthib7.github.io/agentsmith/workflows.html">
+    <title>Workflows | Agentsmith</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="architecture-page">
+    <a class="skip-link" href="#worker-farms">Skip to the worker dispatch flow</a>
+    <header class="site-header page-width" id="top">
+      <a class="brand" href="./" aria-label="Agentsmith home">
+        <svg class="brand-mark" width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 22 16 5l11 17H5Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M10 27h12M16 16v7" stroke="currentColor" stroke-width="3"/></svg>
+        Agentsmith<span class="brand-period">.</span>
+      </a>
+      <nav class="header-nav site-navigation" aria-label="Main navigation">
+        <a href="./">The setup</a>
+        <a href="rules.html">Rules</a>
+        <a href="workflows.html" aria-current="page">Workflows</a>
+        <a href="omp.html">OMP</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="skills.html">Skills</a>
+        <a class="github-link" href="https://github.com/Sarthib7/agentsmith">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="architecture-hero page-width" id="scope" aria-labelledby="hero-title">
+        <p class="eyebrow section-index">02 / SHARED WORK</p>
+        <h1 id="hero-title">Scope the work.<br><span>Keep ownership.</span></h1>
+        <p class="hero-description">A clear workflow gives each task one owner, makes results inspectable, and keeps the lead accountable from the first brief through the human handoff.</p>
+      </section>
+
+      <section class="architecture-primary page-width" id="worker-farms" aria-labelledby="worker-farms-title">
+        <header class="architecture-primary-heading">
+          <div>
+            <p class="architecture-kicker">Worker dispatch flow</p>
+            <h2 id="worker-farms-title">From request to returned result</h2>
+          </div>
+          <p>Explore the dispatch paths and result flow. Then read the five-stage ownership sequence below.</p>
+        </header>
+        <div data-architecture-viewer class="architecture-viewer" role="group" aria-label="Interactive worker dispatch and result flow diagram">
+          <div class="graph-toolbar" role="group" aria-label="Graph controls">
+            <button type="button" data-graph-action="zoom-out" aria-label="Zoom out">−</button>
+            <button type="button" data-graph-action="zoom-in" aria-label="Zoom in">+</button>
+            <button type="button" data-graph-action="fit">Fit all</button>
+            <button type="button" data-graph-action="actual">100%</button>
+            <button type="button" data-graph-action="fullscreen" aria-label="Toggle fullscreen">Fullscreen</button>
+            <output data-graph-zoom aria-live="off">100%</output>
+          </div>
+          <div class="architecture-canvas graph-viewport" data-graph-viewport tabindex="0" role="region" aria-label="Worker dispatch diagram; use arrow keys to pan, plus or minus to zoom, 0 to fit, Escape to exit fullscreen">
+            <div class="graph-world" data-graph-world>
+              <img class="graph-image" data-graph-image src="diagrams/worker-farms.svg" alt="A parent request enters a structured dispatcher, passes policy and artifact preparation, then takes an ordinary in-process AgentSession route or an optional isolation route. Results and artifact state return to the parent; the optional route does not prove containment.">
+            </div>
+            <svg class="graph-minimap" data-graph-minimap viewBox="0 0 3000 1800" role="img" aria-label="Overview of the worker dispatch graph and the current visible area">
+              <image data-graph-minimap-image x="0" y="0" width="3000" height="1800" href="diagrams/worker-farms.svg" aria-hidden="true"></image>
+              <rect data-graph-minimap-window x="0" y="0" width="3000" height="1800" vector-effect="non-scaling-stroke" aria-hidden="true"></rect>
+            </svg>
+          </div>
+          <p class="graph-status" data-graph-status role="status" aria-live="polite">Full graph shown</p>
+        </div>
+        <p class="architecture-primary-caption">Use the controls or keyboard to explore. The diagram distinguishes the ordinary in-process route from optional isolation dispatch; it does not prove operating-system containment or show live runtime state. <a href="diagrams/worker-farms.svg">Open the full SVG <span aria-hidden="true">↗</span></a></p>
+      </section>
+
+      <section class="architecture-section page-width" id="sequence" aria-labelledby="sequence-title">
+        <header class="architecture-section-heading"><h2 id="sequence-title">Five steps. One accountable lead.</h2></header>
+        <div class="architecture-reading">
+          <p><strong>Plan before delegation.</strong> The lead reads the request, defines the boundaries, and fixes the contracts between independent slices. The plan stays with the lead.</p>
+          <p>Every handoff should leave enough context and evidence for another person to continue without relying on private chat history.</p>
+        </div>
+        <ol class="guide-steps">
+          <li><span class="step-number" aria-hidden="true">01</span><div><h3>Scope the slice</h3><p>Write the deliverable, owner, acceptance evidence, and exact file boundary. Decide shared interfaces before parallel work starts.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">02</span><div><h3>Delegate typed work</h3><p>Batch only independent slices. Give each agent a self-contained brief and choose the narrowest role that fits. Keep one owner per file.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">03</span><div><h3>Return artifacts</h3><p>Workers return files, reports, and readable evidence. Pass large payloads by reference. The artifact records what changed and what remains unknown.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">04</span><div><h3>Verify at the parent</h3><p>The lead waits for sibling edits to land, then checks the merged result once. An error or rework request means the work is unresolved. It never grants permission to publish.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">05</span><div><h3>Hand off to a human</h3><p>Present the result, observed checks, open risks, and source links. External publication or other consequential action needs a separate human decision.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="architecture-section architecture-sources page-width" id="sources" aria-labelledby="sources-title">
+        <header class="architecture-section-heading"><h2 id="sources-title">Read the public protocol</h2></header>
+        <p class="architecture-reading source-intro">These documents describe the repository workflow and OMP coordination pattern. They explain intended process, not activity in a live session.</p>
+        <ul class="source-list">
+          <li><a href="https://github.com/Sarthib7/agentsmith/blob/main/workflows/agentic-engineering.md">Agentic engineering repository protocol</a><p>Ownership, shared contracts, durable records, and human approval boundaries.</p></li>
+          <li><a href="https://github.com/Sarthib7/agentsmith/blob/main/workflows/orchestration.md">OMP orchestration workflow</a><p>Typed delegation, task batches, peer coordination, artifacts, and parent validation.</p></li>
+          <li><a href="https://github.com/Sarthib7/agentsmith/blob/main/rules/AGENTS.md">Global agent policy</a><p>Includes the approval rules for acting outside the conversation.</p></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer page-width">
+      <div><a class="footer-brand" href="./">Agentsmith.</a><p>An agentic engineering setup maintained by <a href="https://github.com/Sarthib7">sarthib7</a>.</p></div>
+      <nav aria-label="Footer navigation"><a href="./">The setup</a><a href="rules.html">Rules</a><a href="workflows.html" aria-current="page">Workflows</a><a href="omp.html">OMP</a><a href="architecture.html">Architecture</a><a href="skills.html">Skills</a><a href="https://github.com/Sarthib7/agentsmith">GitHub <span aria-hidden="true">↗</span></a><a href="https://github.com/Sarthib7/agentsmith/blob/main/ATTRIBUTION.md">Attribution</a><a href="#top">Back to top ↑</a></nav>
+    </footer>
+    <script type="module" src="architecture-viewer.mjs"></script>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f2">
+    <meta name="description" content="A source-linked guide to the Agentsmith rules: approvals, verification, privacy, evidence, and the boundary between policy and runtime enforcement.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rules | Agentsmith">
+    <meta property="og:description" content="How the published policy guides agent behavior, and what it does not prove about runtime enforcement.">
+    <meta property="og:url" content="https://sarthib7.github.io/agentsmith/rules.html">
+    <link rel="canonical" href="https://sarthib7.github.io/agentsmith/rules.html">
+    <title>Rules | Agentsmith</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="architecture-page rules-page">
+    <a class="skip-link" href="#main-content">Skip to the Rules guide</a>
+    <header class="site-header page-width" id="top">
+      <a class="brand" href="./" aria-label="Agentsmith home">
+        <svg class="brand-mark" width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 22 16 5l11 17H5Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M10 27h12M16 16v7" stroke="currentColor" stroke-width="3"/></svg>
+        Agentsmith<span class="brand-period">.</span>
+      </a>
+      <nav class="header-nav site-navigation" aria-label="Main navigation">
+        <a href="./">The setup</a>
+        <a href="rules.html" aria-current="page">Rules</a>
+        <a href="workflows.html">Workflows</a>
+        <a href="omp.html">OMP</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="skills.html">Skills</a>
+        <a class="github-link" href="https://github.com/Sarthib7/agentsmith">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="architecture-hero page-width" aria-labelledby="hero-title">
+        <p class="eyebrow">THE ALWAYS-ON LAYER</p>
+        <h1 id="hero-title">Rules make a boundary clear.</h1>
+        <p class="hero-description">A source-linked guide to approval, verification, privacy, and evidence. The policy describes expected behavior; harness settings are a separate layer.</p>
+      </section>
+
+      <section class="architecture-primary page-width" id="approval-flow" aria-labelledby="approval-flow-title">
+        <header class="architecture-primary-heading">
+          <div>
+            <p class="architecture-kicker">Approval flow</p>
+            <h2 id="approval-flow-title">From source to publication</h2>
+          </div>
+          <p>Follow a decision from its source through review, verification, and separate publication approval.</p>
+        </header>
+        <div data-architecture-viewer class="architecture-viewer" role="group" aria-label="Interactive approval flow diagram">
+          <div class="graph-toolbar" role="group" aria-label="Graph controls">
+            <button type="button" data-graph-action="zoom-out" aria-label="Zoom out">−</button>
+            <button type="button" data-graph-action="zoom-in" aria-label="Zoom in">+</button>
+            <button type="button" data-graph-action="fit">Fit all</button>
+            <button type="button" data-graph-action="actual">100%</button>
+            <button type="button" data-graph-action="fullscreen" aria-label="Toggle fullscreen">Fullscreen</button>
+            <output data-graph-zoom aria-live="off">100%</output>
+          </div>
+          <div class="architecture-canvas graph-viewport" data-graph-viewport tabindex="0" role="region" aria-label="Approval flow diagram; use arrow keys to pan, plus or minus to zoom, 0 to fit, Escape to exit fullscreen">
+            <div class="graph-world" data-graph-world>
+              <img class="graph-image" data-graph-image src="diagrams/approval-flow.svg" alt="Approval flow from source trace and revisioned decision, through scope approval, disjoint work, parent verification, and separate publication approval; a material revision returns for review">
+            </div>
+            <svg class="graph-minimap" data-graph-minimap viewBox="0 0 3000 1800" role="img" aria-label="Overview of the approval flow and the current visible area">
+              <image data-graph-minimap-image x="0" y="0" width="3000" height="1800" href="diagrams/approval-flow.svg" aria-hidden="true"></image>
+              <rect data-graph-minimap-window x="0" y="0" width="3000" height="1800" vector-effect="non-scaling-stroke" aria-hidden="true"></rect>
+            </svg>
+          </div>
+          <p class="graph-status" data-graph-status role="status" aria-live="polite">Full approval flow shown</p>
+        </div>
+        <p class="architecture-primary-caption">Use the controls or keyboard to explore. This source-led diagram explains an approval workflow, not live runtime enforcement. <a href="diagrams/approval-flow.svg">Open the full SVG <span aria-hidden="true">↗</span></a></p>
+      </section>
+
+      <nav class="architecture-index page-width" aria-label="On this page">
+        <p>On this page</p>
+        <ul>
+          <li><a href="#gate">What the gate represents</a></li>
+          <li><a href="#policy-runtime">Policy and runtime</a></li>
+          <li><a href="#sources">Public sources</a></li>
+        </ul>
+      </nav>
+
+      <div class="architecture-content">
+        <section class="architecture-section" id="gate" aria-labelledby="gate-title">
+          <div class="architecture-section-heading">
+            <p class="eyebrow section-index">01 / THE PAUSE</p>
+            <h2 id="gate-title">What the gate represents.</h2>
+          </div>
+          <div class="architecture-reading">
+            <p><strong>Approvals.</strong> The policy sets approval gates for changing authored content, destructive or irreversible actions, and acting on the author's behalf.</p>
+            <p><strong>Verification.</strong> For a feature or fix, it asks for a deterministic test that covers the expected result and a plausible failure, then evidence that the check can fail when behavior breaks.</p>
+          </div>
+          <div class="architecture-reading">
+            <p><strong>Privacy.</strong> The public guide leaves credentials and local permissions out of its settings examples. That boundary describes what is published, not runtime filtering.</p>
+            <p><strong>Evidence.</strong> Written records name provenance, quote supporting evidence, and state what a method cannot see. Silence alone is not proof.</p>
+          </div>
+        </section>
+
+        <section class="architecture-section" id="policy-runtime" aria-labelledby="policy-runtime-title">
+          <div class="architecture-section-heading">
+            <p class="eyebrow section-index">02 / SCOPE</p>
+            <h2 id="policy-runtime-title">Policy is not runtime enforcement.</h2>
+          </div>
+          <div class="architecture-reading">
+            <p><strong>Policy</strong> describes the behavior the author expects from an agent. It tells the agent when to ask, what to verify, and how to report evidence.</p>
+          </div>
+          <div class="architecture-reading">
+            <p><strong>Runtime controls</strong> belong to the harness and its permissions. The policy text alone does not block a tool call, redact data, or prove that a check ran. This page makes no claim about which runtime controls are active.</p>
+          </div>
+        </section>
+
+        <section class="architecture-section architecture-sources" id="sources" aria-labelledby="sources-title">
+          <div class="architecture-section-heading">
+            <p class="eyebrow section-index">03 / SOURCE</p>
+            <h2 id="sources-title">Read the published files.</h2>
+          </div>
+          <div class="architecture-reading source-intro">
+            <p>These public repository files are the source for this guide. Read them before adapting the rules; they describe policy and examples, not anyone's private runtime state.</p>
+          </div>
+          <ul class="source-list">
+            <li>
+              <a href="https://github.com/Sarthib7/agentsmith/blob/main/rules/README.md">Rules guide and adaptation notes <span aria-hidden="true">↗</span></a>
+              <p>Explains the always-on layer and the role of each public example.</p>
+            </li>
+            <li>
+              <a href="https://github.com/Sarthib7/agentsmith/blob/main/rules/AGENTS.md">Global policy source <span aria-hidden="true">↗</span></a>
+              <p>See the confirmation gates, verification requirements, and evidence rules.</p>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer page-width">
+      <div><a class="footer-brand" href="./">Agentsmith.</a><p>An agentic engineering setup maintained by <a href="https://github.com/Sarthib7">sarthib7</a>.</p></div>
+      <nav aria-label="Footer navigation">
+        <a href="./">The setup</a>
+        <a href="rules.html" aria-current="page">Rules</a>
+        <a href="workflows.html">Workflows</a>
+        <a href="omp.html">OMP</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="skills.html">Skills</a>
+        <a href="https://github.com/Sarthib7/agentsmith">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </footer>
+    <script type="module" src="architecture-viewer.mjs"></script>
+  </body>
+</html>

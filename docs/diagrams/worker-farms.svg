@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="530" viewBox="0 0 960 530" role="img" aria-labelledby="title desc" style="font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f7f6f2">
+  <title id="title">OMP structured worker dispatch and result flow</title>
+  <desc id="desc">Six concepts show a parent request entering the structured dispatcher, which awaits policy and artifact preparation before choosing an ordinary in-process AgentSession route or a distinct optional isolation route. Both return structured result and artifact state. The diagram asserts no separate operating-system process per ordinary child and no sandbox guarantee for the optional route.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 10 4 0 8Z" fill="#64665e"/></marker></defs>
+  <g fill="none" stroke="#64665e" stroke-width="2">
+    <path d="M190 250H230" marker-end="url(#arrow)"/>
+    <path d="M460 220H490V120H520" marker-end="url(#arrow)"/>
+    <path d="M460 280H490V350H520" marker-end="url(#arrow)" stroke-dasharray="8 6"/>
+    <path d="M725 120H760" marker-end="url(#arrow)"/>
+    <path d="M850 175V235H850V290" marker-end="url(#arrow)" stroke-dasharray="8 6"/>
+    <path d="M725 350H760" marker-end="url(#arrow)" stroke-dasharray="8 6"/>
+    <path d="M850 410V470H105V300" marker-end="url(#arrow)" stroke-dasharray="8 6"/>
+  </g>
+  <text x="622" y="42" text-anchor="middle" fill="#64665e" font-size="16" font-weight="650">ORDINARY ROUTE</text>
+  <text x="622" y="266" text-anchor="middle" fill="#64665e" font-size="16" font-weight="650">OPTIONAL ROUTE</text>
+  <text x="830" y="225" text-anchor="end" fill="#64665e" font-size="16">SingleResult</text>
+  <text x="470" y="458" text-anchor="middle" fill="#64665e" font-size="16" font-weight="650">STRUCTURED RETURN: RESULT · POLICY · MERGE + ARTIFACT STATE</text>
+  <g>
+    <rect x="20" y="200" width="170" height="100" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2"/>
+    <text x="105" y="237" text-anchor="middle" fill="#20211e" font-size="19" font-weight="700">Parent request</text>
+    <text x="105" y="266" text-anchor="middle" fill="#64665e" font-size="16">session + invocation</text>
+    <rect x="230" y="170" width="230" height="160" rx="8" fill="#fff0e8" stroke="#c2381c" stroke-width="2"/>
+    <text x="345" y="205" text-anchor="middle" fill="#20211e" font-size="19" font-weight="700">Structured dispatcher</text>
+    <text x="345" y="236" text-anchor="middle" fill="#20211e" font-size="16">runStructuredSubagent()</text>
+    <text x="345" y="266" text-anchor="middle" fill="#64665e" font-size="16">await policy + artifact lease</text>
+    <text x="345" y="296" text-anchor="middle" fill="#64665e" font-size="16">choose prepared branch</text>
+    <rect x="520" y="65" width="205" height="110" rx="8" fill="#fffefa" stroke="#20211e" stroke-width="2"/>
+    <text x="622" y="100" text-anchor="middle" fill="#20211e" font-size="18" font-weight="700">runSubprocess()</text>
+    <text x="622" y="130" text-anchor="middle" fill="#64665e" font-size="16">ordinary · in-process</text>
+    <text x="622" y="157" text-anchor="middle" fill="#64665e" font-size="16">not an OS boundary</text>
+    <rect x="760" y="65" width="180" height="110" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2"/>
+    <text x="850" y="99" text-anchor="middle" fill="#20211e" font-size="16" font-weight="700">createAgentSession()</text>
+    <text x="850" y="130" text-anchor="middle" fill="#64665e" font-size="16">child AgentSession</text>
+    <text x="850" y="157" text-anchor="middle" fill="#64665e" font-size="16">session object</text>
+    <rect x="520" y="290" width="205" height="120" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="622" y="324" text-anchor="middle" fill="#20211e" font-size="16" font-weight="700">Isolation runner</text>
+    <text x="622" y="354" text-anchor="middle" fill="#20211e" font-size="16">runIsolatedSubprocess()</text>
+    <text x="622" y="384" text-anchor="middle" fill="#64665e" font-size="16">backend not established</text>
+    <rect x="760" y="290" width="180" height="120" rx="8" fill="#fffefa" stroke="#dcded4" stroke-width="2"/>
+    <text x="850" y="324" text-anchor="middle" fill="#20211e" font-size="18" font-weight="700">Structured result</text>
+    <text x="850" y="354" text-anchor="middle" fill="#64665e" font-size="16">SingleResult + policy</text>
+    <text x="850" y="384" text-anchor="middle" fill="#64665e" font-size="16">merge + artifact state</text>
+  </g>
+  <text x="480" y="513" text-anchor="middle" fill="#64665e" font-size="16">Async failures may be thrown or returned as exit/error/abort state · no containment guarantee inferred</text>
+</svg>

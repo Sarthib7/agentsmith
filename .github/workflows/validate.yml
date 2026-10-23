@@ -16,6 +16,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Test architecture viewer
+        run: node --test site/architecture-viewer.test.mjs
+
       - name: Run tests
         run: python3 -B -m unittest discover -s tests -v
 

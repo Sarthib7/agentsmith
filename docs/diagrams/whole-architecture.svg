@@ -1,0 +1,250 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3000" height="1800" viewBox="0 0 3000 1800" role="img" aria-labelledby="title desc" style="font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f7f6f2">
+  <title id="title">Agentsmith and Oh My Pi full system architecture</title>
+  <desc id="desc">One connected architecture graph with optional Astra, Fable, and Grok advisor roles above the lead orchestrator, logical worker swarms below, grouped configuration, rules, skills, and workflow inputs, shared repository and returned artifacts, parent verification, a human permission boundary, and a correction loop. Solid arrows show task and result flow; dashed arrows show optional advice or policy-driven review. Worker grouping is illustrative, not a fixed capacity claim. This is a static model based on the public OMP source pinned to 6d31705a08530fcaa79c1ff45b4862c113184a18 and documented project policy, not live telemetry; the installed OMP build is not mapped to that revision, and human approval is not a runtime lock.</desc>
+  <defs>
+    <marker id="flow-arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto" viewBox="0 0 14 14">
+      <path d="M1 1 13 7 1 13Z" fill="#64665e"/>
+    </marker>
+    <marker id="advice-arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto" viewBox="0 0 14 14">
+      <path d="M1 1 13 7 1 13Z" fill="#85867e"/>
+    </marker>
+    <marker id="policy-arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto" viewBox="0 0 14 14">
+      <path d="M1 1 13 7 1 13Z" fill="#c2381c"/>
+    </marker>
+  </defs>
+
+  <rect width="3000" height="1800" fill="#f7f6f2"/>
+  <text x="100" y="93" fill="#20211e" font-size="54" font-weight="760" letter-spacing="-1.5">FULL SYSTEM GRAPH</text>
+  <text x="102" y="137" fill="#64665e" font-size="24">Guidance → advisors → lead orchestration → logical work → shared artifacts → parent verification</text>
+  <rect x="2440" y="56" width="450" height="55" rx="27" fill="#fff0e8" stroke="#e6b29f" stroke-width="2"/>
+  <circle cx="2474" cy="83" r="8" fill="#c2381c"/>
+  <text x="2500" y="91" fill="#a33219" font-size="21" font-weight="700" letter-spacing="1">STATIC MODEL · NO TELEMETRY</text>
+
+  <!-- Edges behind the groups: the single connected graph's task, advice, policy and return paths. -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Optional advisor feedback to the lead session. -->
+    <path d="M1005 430V620" stroke="#85867e" stroke-width="4" stroke-dasharray="10 12" marker-end="url(#advice-arrow)"/>
+    <path d="M1490 430V620" stroke="#85867e" stroke-width="4" stroke-dasharray="10 12" marker-end="url(#advice-arrow)"/>
+    <path d="M1975 430V620" stroke="#85867e" stroke-width="4" stroke-dasharray="10 12" marker-end="url(#advice-arrow)"/>
+    <!-- Control inputs into the lead orchestrator. -->
+    <path d="M640 810H820" stroke="#64665e" stroke-width="5" marker-end="url(#flow-arrow)"/>
+    <!-- Human request and approval decisions return only to the lead. -->
+    <path d="M640 1300H680V940H820" stroke="#c2381c" stroke-width="4" stroke-dasharray="10 10" marker-end="url(#policy-arrow)"/>
+    <!-- Lead dispatch to the logical subagent layer. -->
+    <path d="M1420 1010V1150" stroke="#64665e" stroke-width="5" marker-end="url(#flow-arrow)"/>
+    <!-- Worker changes and results enter the shared repository. -->
+    <path d="M2020 1360H2110V700H2240" stroke="#64665e" stroke-width="5" marker-end="url(#flow-arrow)"/>
+    <!-- Repository artifacts are handed to the parent-owned verification pass. -->
+    <path d="M2565 830V885" stroke="#64665e" stroke-width="5" marker-end="url(#flow-arrow)"/>
+    <path d="M2565 1120V1175" stroke="#64665e" stroke-width="5" marker-end="url(#flow-arrow)"/>
+    <!-- Findings return for correction and revised scope at the lead. -->
+    <path d="M2565 1405V1460" stroke="#c2381c" stroke-width="4" stroke-dasharray="10 10" marker-end="url(#policy-arrow)"/>
+    <path d="M2240 1555H2150V1660H760V1060H900V1010" stroke="#c2381c" stroke-width="4" stroke-dasharray="10 10" marker-end="url(#policy-arrow)"/>
+    <!-- A consequential action can request direct human approval; the route stays outside the system graph. -->
+    <path d="M2890 1290H2950V1730H370V1480" stroke="#c2381c" stroke-width="4" stroke-dasharray="8 12" marker-end="url(#policy-arrow)"/>
+  </g>
+
+  <!-- 02 · Three optional advisor roles. -->
+  <g id="advisors">
+    <rect x="740" y="175" width="1480" height="320" rx="28" fill="#f1f0e9" stroke="#dcded4" stroke-width="3"/>
+    <text x="790" y="218" fill="#64665e" font-size="21" font-weight="730" letter-spacing="2">02 · OPTIONAL ADVISOR ROLES</text>
+    <text x="2170" y="218" fill="#64665e" font-size="18" text-anchor="end">main-session-only attachment is policy</text>
+
+    <g>
+      <rect x="790" y="250" width="430" height="180" rx="18" fill="#fffefa" stroke="#dcded4" stroke-width="2.5"/>
+      <circle cx="836" cy="296" r="17" fill="#fff0e8" stroke="#c2381c" stroke-width="2"/>
+      <path d="M828 296h16M836 288v16" stroke="#c2381c" stroke-width="2.5" stroke-linecap="round"/>
+      <text x="870" y="304" fill="#20211e" font-size="31" font-weight="740">Astra</text>
+      <text x="830" y="354" fill="#64665e" font-size="22">Optional advice / review</text>
+      <text x="830" y="393" fill="#85867e" font-size="18">role label · live attachment unverified</text>
+    </g>
+    <g>
+      <rect x="1275" y="250" width="430" height="180" rx="18" fill="#fffefa" stroke="#dcded4" stroke-width="2.5"/>
+      <circle cx="1321" cy="296" r="17" fill="#fff0e8" stroke="#c2381c" stroke-width="2"/>
+      <path d="M1313 296h16M1321 288v16" stroke="#c2381c" stroke-width="2.5" stroke-linecap="round"/>
+      <text x="1355" y="304" fill="#20211e" font-size="31" font-weight="740">Fable</text>
+      <text x="1315" y="354" fill="#64665e" font-size="22">Optional advice / review</text>
+      <text x="1315" y="393" fill="#85867e" font-size="18">role label · live attachment unverified</text>
+    </g>
+    <g>
+      <rect x="1760" y="250" width="430" height="180" rx="18" fill="#fffefa" stroke="#dcded4" stroke-width="2.5"/>
+      <circle cx="1806" cy="296" r="17" fill="#fff0e8" stroke="#c2381c" stroke-width="2"/>
+      <path d="M1798 296h16M1806 288v16" stroke="#c2381c" stroke-width="2.5" stroke-linecap="round"/>
+      <text x="1840" y="304" fill="#20211e" font-size="31" font-weight="740">Grok</text>
+      <text x="1800" y="354" fill="#64665e" font-size="22">Optional advice / review</text>
+      <text x="1800" y="393" fill="#85867e" font-size="18">role label · live attachment unverified</text>
+    </g>
+  </g>
+
+  <!-- 01 · Guidance inputs are grouped, not private setting exports. -->
+  <g id="control-inputs">
+    <rect x="100" y="575" width="540" height="480" rx="25" fill="#fffefa" stroke="#dcded4" stroke-width="3"/>
+    <text x="140" y="623" fill="#64665e" font-size="21" font-weight="730" letter-spacing="1.7">01 · CONTROL INPUTS</text>
+    <text x="140" y="658" fill="#85867e" font-size="18">Guidance and selectors shape task handling</text>
+    <g>
+      <rect x="140" y="685" width="460" height="70" rx="13" fill="#f7f6f2" stroke="#e4e4dc" stroke-width="2"/>
+      <circle cx="171" cy="720" r="9" fill="#c2381c"/>
+      <text x="198" y="728" fill="#20211e" font-size="24" font-weight="700">Configuration</text>
+      <text x="562" y="728" text-anchor="end" fill="#64665e" font-size="18">selectors</text>
+    </g>
+    <g>
+      <rect x="140" y="772" width="460" height="70" rx="13" fill="#f7f6f2" stroke="#e4e4dc" stroke-width="2"/>
+      <circle cx="171" cy="807" r="9" fill="#c2381c"/>
+      <text x="198" y="815" fill="#20211e" font-size="24" font-weight="700">Repository rules</text>
+      <text x="562" y="815" text-anchor="end" fill="#64665e" font-size="18">cross-cutting</text>
+    </g>
+    <g>
+      <rect x="140" y="859" width="460" height="70" rx="13" fill="#f7f6f2" stroke="#e4e4dc" stroke-width="2"/>
+      <circle cx="171" cy="894" r="9" fill="#c2381c"/>
+      <text x="198" y="902" fill="#20211e" font-size="24" font-weight="700">Workflow guides</text>
+      <text x="562" y="902" text-anchor="end" fill="#64665e" font-size="18">coordination</text>
+    </g>
+    <g>
+      <rect x="140" y="946" width="460" height="70" rx="13" fill="#f7f6f2" stroke="#e4e4dc" stroke-width="2"/>
+      <circle cx="171" cy="981" r="9" fill="#c2381c"/>
+      <text x="198" y="989" fill="#20211e" font-size="24" font-weight="700">Task-matched skills</text>
+      <text x="562" y="989" text-anchor="end" fill="#64665e" font-size="18">load on match</text>
+    </g>
+    <text x="370" y="1038" text-anchor="middle" fill="#85867e" font-size="17">Public guidance is shown; private config values are not.</text>
+  </g>
+
+  <!-- 03 · Lead orchestration and its work/return responsibilities. -->
+  <g id="lead-orchestrator">
+    <rect x="820" y="620" width="1200" height="390" rx="28" fill="#fff0e8" stroke="#c2381c" stroke-width="4"/>
+    <text x="875" y="670" fill="#a33219" font-size="21" font-weight="730" letter-spacing="1.8">03 · LEAD ORCHESTRATOR</text>
+    <text x="1965" y="670" fill="#a33219" font-size="18" text-anchor="end">main session owns the plan and cross-slice contract</text>
+
+    <g>
+      <rect x="865" y="710" width="345" height="225" rx="17" fill="#fffefa" stroke="#e6b29f" stroke-width="2"/>
+      <path d="M897 753h30M897 770h30M897 787h19" stroke="#c2381c" stroke-width="3" stroke-linecap="round"/>
+      <text x="947" y="764" fill="#20211e" font-size="26" font-weight="730">Plan + contract</text>
+      <text x="897" y="827" fill="#64665e" font-size="21">goal · acceptance</text>
+      <text x="897" y="865" fill="#64665e" font-size="21">slice boundaries · owners</text>
+      <text x="897" y="903" fill="#64665e" font-size="21">shared interfaces first</text>
+    </g>
+    <g>
+      <rect x="1247" y="710" width="345" height="225" rx="17" fill="#fffefa" stroke="#e6b29f" stroke-width="2"/>
+      <path d="M1279 753h24v24h-24zM1285 747h24v24" fill="none" stroke="#c2381c" stroke-width="3" stroke-linejoin="round"/>
+      <text x="1325" y="764" fill="#20211e" font-size="26" font-weight="730">Dispatch</text>
+      <text x="1279" y="827" fill="#64665e" font-size="21">independent, bounded work</text>
+      <text x="1279" y="865" fill="#64665e" font-size="21">ordinary in-process child</text>
+      <text x="1279" y="903" fill="#64665e" font-size="21">optional isolation ≠ proof</text>
+    </g>
+    <g>
+      <rect x="1629" y="710" width="345" height="225" rx="17" fill="#fffefa" stroke="#e6b29f" stroke-width="2"/>
+      <path d="M1661 750l14 14 24-28" fill="none" stroke="#c2381c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="1717" y="764" fill="#20211e" font-size="26" font-weight="730">Own the return</text>
+      <text x="1661" y="827" fill="#64665e" font-size="21">result · errors · aborts</text>
+      <text x="1661" y="865" fill="#64665e" font-size="21">merge + artifact state</text>
+      <text x="1661" y="903" fill="#64665e" font-size="21">correct or revise scope</text>
+    </g>
+    <text x="1420" y="979" text-anchor="middle" fill="#a33219" font-size="18">Main-session-only advisor attachment is policy; pinned OMP source permits child opt-ins. No live attachment is inferred.</text>
+  </g>
+
+  <!-- 05 · Shared repository. -->
+  <g id="shared-repository">
+    <rect x="2240" y="570" width="650" height="260" rx="25" fill="#fffefa" stroke="#dcded4" stroke-width="3"/>
+    <text x="2290" y="618" fill="#64665e" font-size="21" font-weight="730" letter-spacing="1.7">05 · SHARED REPOSITORY</text>
+    <path d="M2290 650h550" stroke="#e4e4dc" stroke-width="2"/>
+    <g transform="translate(2295 680)">
+      <path d="M0 12h34l12 12h34v52H0z" fill="#fff0e8" stroke="#c2381c" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M9 39h61M9 53h45" stroke="#c2381c" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <text x="2435" y="711" fill="#20211e" font-size="25" font-weight="720">Code + working files</text>
+    <text x="2435" y="750" fill="#64665e" font-size="20">owned edits converge on shared artifacts</text>
+    <text x="2435" y="790" fill="#85867e" font-size="18">A worktree is not proof of sandboxing.</text>
+  </g>
+
+  <!-- 06 · Results and artifacts. -->
+  <g id="artifact-results">
+    <rect x="2240" y="885" width="650" height="235" rx="25" fill="#fffefa" stroke="#dcded4" stroke-width="3"/>
+    <text x="2290" y="932" fill="#64665e" font-size="21" font-weight="730" letter-spacing="1.7">06 · ARTIFACTS + RESULT STATE</text>
+    <path d="M2290 965h550" stroke="#e4e4dc" stroke-width="2"/>
+    <g>
+      <rect x="2295" y="992" width="150" height="68" rx="12" fill="#f7f6f2" stroke="#e4e4dc" stroke-width="2"/>
+      <text x="2370" y="1035" fill="#20211e" font-size="19" text-anchor="middle" font-weight="680">patch / files</text>
+      <rect x="2460" y="992" width="180" height="68" rx="12" fill="#f7f6f2" stroke="#e4e4dc" stroke-width="2"/>
+      <text x="2550" y="1035" fill="#20211e" font-size="19" text-anchor="middle" font-weight="680">success / error</text>
+      <rect x="2655" y="992" width="180" height="68" rx="12" fill="#f7f6f2" stroke="#e4e4dc" stroke-width="2"/>
+      <text x="2745" y="1035" fill="#20211e" font-size="19" text-anchor="middle" font-weight="680">abort / merge</text>
+    </g>
+    <text x="2565" y="1090" text-anchor="middle" fill="#85867e" font-size="18">Structured return may carry state, not only a thrown exception.</text>
+  </g>
+
+  <!-- 04 · Logical subagent swarm layer. -->
+  <g id="subagent-swarms">
+    <rect x="820" y="1150" width="1200" height="400" rx="28" fill="#fffefa" stroke="#dcded4" stroke-width="3"/>
+    <text x="875" y="1198" fill="#64665e" font-size="21" font-weight="730" letter-spacing="1.8">04 · SUBAGENT SWARMS · LOGICAL TASK SCOPES</text>
+    <text x="1965" y="1198" fill="#85867e" font-size="18" text-anchor="end">illustrative grouping · no fixed capacity</text>
+
+    <g>
+      <rect x="865" y="1235" width="345" height="185" rx="17" fill="#f7f6f2" stroke="#e4e4dc" stroke-width="2"/>
+      <circle cx="904" cy="1275" r="9" fill="#c2381c"/><circle cx="930" cy="1275" r="9" fill="#dcded4"/><circle cx="956" cy="1275" r="9" fill="#dcded4"/>
+      <text x="888" y="1329" fill="#20211e" font-size="25" font-weight="720">Bounded slice</text>
+      <text x="888" y="1368" fill="#64665e" font-size="20">one owner · clear interface</text>
+      <text x="888" y="1400" fill="#64665e" font-size="20">only when work is independent</text>
+    </g>
+    <g>
+      <rect x="1247" y="1235" width="345" height="185" rx="17" fill="#f7f6f2" stroke="#e4e4dc" stroke-width="2"/>
+      <circle cx="1286" cy="1275" r="9" fill="#c2381c"/><circle cx="1312" cy="1275" r="9" fill="#dcded4"/><circle cx="1338" cy="1275" r="9" fill="#dcded4"/>
+      <text x="1270" y="1329" fill="#20211e" font-size="25" font-weight="720">Bounded slice</text>
+      <text x="1270" y="1368" fill="#64665e" font-size="20">disjoint file ownership</text>
+      <text x="1270" y="1400" fill="#64665e" font-size="20">results return to the lead</text>
+    </g>
+    <g>
+      <rect x="1629" y="1235" width="345" height="185" rx="17" fill="#f7f6f2" stroke="#e4e4dc" stroke-width="2"/>
+      <circle cx="1668" cy="1275" r="9" fill="#c2381c"/><circle cx="1694" cy="1275" r="9" fill="#dcded4"/><circle cx="1720" cy="1275" r="9" fill="#dcded4"/>
+      <text x="1652" y="1329" fill="#20211e" font-size="25" font-weight="720">Bounded slice</text>
+      <text x="1652" y="1368" fill="#64665e" font-size="20">scope, files, acceptance</text>
+      <text x="1652" y="1400" fill="#64665e" font-size="20">no capacity or concurrency promise</text>
+    </g>
+    <text x="1420" y="1493" text-anchor="middle" fill="#64665e" font-size="18">Logical worker scopes do not imply separate operating-system processes or isolation.</text>
+  </g>
+
+  <!-- 07 · Parent verification after results converge. -->
+  <g id="parent-verification">
+    <rect x="2240" y="1175" width="650" height="230" rx="25" fill="#fffefa" stroke="#20211e" stroke-width="3"/>
+    <text x="2290" y="1222" fill="#20211e" font-size="21" font-weight="730" letter-spacing="1.7">07 · PARENT VERIFICATION</text>
+    <path d="M2290 1255h550" stroke="#e4e4dc" stroke-width="2"/>
+    <circle cx="2320" cy="1300" r="15" fill="#fff0e8" stroke="#c2381c" stroke-width="2"/>
+    <path d="M2313 1300l5 5 10-12" fill="none" stroke="#c2381c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="2355" y="1308" fill="#20211e" font-size="23" font-weight="700">Merged state, one final pass</text>
+    <text x="2290" y="1357" fill="#64665e" font-size="19">Parent owns validation after all task scopes return.</text>
+    <text x="2290" y="1385" fill="#85867e" font-size="17">This graph does not claim any check has run.</text>
+  </g>
+
+  <!-- 08 · Direct human permission boundary; policy, not enforcement machinery. -->
+  <g id="human-permission">
+    <rect x="100" y="1180" width="540" height="300" rx="25" fill="#fffefa" stroke="#c2381c" stroke-width="3" stroke-dasharray="12 9"/>
+    <text x="140" y="1227" fill="#a33219" font-size="21" font-weight="730" letter-spacing="1.4">08 · HUMAN PERMISSION BOUNDARY</text>
+    <text x="140" y="1275" fill="#20211e" font-size="25" font-weight="740">Operator / user</text>
+    <text x="140" y="1317" fill="#64665e" font-size="21">goal · reviewed scope · correction request</text>
+    <path d="M140 1340h460" stroke="#e4e4dc" stroke-width="2"/>
+    <text x="140" y="1380" fill="#20211e" font-size="20" font-weight="700">Direct confirmation at consequential actions</text>
+    <text x="140" y="1418" fill="#64665e" font-size="20">Publication needs a separate go-ahead.</text>
+    <text x="140" y="1455" fill="#a33219" font-size="17" font-weight="650">Policy boundary · not an OMP runtime lock</text>
+  </g>
+
+  <!-- 09 · Corrections return to the lead; material changes require new review. -->
+  <g id="correction-return">
+    <rect x="2240" y="1460" width="650" height="190" rx="25" fill="#fff0e8" stroke="#c2381c" stroke-width="3"/>
+    <text x="2290" y="1508" fill="#a33219" font-size="21" font-weight="730" letter-spacing="1.4">09 · CORRECTION RETURN</text>
+    <text x="2290" y="1553" fill="#20211e" font-size="23" font-weight="720">Findings or approved feedback → lead</text>
+    <text x="2290" y="1593" fill="#64665e" font-size="20">Correct, re-scope, or seek new approval.</text>
+    <text x="2290" y="1627" fill="#a33219" font-size="17" font-weight="650">Material scope changes invalidate prior approval.</text>
+  </g>
+
+  <!-- Compact key, source boundary and epistemic limits. -->
+  <g id="legend">
+    <path d="M100 1697H175" stroke="#64665e" stroke-width="5" marker-end="url(#flow-arrow)"/>
+    <text x="196" y="1705" fill="#64665e" font-size="18">task / result flow</text>
+    <path d="M410 1697H485" stroke="#85867e" stroke-width="4" stroke-dasharray="10 10" marker-end="url(#advice-arrow)"/>
+    <text x="505" y="1705" fill="#64665e" font-size="18">optional advisory input</text>
+    <path d="M790 1697H865" stroke="#c2381c" stroke-width="4" stroke-dasharray="10 10" marker-end="url(#policy-arrow)"/>
+    <text x="885" y="1705" fill="#64665e" font-size="18">policy / correction / approval path</text>
+    <text x="2890" y="1705" text-anchor="end" fill="#85867e" font-size="17">No provider access, session activity, or isolation guarantee inferred.</text>
+  </g>
+  <path d="M100 1760H2890" stroke="#dcded4" stroke-width="2"/>
+  <text x="100" y="1790" fill="#64665e" font-size="16">Static public source: Sarthib7/oh-my-pi @ 6d31705a08530fcaa79c1ff45b4862c113184a18 · repository guidance · runtime identity unknown · no live telemetry</text>
+  <text x="2890" y="1790" fill="#85867e" font-size="16" text-anchor="end">One connected graph · viewBox 3000 × 1800</text>
+</svg>
