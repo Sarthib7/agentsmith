@@ -67,7 +67,7 @@ GROUPS = [
      "Catching what you got wrong before someone else does, and proving fixes actually hold.",
      ["review", "deterministic-code-review", "followup-review", "review-and-iterate",
       "prove-it", "bench-it", "fresh-eyes", "cso", "diagnose", "improve",
-      "improve-codebase-architecture", "tdd", "code-review", "diagnosing-bugs"]),
+      "improve-codebase-architecture", "tdd", "code-review", "diagnosing-bugs", "harness-experiment"]),
 
     ("coding", "Architecture and domain modeling",
      "Design module interfaces and define the language used in a codebase.",

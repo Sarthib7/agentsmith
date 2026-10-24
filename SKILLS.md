@@ -1,6 +1,6 @@
 # Skill index
 
-147 skills across 5 catalog sections.
+148 skills across 5 catalog sections.
 Generated from `skills/*/SKILL.md` and `my-skills/*/SKILL.md`. Do not edit by hand.
 
 Install one by its declared name:
@@ -82,7 +82,7 @@ Writing and maintaining skills themselves.
 
 <a id="coding"></a>
 
-## Coding <sub>(77)</sub>
+## Coding <sub>(78)</sub>
 
 Writing, reviewing, and shipping code. Chain-agnostic.
 
@@ -101,7 +101,7 @@ SPEC.md as source of truth: distill it, build against it, check drift, feed ever
 | [`to-spec`](skills/to-spec/SKILL.md) | Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed. |
 | [`wayfinder`](skills/wayfinder/SKILL.md) | Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the… |
 
-### Review and verification <sub>(14)</sub>
+### Review and verification <sub>(15)</sub>
 
 Catching what you got wrong before someone else does, and proving fixes actually hold.
 
@@ -115,6 +115,7 @@ Catching what you got wrong before someone else does, and proving fixes actually
 | [`diagnosing-bugs`](skills/diagnosing-bugs/SKILL.md) | Diagnosis loop for hard bugs and performance regressions. |
 | [`followup-review`](my-skills/followup-review/SKILL.md) | Re-review a pull request after the author has pushed fixes for your earlier findings. |
 | [`fresh-eyes`](my-skills/fresh-eyes/SKILL.md) | Get a second opinion from a subagent that has none of your context, either to independently corroborate a diagnosis or to adversarially break your work. |
+| [`harness-experiment`](skills/harness-experiment/SKILL.md) | Use when the user explicitly requests a bounded harness experiment comparing one instruction variant with its unchanged baseline. |
 | [`improve`](skills/improve/SKILL.md) | Survey any codebase as a senior advisor and produce prioritized, self-contained implementation plans for OTHER models/agents to execute. |
 | [`improve-codebase-architecture`](skills/improve-codebase-architecture/SKILL.md) | Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick. |
 | [`prove-it`](my-skills/prove-it/SKILL.md) | Verify a change in both directions before claiming it works. |

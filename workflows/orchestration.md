@@ -60,6 +60,8 @@ Three read-only advisors watch the main session. `astra` checks correctness, inv
 3. Builders prove a failing-first test in their own worktree. Testers and verifiers run the real thing and mark what they observed versus inferred.
 4. The lead validates once on the merged state. Sharpshooter memory keeps decisions across sessions, and autolearn is on.
 
+For an explicitly requested, bounded instruction comparison, use the [harness experiment guide](harness-experiment.md). A suggestion alone does not authorize an experiment.
+
 ## Without OMP
 
 The invariants are harness-neutral. Only the transport changes.
