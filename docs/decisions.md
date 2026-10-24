@@ -84,3 +84,19 @@ VERIFIED integrated demo checks: The Node model/viewer suite returned 9 passed, 
 
 1. INFERRED: The two-PR boundary is clear enough for review, but contributor feedback on the split is not recorded.
 2. INFERRED: The workbench adds value when it stays secondary to the maps; this has not been evaluated with contributor feedback.
+
+## Harness experiment instruction layer, 2026-10-23
+
+REPORTED: Approved R1 adds one opt-in `harness-experiment` skill. Its package-local reference is the canonical procedure; the public [`workflows/harness-experiment.md` guide](https://github.com/Sarthib7/agentsmith/blob/main/workflows/harness-experiment.md) is a concise entry and does not copy that procedure.
+
+INFERRED decision: Show one summary process flow on Workflows. Rules and Architecture explain the instruction-versus-enforcement boundary and link to the same [workflow guide](https://github.com/Sarthib7/agentsmith/blob/main/workflows/harness-experiment.md) and [skill source](https://github.com/Sarthib7/agentsmith/blob/main/skills/harness-experiment/SKILL.md). Keep this as an instruction-layer path; add no runtime command, daemon, hook, permission change, Decider dependency, or global self-editing.
+
+REQUIRED boundary: The skill routes an explicitly requested experiment; a recurring failure may prompt a suggestion, not start a run. The procedure is not runtime enforcement, a permission grant, or an OS sandbox. Public links expose source, not installation or runtime use. Method attribution points to [Harness2 at pinned revision `1cfe254e8d25b15f37048c3730134686abe60335`](https://github.com/google-research/harness2/tree/1cfe254e8d25b15f37048c3730134686abe60335); no benchmark gains are claimed.
+
+VERIFIED packaging check: Skills CLI 1.7.0 preserved the package-local reference in a targeted project copy installation for Codex. See the [checkpoint](../status.md#harness-experiment-checkpoint-2026-10-23). This does not establish installation in a user's OMP runtime.
+
+### Least confident decisions
+
+1. UNKNOWN: Other installer versions and targets may handle package-local references differently.
+2. UNKNOWN: Actual OMP discovery and compliance with these instructions are not established by the packaging check.
+3. UNKNOWN: Real-task benefits and total parent model costs remain unmeasured.

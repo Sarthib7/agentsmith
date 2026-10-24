@@ -86,6 +86,7 @@
           <li><a href="#overview">Overview</a></li>
           <li><a href="#workers">Workers</a></li>
           <li><a href="#configuration">Configuration</a></li>
+          <li><a href="#harness-experiment">Harness experiment guidance</a></li>
           <li><a href="#approvals">Approvals</a></li>
           <li><a href="#publishing">Publishing</a></li>
           <li><a href="#learnings">Learnings</a></li>
@@ -146,6 +147,18 @@
             <p class="diagram-scroll-hint" id="configuration-scroll-hint">Scroll horizontally to inspect the full diagram and read every label.</p>
             <figcaption id="configuration-caption"><strong>Policy, resolution, and distribution are separate layers.</strong> Example settings are reference material, not a live configuration dump. <a href="diagrams/configuration-flow.svg">Open the full SVG <span aria-hidden="true">↗</span></a></figcaption>
           </figure>
+        </section>
+
+        <section class="architecture-section page-width" id="harness-experiment" aria-labelledby="harness-experiment-title">
+          <header class="architecture-section-heading"><h2 id="harness-experiment-title">Harness experiment guidance</h2></header>
+          <div class="architecture-reading">
+            <p><strong>Chosen policy.</strong> The <code>harness-experiment</code> skill routes an explicitly requested experiment. Its package-local reference is the canonical procedure; the <a href="https://github.com/Sarthib7/agentsmith/blob/main/workflows/harness-experiment.md">public workflow guide</a> is a concise entry, and the <a href="https://github.com/Sarthib7/agentsmith/blob/main/skills/harness-experiment/SKILL.md">skill source</a> carries invocation instructions. The <a href="workflows.html#harness-experiment">Workflows page</a> shows the single summary flow.</p>
+            <p><strong>Source evidence.</strong> The adaptation cites Harness2 at the immutable public revision <a href="https://github.com/google-research/harness2/tree/1cfe254e8d25b15f37048c3730134686abe60335"><code>1cfe254e8d25b15f37048c3730134686abe60335</code></a>, including its selection and budget sources. This attribution is not evidence that OMP integrates that implementation.</p>
+          </div>
+          <div class="architecture-reading">
+            <p><strong>Runtime unknowns.</strong> A public source or catalog entry does not prove that the skill is installed, discoverable, or being used. Instructions alone do not enforce tool permissions, call/time/spend limits, or sandboxing; workspace separation is not an OS isolation guarantee.</p>
+            <p>No measured improvement is claimed. Whether the procedure changes real task quality, latency, or cost remains unknown.</p>
+          </div>
         </section>
 
         <section class="architecture-section page-width" id="approvals" aria-labelledby="approvals-title">

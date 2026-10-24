@@ -85,6 +85,44 @@
         </ol>
       </section>
 
+      <section class="harness-section page-width" id="harness-experiment" aria-labelledby="harness-experiment-title">
+        <div class="harness-intro">
+          <p class="eyebrow">03 / OPT-IN EXPERIMENT</p>
+          <h2 id="harness-experiment-title">One experiment, explicitly requested and parent-reviewed.</h2>
+          <p>The harness experiment is process guidance for comparing one instruction variant on a public or synthetic task. A recurring failure may prompt a suggestion; it never starts an experiment without the user's explicit request.</p>
+          <p class="harness-protocol">The packaged skill's local reference is canonical. The public workflow guide is a short entry point, not a second copy of the procedure. A public source link does not prove that a skill is installed or discoverable.</p>
+          <div class="reference-links">
+            <a class="reference-link" href="https://github.com/Sarthib7/agentsmith/blob/main/workflows/harness-experiment.md">
+              <span class="reference-kind">GUIDE</span>
+              <div><h3>Public workflow guide</h3><p>Repository entry to the packaged procedure.</p><code>workflows/harness-experiment.md</code></div>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="reference-link" href="https://github.com/Sarthib7/agentsmith/blob/main/skills/harness-experiment/SKILL.md">
+              <span class="reference-kind">SKILL</span>
+              <div><h3>Skill source</h3><p>Invocation instructions and its package-local workflow reference.</p><code>skills/harness-experiment/SKILL.md</code></div>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="reference-link" href="https://github.com/google-research/harness2/tree/1cfe254e8d25b15f37048c3730134686abe60335">
+              <span class="reference-kind">SOURCE</span>
+              <div><h3>Harness2 method source</h3><p>Attribution is pinned to this public revision; no performance gain is claimed.</p><code>1cfe254e8d25b15f37048c3730134686abe60335</code></div>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="workflow-diagram" role="group" aria-labelledby="harness-flow-title">
+            <div class="workflow-host"><strong id="harness-flow-title">Harness experiment process</strong><span>POLICY · NOT RUNTIME ENFORCEMENT</span></div>
+            <ol class="workflow-sequence">
+              <li><span class="flow-number">01 / REQUEST</span><h3>Set the scope</h3><p>Start only on an explicit user request. Define one public or synthetic task; a suggestion is not approval.</p></li>
+              <li><span class="flow-number">02 / FREEZE</span><h3>Fix inputs and bounds</h3><p>Record code and fixture identities, model, tools, permissions and network, acceptance checks, one metric, the edit surface, and total call, time, and spend limits.</p></li>
+              <li><span class="flow-number">03 / COMPARE</span><h3>Run baseline + candidate</h3><p>Default to one run each and one instruction variant. Keep other inputs equal, count every call, and do not retry or loop automatically.</p></li>
+              <li><span class="flow-number">04 / REVIEW</span><h3>Inspect and decide</h3><p>The parent inspects artifacts and reruns checks. KEEP_BASE or INCONCLUSIVE preserves the baseline; USE_CANDIDATE is task-local only. Candidate check failures, ties, stale identity, missing evidence, executor errors, or an exhausted limit never adopt.</p></li>
+            </ol>
+          </div>
+          <p class="flow-note">These instructions do not enforce permissions or budgets. Separate workspaces do not prove an OS sandbox, and one experiment cannot establish general quality, latency, or cost gains.</p>
+        </div>
+      </section>
+
       <section class="architecture-section architecture-sources page-width" id="sources" aria-labelledby="sources-title">
         <header class="architecture-section-heading"><h2 id="sources-title">Read the public protocol</h2></header>
         <p class="architecture-reading source-intro">These documents describe the repository workflow and OMP coordination pattern. They explain intended process, not activity in a live session.</p>

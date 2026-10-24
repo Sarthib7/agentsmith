@@ -36,6 +36,16 @@ The repository deliberately separates three kinds of guidance: [rules](../rules/
 
 At runtime, the pinned model-resolver.ts considers the request pattern, settings override, agent pattern, and inherited/active/fallback/default patterns when resolving a model selection ([resolver](https://github.com/Sarthib7/oh-my-pi/blob/6d31705a08530fcaa79c1ff45b4862c113184a18/packages/coding-agent/src/config/model-resolver.ts#L1215-L1265)). A selected pattern is not authorization, subscription entitlement, usable credentials, proof of a selected backend, or evidence of live use. Likewise, an advisor role name is a label, not a provider identity. The main-session-only advisor boundary is policy; child opt-ins remain an implementation capability ([executor source](https://github.com/Sarthib7/oh-my-pi/blob/6d31705a08530fcaa79c1ff45b4862c113184a18/packages/coding-agent/src/task/executor.ts#L3315-L3335)).
 
+## Harness experiment guidance
+
+**Policy.** The `harness-experiment` skill is routed only for an explicitly requested experiment. A recurring failure can prompt a suggestion, not an unapproved run. Its package-local reference is the canonical procedure; the [public workflow guide](https://github.com/Sarthib7/agentsmith/blob/main/workflows/harness-experiment.md) is a concise entry, and the [skill source](https://github.com/Sarthib7/agentsmith/blob/main/skills/harness-experiment/SKILL.md) contains invocation instructions. Public links describe source files; they do not install a skill.
+
+This is an instruction-layer path only. It adds no OMP runtime command, daemon, hook, Decider dependency, permission change, or global self-editing. Instructions cannot enforce tool permissions or call/time/spend limits, guarantee retry behavior, provide an OS sandbox, or automatically promote durable policy.
+
+**Source evidence.** The method adaptation cites the public [Harness2 source at revision `1cfe254e8d25b15f37048c3730134686abe60335`](https://github.com/google-research/harness2/tree/1cfe254e8d25b15f37048c3730134686abe60335), including its [selection source](https://github.com/google-research/harness2/blob/1cfe254e8d25b15f37048c3730134686abe60335/harness2/core/selection.py) and [budget ledger](https://github.com/google-research/harness2/blob/1cfe254e8d25b15f37048c3730134686abe60335/harness2/core/ledger.py). These references support attribution, not a claim that OMP implements Harness2.
+
+**VERIFIED packaging check.** Skills CLI 1.7.0 preserved the package-local reference in a targeted project copy installation for Codex. The [checkpoint](../status.md#harness-experiment-checkpoint-2026-10-23) records the method and limits. Other installers, actual OMP discovery and compliance, and real-task benefits remain unverified or unmeasured. The procedure makes no general quality, latency, or cost-gain claim. Workspace separation is not evidence of OS-level containment.
+
 ## Approvals
 
 ![Approval flow: source trace and a revisioned decision lead to direct approval, bounded worker ownership, parent verification, separate publication approval, and only then the existing Pages workflow. Material changes invalidate the old decision.](diagrams/approval-flow.svg)
@@ -60,7 +70,7 @@ The existing Pages workflow runs on a push to <code>main</code> or <code>workflo
 - A returned result has state: success, error, abort, merge, and artifact retention are distinct transitions. A single exception-only model hides real failure paths.
 - Keep canonical source separate from generated output. The static builder and Pages workflow form a path to publication, but no local generation alone publishes it.
 
-**Known limits.** Installed runtime identity, enabled advisors, session bindings, provider authorization, and current model use are unknown. The optional isolation branch does not establish a containment guarantee. This change adds no skills or private configuration exports.
+**Known limits.** Installed runtime identity, enabled advisors, session bindings, provider authorization, and current model use are unknown. The optional isolation branch does not establish a containment guarantee. The R1 change adds instruction-layer content but makes no installation or runtime-enforcement claim and exports no private configuration.
 
 ## Sources
 
