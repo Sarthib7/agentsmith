@@ -63,6 +63,16 @@ Escape skill metadata as HTML. Browser code uses textContent for text updates. S
 
 The former site-v2 checks predated the Architecture page and do not describe the current six-page builder contract or establish a public deployment. No current build or deployment is claimed here.
 
+### Harness experiment discovery
+
+Interface ID: harness-experiment-discovery-v1
+
+The canonical procedure lives in the package-local `skills/harness-experiment/references/workflow.md`; the public [workflow guide](https://github.com/Sarthib7/agentsmith/blob/main/workflows/harness-experiment.md) is a concise entry, not a second procedure. The packaged [`harness-experiment` skill source](https://github.com/Sarthib7/agentsmith/blob/main/skills/harness-experiment/SKILL.md) contains invocation metadata and its local reference path.
+
+The Workflows page contains one accessible four-stage summary flow and links to the public workflow guide, skill source, and the pinned [Harness2 method source](https://github.com/google-research/harness2/tree/1cfe254e8d25b15f37048c3730134686abe60335). Rules and Architecture link to the same workflow and skill sources; Architecture links to the Workflows summary rather than duplicating its flow.
+
+These are static source links. They do not install a skill or prove local discovery, execution, permission enforcement, or runtime state. No site template tokens, page routes, catalog output, shared JavaScript, framework, viewer, diagram, or CTA contract changes are introduced by this interface.
+
 ## Least confident decisions
 
 1. INFERRED: Five existing catalog sections can remain the main filters. Task groups and search provide finer navigation.

@@ -84,6 +84,7 @@
         <ul>
           <li><a href="#gate">What the gate represents</a></li>
           <li><a href="#policy-runtime">Policy and runtime</a></li>
+          <li><a href="#harness-experiment">Harness experiment policy</a></li>
           <li><a href="#sources">Public sources</a></li>
           <li><a href="#workbench">Optional visual demo</a></li>
         </ul>
@@ -115,6 +116,21 @@
           </div>
           <div class="architecture-reading">
             <p><strong>Runtime controls</strong> belong to the harness and its permissions. The policy text alone does not block a tool call, redact data, or prove that a check ran. This page makes no claim about which runtime controls are active.</p>
+          </div>
+        </section>
+
+        <section class="architecture-section" id="harness-experiment" aria-labelledby="harness-experiment-title">
+          <div class="architecture-section-heading">
+            <p class="eyebrow section-index">03 / WORKFLOW</p>
+            <h2 id="harness-experiment-title">Experiments are opt-in instructions, not controls.</h2>
+          </div>
+          <div class="architecture-reading">
+            <p><strong>Policy.</strong> The <code>harness-experiment</code> skill applies only to an explicitly requested experiment. A repeated failure may justify suggesting one, never launching it without approval. Read the <a href="https://github.com/Sarthib7/agentsmith/blob/main/workflows/harness-experiment.md">public workflow guide</a> and <a href="https://github.com/Sarthib7/agentsmith/blob/main/skills/harness-experiment/SKILL.md">skill source</a>.</p>
+            <p><strong>Source evidence.</strong> This repository adaptation cites the public Harness2 source at pinned revision <a href="https://github.com/google-research/harness2/tree/1cfe254e8d25b15f37048c3730134686abe60335"><code>1cfe254e8d25b15f37048c3730134686abe60335</code></a>; it does not claim measured gains.</p>
+          </div>
+          <div class="architecture-reading">
+            <p><strong>Runtime boundary.</strong> Instructions do not enforce tool permissions, budgets, automatic retries, isolation, or persistent policy changes. Workspace separation is not proof of an OS sandbox.</p>
+            <p><strong>Unknown.</strong> A public link or catalog listing does not prove installation, discovery, or use. Runtime compliance and benefit on real OMP tasks remain unknown.</p>
           </div>
         </section>
 

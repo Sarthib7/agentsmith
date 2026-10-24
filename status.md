@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-23
 Updated by: coordinator
-Current phase: Harness experiment validation and publication
+Current phase: Harness experiment instruction-layer rollout
 
 ## Scope
 
@@ -221,3 +221,13 @@ VERIFIED controlled artifact checks: Two separate CSV fixture episodes used one 
 VERIFIED local limit: The unchanged Anatomy audit was interrupted by the local command's 60-second deadline after two sampled poses passed. A complete audit is not claimed here. Exact-head GitHub CI remains the publication gate.
 
 At this checkpoint, commits and publication have not occurred. The original working trees, generated global-policy snapshot, private settings, and credentials were not modified by this feature.
+
+## Harness experiment site checkpoint
+
+VERIFIED: [PR #11](https://github.com/Sarthib7/agentsmith/pull/11) merged as `3ad05e6b28a4fd4d1acb0e0d533970e2bceffdc7`. Exact-head [CI 40083555595](https://github.com/Sarthib7/agentsmith/actions/runs/40083555595) passed for `8c570c7b8d33c31b11cf0d519a05001b1c684efa`, including the complete audit. [Pages deployment 40084280345](https://github.com/Sarthib7/agentsmith/actions/runs/40084280345) passed for the merge revision. The live catalog contains `harness-experiment` and its install command; the primary Book a call destination remains unchanged.
+
+VERIFIED: The integrated site branch builds six pages, two Anatomy views, and 148 skills. The focused site-builder suite returned `Ran 7 tests in 0.151s` and `OK`.
+
+VERIFIED sampled UI: Brave rendered the workflow at desktop width 1200 and phone width 390. The document and measured process containers fit both widths. The phone Rules and Architecture pages exposed the new guide and fit the document width. Keyboard activation of Architecture's Workflows link reached the experiment section. The browser error log was empty for that local navigation check. Screenshots were inspected; these checks do not certify arbitrary browsers or accessibility.
+
+This checkpoint records the site changes before their own publication. Private global installation and runtime configuration remain outside scope. The packaging and controlled fixture results do not establish real-task model benefits or automatic enforcement.
