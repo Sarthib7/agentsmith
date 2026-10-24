@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-23
 Updated by: coordinator
-Current phase: Validated architecture and optional-demo release
+Current phase: Harness experiment validation and publication
 
 ## Scope
 
@@ -205,3 +205,19 @@ REPORTED: The user requested Book a call instead of Explore the setup in the hom
 VERIFIED working tree: The hero has one primary Book a call link with the existing destination. The duplicate contact block and its unused styles were removed. The Architecture link and setup accessibility skip link remain.
 
 VERIFIED: The focused site-builder suite returned 7 tests and `OK`. Both builders passed with 147 skills, six pages, and two Anatomy views. Isolated Brave checks at desktop and phone widths found one booking link, no document overflow, a focusable primary CTA, and clean consoles. The booking destination was not opened or submitted.
+
+## Harness experiment checkpoint, 2026-10-23
+
+REPORTED: The user approved R1, the opt-in workflow, an invocation skill, a conditional repository rule, and two sequential PRs. Private global installation is excluded.
+
+VERIFIED: The catalog builder returned `OK 148 skills total; 8 verified as mine`. The site builder reported six pages, two Anatomy views, and 148 skills. The existing Python suite returned `Ran 30 tests` and `OK`; the Node suite returned 9 passed, 0 failed.
+
+VERIFIED: `skills@1.7.0` listed 148 skills in the checkout, including `harness-experiment`. A targeted project-scope copy installation for Codex included both `SKILL.md` and its package-local `references/workflow.md`; both installed files were opened. This does not establish installation or discovery in a user's OMP runtime.
+
+VERIFIED: One negative control removed only the new catalog registration in memory. The builder returned exit 1 for the ungrouped skill and preserved the prior generated outputs. No source was edited for that control.
+
+VERIFIED controlled artifact checks: Two separate CSV fixture episodes used one baseline and one candidate execution each. The regressing candidate passed 2 of 4 cases against a 4-of-4 baseline and was rejected. The valid candidate passed 4 of 4 against a 2-of-4 baseline and was eligible for task-local use. All four executor exits were 0. These fault-injected, deterministic controls are not a live model pilot or evidence of general agent compliance, model quality, or savings. The probes made no model API calls; parent model billing was not measured.
+
+VERIFIED local limit: The unchanged Anatomy audit was interrupted by the local command's 60-second deadline after two sampled poses passed. A complete audit is not claimed here. Exact-head GitHub CI remains the publication gate.
+
+At this checkpoint, commits and publication have not occurred. The original working trees, generated global-policy snapshot, private settings, and credentials were not modified by this feature.

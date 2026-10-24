@@ -26,6 +26,7 @@ Keep plugin-only agents, commands, hooks, and manifests under `plugin/`. Skills 
 ## Workflows
 
 - [Agentic engineering repository protocol](workflows/agentic-engineering.md): read this workflow when two or more agents work on one repository outcome.
+- [Harness experiment](workflows/harness-experiment.md): use only after an explicit user request; repeated failures or competing approaches may prompt a suggestion, not a run.
 
 ## Verification
 

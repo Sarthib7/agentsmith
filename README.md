@@ -15,7 +15,7 @@ Oh My Pi (`omp`) is my primary harness. This repository records how I configure 
 | Part | What it does | Start here |
 |---|---|---|
 | Rules | Govern how agents work and when they need approval. | [Rules guide](rules/README.md), [rules snapshot](rules/AGENTS.md) |
-| Workflows | Coordinate agents and record decisions. | [Agent orchestration](workflows/orchestration.md), [repository protocol](workflows/agentic-engineering.md) |
+| Workflows | Coordinate agents, compare task-local harness changes, and record decisions. | [Agent orchestration](workflows/orchestration.md), [repository protocol](workflows/agentic-engineering.md), [harness experiment](workflows/harness-experiment.md) |
 | OMP harness | Runs sessions and tool tasks with assigned model roles. | [OMP config example](rules/omp-config.example.yml), [operating workflow](workflows/orchestration.md) |
 | Skills | Provide instructions for specific tasks. | [Searchable catalog](https://sarthib7.github.io/agentsmith/skills.html), [GitHub index](SKILLS.md) |
 
@@ -37,9 +37,9 @@ The skills CLI installs task instructions. Configure the rules, workflows, and h
 The badges count skills in each catalog category.
 
 <!-- counts:start -->
-![skills](https://img.shields.io/badge/skills-147-1a1a1a?style=flat-square&labelColor=1a1a1a&color=FF51FF)
+![skills](https://img.shields.io/badge/skills-148-1a1a1a?style=flat-square&labelColor=1a1a1a&color=FF51FF)
 ![setup skills](https://img.shields.io/badge/setup%20skills-31-1a1a1a?style=flat-square)
-![coding](https://img.shields.io/badge/coding-77-1a1a1a?style=flat-square)
+![coding](https://img.shields.io/badge/coding-78-1a1a1a?style=flat-square)
 ![crypto](https://img.shields.io/badge/crypto-25-1a1a1a?style=flat-square)
 ![writing](https://img.shields.io/badge/writing-6-1a1a1a?style=flat-square)
 ![product](https://img.shields.io/badge/product-8-1a1a1a?style=flat-square)
@@ -65,9 +65,21 @@ List available skills before installing:
 npx skills add Sarthib7/agentsmith --full-depth --list
 ```
 
-<!-- VERIFIED: Cached skills CLI 1.7.0 discovered all 147 catalog names with --full-depth, including eight entries in my-skills/. CLI flags are documented at https://github.com/vercel-labs/skills. -->
+<!-- VERIFIED: Skills CLI 1.7.0 discovered all 148 catalog names with --full-depth, including eight entries in my-skills/. CLI flags are documented at https://github.com/vercel-labs/skills. -->
 
 The [skills CLI](https://github.com/vercel-labs/skills) supports Claude Code, Codex, Cursor, and other coding agents. Add `-g` for a global installation or `--agent codex` to select an agent. `--full-depth` includes both skill folders.
+
+## Run a bounded harness experiment
+
+Use [harness-experiment](workflows/harness-experiment.md) when you explicitly want to compare one task-local instruction change with the current baseline. Read the workflow and agree on the checks and total budget before either run.
+
+```bash
+npx skills add Sarthib7/agentsmith --full-depth --skill harness-experiment
+```
+
+Then ask your agent: “Use harness-experiment on this public fixture. Propose the frozen inputs, acceptance checks, and total budget first.”
+
+The skill bundles its workflow reference. Installation adds instructions, not runtime enforcement or changes to global rules. The comparison can keep the baseline or end as inconclusive. Durable policy changes need your approval.
 
 <!-- VERIFIED: Ownership roots and source gaps are recorded in ATTRIBUTION.md. plugin/README.md describes unfinished packaging. Inspected research/ and data/ contain notes and reference material. -->
 

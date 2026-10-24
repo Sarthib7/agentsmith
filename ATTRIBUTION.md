@@ -38,6 +38,9 @@ These directories carry their own license file, which governs that directory:
 |---|---|
 | `pay` | `solana-foundation/pay`, recorded in the original `skills-lock.json` |
 | `using-superpowers` | Ships with the `superpowers` Claude Code plugin |
+| `harness-experiment` | Repository process adaptation inspired by [Google Research Harness2](https://github.com/google-research/harness2/tree/1cfe254e8d25b15f37048c3730134686abe60335), especially its pinned [selection.py](https://github.com/google-research/harness2/blob/1cfe254e8d25b15f37048c3730134686abe60335/harness2/core/selection.py) and [ledger.py](https://github.com/google-research/harness2/blob/1cfe254e8d25b15f37048c3730134686abe60335/harness2/core/ledger.py). Individual authorship is not verified. |
+
+The Harness2 files identify Apache License 2.0; the pinned tree's [LICENSE](https://github.com/google-research/harness2/blob/1cfe254e8d25b15f37048c3730134686abe60335/LICENSE) states the same. The [harness-experiment skill package](skills/harness-experiment/SKILL.md) is a separate repository process guide, not a Google-authored or published Harness2 skill; no Harness2 source code is copied.
 
 ## Everything else
 
